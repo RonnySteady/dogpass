@@ -12,6 +12,5 @@ export default function DogList({ dogs }) {
 }
 
 const StyledDogList = styled.ul`
-  text-decoration: none;
   list-style-type: none;
 `;

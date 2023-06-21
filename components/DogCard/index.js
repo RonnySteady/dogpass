@@ -16,7 +16,7 @@ export default function DogCard({ dog }) {
 const StyledDogCard = styled.li`
   border: 2px solid;
   border-radius: 15px;
-  width: 400px;
-  padding-left: 20px;
-  margin-bottom: 35px;
+  width: 90%;
+  padding: 1rem;
+  margin: 1rem;
 `;

@@ -1,14 +1,11 @@
 import Heading from "../components/Heading";
-import SubHeading from "../components/SubHeading";
 import DogList from "../components/DogList";
 
-export default function Home() {
+export default function Home({ dogs }) {
   return (
     <main>
       <Heading>Dog Pass 🐕‍🦺</Heading>
-      <SubHeading></SubHeading>
-      <br></br>
-      <DogList />
+      <DogList dogs={dogs} />
     </main>
   );
 }

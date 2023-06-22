@@ -1,23 +1,22 @@
-import React from "react";
+import styled from "styled-components";
 
-const DogCard = () => {
+export default function DogCard({ dog }) {
   return (
-    <div>
-      <h1>Anton</h1>
-      <p>Date of birth: 14.07.2014</p>
-      <p>Place of birth: Romania</p>
-      <p>Sex: male</p>
-      <p>Color: black</p>
-      <p>Breed/Race: Shepard Labrador Mix</p>
-      <br></br>
-      <h1>Canella</h1>
-      <p>Date of birth: 01.05.2018</p>
-      <p>Place of birth: Spain</p>
-      <p>Sex: female</p>
-      <p>Color: brown</p>
-      <p>Breed/Race: Unknown Mix</p>
-    </div>
+    <StyledDogCard>
+      <h2>{dog.name}</h2>
+      <p>Date of Birth: {dog.dateOfBirth}</p>
+      <p>Place of Birth: {dog.placeOfBirth}</p>
+      <p>Sex: {dog.sex}</p>
+      <p>Color: {dog.color}</p>
+      <p>Breed/Race: {dog.breed}</p>
+    </StyledDogCard>
   );
-};
+}
 
-export default DogCard;
+const StyledDogCard = styled.li`
+  border: 2px solid;
+  border-radius: 15px;
+  width: 90%;
+  padding: 1rem;
+  margin: 1rem;
+`;

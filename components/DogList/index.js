@@ -1,12 +1,16 @@
-import React from "react";
 import DogCard from "/components/DogCard";
+import styled from "styled-components";
 
-const DogList = () => {
+export default function DogList({ dogs }) {
   return (
-    <div>
-      <DogCard />
-    </div>
+    <StyledDogList>
+      {dogs.map((dog) => (
+        <DogCard key={dog.name} dog={dog} />
+      ))}
+    </StyledDogList>
   );
-};
+}
 
-export default DogList;
+const StyledDogList = styled.ul`
+  list-style-type: none;
+`;

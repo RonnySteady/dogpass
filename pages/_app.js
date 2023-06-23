@@ -3,6 +3,7 @@ import Head from "next/head";
 
 const dogs = [
   {
+    id: 1,
     name: "Anton",
     dateOfBirth: "14.07.2014",
     placeOfBirth: "Romania",

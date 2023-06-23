@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { dogs } from "../../pages/_app";
 
 export default function DogCard({ dog }) {
   return (

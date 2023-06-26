@@ -6,7 +6,7 @@ const dogs = [
     id: 1,
     name: "Anton",
     dateOfBirth: "14.07.2014",
-    placeOfBirth: "Romania",
+    placeOfBirth: "Germany",
     sex: "male",
     color: "black",
     breed: "Shepard Labrador Mix",

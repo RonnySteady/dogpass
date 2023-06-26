@@ -6,22 +6,13 @@ import Link from "next/link";
 
 export default function CreateDog({ dogs }) {
   const [newDog, setNewDog] = useState([]);
-  // const [dateOfBirth, setDateOfBirth] = useState("");
-  // const [placeOfBirth, setPlaceOfBirth] = useState("");
-  // const [sex, setSex] = useState("");
-  // const [color, setColor] = useState("");
-  // const [breedRace, setBreedRace] = useState("");
-  // const [transponder, setTransponder] = useState("");
-  // const [vaccinations, setVaccinations] = useState("");
-  // const [insurances, setInsurances] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // form submission logic
 
     const data = new FormData(event.target);
     const formData = Object.fromEntries(data);
-    console.log(formData);
     const updatedDog = [
       {
         id: uid(),
@@ -39,7 +30,10 @@ export default function CreateDog({ dogs }) {
     setNewDog(updatedDog);
   };
 
-  console.log(dogs);
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
   return (
     <>
       <StyledForm onSubmit={handleSubmit}>
@@ -47,6 +41,30 @@ export default function CreateDog({ dogs }) {
           <StyledLabel htmlFor="name">Name: * </StyledLabel>
           <StyledInput type="text" name="name" id="name" required />
         </div>
+
+        <StyledFieldset>
+          <legend>Sex: *</legend>
+          <input
+            type="radio"
+            id="male"
+            name="sex"
+            value="male"
+            checked={selectedOption === "male"}
+            onChange={handleOptionChange}
+          />
+          <label htmlFor="male">Male</label>
+
+          <input
+            type="radio"
+            id="female"
+            name="sex"
+            value="female"
+            checked={selectedOption === "female"}
+            onChange={handleOptionChange}
+          />
+          <label htmlFor="female">Female</label>
+        </StyledFieldset>
+
         <div>
           <StyledLabel htmlFor="dateofbirth">Date of birth: </StyledLabel>
           <StyledInput type="date" name="dateofbirth" id="dateofbirth" />
@@ -55,25 +73,7 @@ export default function CreateDog({ dogs }) {
           <StyledLabel htmlFor="placeofbirth">Place of birth: </StyledLabel>
           <StyledTextarea name="placeofbirth" id="placeofbirth" rows="1" />
         </div>
-        <div>
-          <StyledLabel htmlFor="sex">Sex: *</StyledLabel>
-          <StyledInput
-            type="radio"
-            name="sex"
-            id="male"
-            value="male"
-            required
-          />
-          <StyledLabel htmlFor="male">Male</StyledLabel>
-          <StyledInput
-            type="radio"
-            name="sex"
-            id="female"
-            value="female"
-            required
-          />
-          <StyledLabel htmlFor="female">Female</StyledLabel>
-        </div>
+
         <div>
           <StyledLabel htmlFor="color">Color: *</StyledLabel>
           <StyledTextarea name="color" id="color" rows="1" required />
@@ -100,17 +100,20 @@ export default function CreateDog({ dogs }) {
         <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
       </StyledForm>
 
-      <div>
-        {newDog.map((dog) => (
-          <DogCard key={dog.id} dog={dog} />
-        ))}
-      </div>
+      {newDog.map((dog) => (
+        <DogCard key={dog.id} dog={dog} />
+      ))}
     </>
   );
 }
 
 const StyledLabel = styled.label`
   font-size: 18px;
+`;
+
+const StyledFieldset = styled.fieldset`
+  border: none;
+  position: relative;
 `;
 
 const StyledInput = styled.input`
@@ -147,7 +150,9 @@ const StyledTextarea = styled.input`
 
 const StyledRadio = styled.button`
   display: flex;
-  flex-direction: row;
+  position: relative;
+  left: 50%;
+  padding: 5px;
 `;
 
 const StyledForm = styled.form`

@@ -8,7 +8,7 @@ export default function Home({ dogs }) {
     <main>
       <Heading>Dog Pass 🐕‍🦺</Heading>
       <DogList dogs={dogs} />
-      <Link href="/dogform">
+      <Link href="/newdog">
         <AddDogButton />
       </Link>
     </main>

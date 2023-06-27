@@ -1,7 +1,3 @@
-// import { useState } from "react";
-// import { uid } from "uid";
-// import Link from "next/link";
-// import DogCard from "../DogCard";
 import Link from "next/link";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
@@ -26,70 +22,75 @@ export default function AddDogForm({ dogs }) {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="Name">Name: </label>
-        <Input
-          type="text"
-          // placeholder="Name"
-          {...register("name", { required: true, min: 2, maxLenght: 15 })}
-        />
-        <br></br>
+        <Grid>
+          <LabelName htmlFor="Name">Name: </LabelName>
+          <InputName
+            type="text"
+            // placeholder="Name"
+            {...register("name", { required: true, min: 2, maxLenght: 15 })}
+          />
+          <LabelPicture htmlFor="Picture">Picture: </LabelPicture>
+          <InputPicture
+            type="text"
+            placeholder="upload coming later"
+            {...register("picture", { required: false, min: 2, maxLenght: 15 })}
+          />
+        </Grid>
         <Grid>
           <LabelDateBirth htmlFor="Date of birth">
             Date of birth:{" "}
           </LabelDateBirth>
-          <Input
-            type="date"
-            placeholder="Date of birth"
-            {...register("birthdate", {})}
-          />
+          <InputDateBirth type="date" {...register("birthdate", {})} />
           <LabelPlaceBirth htmlFor="Place of birth">
             Place of birth:{" "}
           </LabelPlaceBirth>
-          <Input
+          <InputPlaceBirth type="text" {...register("birthplace", {})} />
+        </Grid>
+        <Grid>
+          <LabelSex htmlFor="Sex">Sex: </LabelSex>
+
+          <LabelFemale htmlFor="Female"> ♀ </LabelFemale>
+          <ButtonFemale
+            type="radio"
+            label="female"
+            {...register("sex", { required: true })}
+            value="female"
+          />
+
+          <LabelMale htmlFor="Male"> ♂ </LabelMale>
+          <ButtonMale
+            type="radio"
+            label="male"
+            {...register("sex", { required: true })}
+            value="male"
+          />
+
+          <LabelColor htmlFor="Color">Color: </LabelColor>
+          <InputColor
             type="text"
-            // placeholder="Place of birth"
-            {...register("birthplace", {
+            {...register("color", {
               required: true,
               min: 2,
               maxLenght: 15,
             })}
           />
-        </Grid>
-        <Grid>
-          <div>
-            <label htmlFor="Sex">Sex: </label>
-          </div>
-          <DivRadioLabel>
-            <RadioButton
-              type="radio"
-              label="female"
-              {...register("sex", { required: true })}
-              value="female"
-            />
-            <LabelSex htmlFor="Female"> ♀ </LabelSex>
-            <RadioButton
-              type="radio"
-              label="male"
-              {...register("sex", { required: true })}
-              value="male"
-            />
-            <LabelSex htmlFor="Male"> ♂ </LabelSex>
-          </DivRadioLabel>
-          <LabelRaceBreed htmlFor="Race/Breed">Race/Breed: </LabelRaceBreed>
-          <Input
+          <LabelTransponder htmlFor="Transponder">
+            Transponder:{" "}
+          </LabelTransponder>
+          <InputTransponder
+            type="text"
+            // placeholder="Transponder"
+            {...register("transponder", {
+              required: true,
+              min: 2,
+              maxLenght: 15,
+            })}
+          />
+          <LabelRace htmlFor="Race">Race/Breed: </LabelRace>
+          <InputRace
             type="text"
             // placeholder="Race/Breed"
             {...register("race", {
-              required: true,
-              min: 2,
-              maxLenght: 15,
-            })}
-          />
-          <LabelColor htmlFor="Color">color: : </LabelColor>
-          <Input
-            type="text"
-            // placeholder="Race/Breed"
-            {...register("color", {
               required: true,
               min: 2,
               maxLenght: 15,
@@ -100,7 +101,7 @@ export default function AddDogForm({ dogs }) {
           <LabelVaccinations htmlFor="Vaccinations">
             Vaccinations:{" "}
           </LabelVaccinations>
-          <Textarea
+          <TextareaVaccinations
             rows="3"
             // placeholder="Vaccinations"
             {...register("vaccinations", {
@@ -110,7 +111,7 @@ export default function AddDogForm({ dogs }) {
             })}
           />
           <LabelInsurances htmlFor="Insurances">Insurances: </LabelInsurances>
-          <Textarea
+          <TextareaInsurances
             // placeholder="Insurances"
             {...register("insurances", {
               required: true,
@@ -120,31 +121,12 @@ export default function AddDogForm({ dogs }) {
           />
         </Grid>
         <Grid>
-          <Link href="/">
-            <CancelButton type="button">Cancel</CancelButton>
-          </Link>
           <SubmitButton type="submit">Submit</SubmitButton>
+          <Link href="/">
+            <CancelButton type="submit">Cancel</CancelButton>
+          </Link>
         </Grid>
-        {/* RONNYS STYLING RADIO BUTTONS */}
-        {/* <div class="radio">
-          <div class="radio__1">
-            <input id="radio-1" type="radio" name="radio" value="1">
-              <label for="radio-1"></label>
-            </input>
-          </div>
-
-          <div class="radio__2">
-            <input id="radio-2" type="radio" name="radio" value="2" checked>
-              <label for="radio-2"></label>
-            </input>
-          </div>
-        </div> */}
-        {/* RONNYS STYLING RADIO BUTTONS */}
       </Form>
-
-      {/* {newDog.map((dog) => (
-        <DogCard key={dog.id} dog={dog} />
-      ))} */}
     </>
   );
 }
@@ -158,160 +140,234 @@ const Form = styled.form`
   padding-left: 25px;
   padding-right: 25px;
   padding-top: 15px;
-  // padding-bottom: 16px;
+  padding-bottom: 16px;
   border: 1px solid rgba(0, 0, 0, 0.29);
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 `;
 
-const Input = styled.input`
-  background: whitesmoke;
-  border-radius: 15px;
-  padding-left: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-`;
-
-const Textarea = styled.textarea`
-  background: whitesmoke;
-  border-radius: 15px;
-  padding-left: 12px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-`;
-
 const Grid = styled.div`
   display: grid;
+  grid-template-columns: 130px 130px;
   column-gap: 15px;
-  margin-top: 20px;
+  margin-top: 2px;
   margin-bottom: 15px;
 `;
 
-const LabelDateBirth = styled.label`
+const LabelName = styled.label`
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 1;
   grid-row-end: 1;
 `;
-
-const LabelColor = styled.label`
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 1;
-  grid-row-end: 1;
-`;
-
-const LabelPlaceBirth = styled.label`
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
-`;
-
-const DivRadioLabel = styled.div`
+const InputName = styled.input`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 2;
   grid-row-end: 2;
 `;
 
-const LabelSex = styled.label`
-  font-size: 20px;
-`;
-
-const RadioButton = styled.input`
-  background-color: red;
-  transform: scale(1.8);
-  // vertical-align: middle;
-  margin: 5px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 2;
-  grid-row-end: 3;
-`;
-
-const LabelRaceBreed = styled.label`
+const LabelPicture = styled.label`
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 1;
+`;
+const InputPicture = styled.input`
+background: whitesmoke;
+border-radius: 15px;
+padding-left: 12px;
+padding-top: 5px;
+padding-bottom: 5px;
+  grid-column-start: 2
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 2;
+`;
+
+const LabelDateBirth = styled.label`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 4;
+  grid-row-end: 4;
+`;
+const InputDateBirth = styled.input`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 5;
+  grid-row-end: 5;
+`;
+
+const LabelPlaceBirth = styled.label`
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 4;
+`;
+
+const InputPlaceBirth = styled.input`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 5;
+  grid-row-end: 5;
+`;
+
+const LabelSex = styled.label`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 7;
+  grid-row-end: 7;
+`;
+
+const LabelFemale = styled.label`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 8;
+  grid-row-end: 8;
+`;
+
+const LabelMale = styled.label`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 9;
+  grid-row-end: 9;
+`;
+
+const ButtonFemale = styled.input`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 8;
+  grid-row-end: 8;
+`;
+const ButtonMale = styled.input`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 9;
+  grid-row-end: 9;
+`;
+
+const LabelColor = styled.label`
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 7;
+  grid-row-end: 7;
+`;
+const InputColor = styled.input`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 8;
+  grid-row-end: 8;
+`;
+
+const LabelTransponder = styled.label`
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 10;
+  grid-row-end: 10;
+`;
+
+const InputTransponder = styled.input`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 11;
+  grid-row-end: 11;
+`;
+
+const LabelRace = styled.label`
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 10;
+  grid-row-end: 10;
+`;
+
+const InputRace = styled.input`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 11;
+  grid-row-end: 11;
 `;
 
 const LabelVaccinations = styled.label`
   grid-column-start: 1;
   grid-column-end: 1;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-row-start: 13;
+  grid-row-end: 13;
+`;
+
+const TextareaVaccinations = styled.textarea`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 14;
+  grid-row-end: 14;
 `;
 
 const LabelInsurances = styled.label`
   grid-column-start: 2;
   grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-row-start: 13;
+  grid-row-end: 13;
+`;
+
+const TextareaInsurances = styled.textarea`
+  background: whitesmoke;
+  border-radius: 15px;
+  padding-left: 12px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 14;
+  grid-row-end: 14;
 `;
 
 const CancelButton = styled.button`
   margin: 10px;
   background-color: #800000;
-  color: white;
+  color: whitesmoke;
   padding: 5px 30px;
-  font-size: 16px;
   border-radius: 15px;
-  grid-column-start: 1;
-  grid-column-end: 1;
 `;
 
 const SubmitButton = styled.button`
   margin: 10px;
   background-color: #445540;
-  color: white;
+  color: whitesmoke;
   padding: 5px 30px;
-  font-size: 16px;
   border-radius: 15px;
-  grid-column-start: 2;
-  grid-column-end: 2;
 `;
-
-// /*  RADIO  */
-// const RadioButtonNeu = styled.button``
-//   grid-column: 1 / 2;
-//   display: grid;
-//   grid-template-columns: repeat(2, 1fr);
-//   justify-items: center;
-//   input { display: none; }
-
-//   &__1, &__2 {
-//     & input:checked {
-//         & ~ label {
-//           box-shadow: $inner-shadow;
-//           &::after {
-//             background: var(--primary);}
-//       }
-//     }
-//     label {
-//       box-shadow: $shadow;
-//       position: relative;
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-// 		  cursor: pointer;
-//       width: 2.8rem;
-// 			height: 2.8rem;
-// 			border-radius: 50%;
-//       &:hover {&::after{background: var(--primary);}}
-
-// 		  &::after {
-// 			  content: "";
-// 			  position: absolute;
-// 			  width: 1.4rem;
-// 			  height: 1.4rem;
-// 			  background: var(--greyDark);
-// 			  border-radius: 50%;
-// 			  transition: 0.3s ease;
-// 		  }
-//     }
-//   }
-// `

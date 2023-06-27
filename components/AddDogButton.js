@@ -7,9 +7,10 @@ export default function AddDogButton() {
 const StyledAddDogButton = styled.button`
   display: flex;
   margin: auto;
+  margin-bottom: 25px;
   background-color: #445540;
   color: white;
-  padding: 10px 30px;
+  padding: 5px 30px;
   font-size: 16px;
   border-radius: 15px;
 `;

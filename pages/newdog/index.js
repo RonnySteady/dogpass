@@ -1,6 +1,5 @@
 import Heading from "/components/Heading";
 import AddDogForm from "../../components/AddDogForm";
-import styled from "styled-components";
 
 export default function DogForm({ dogs }) {
   console.log(dogs ? dogs : 0);

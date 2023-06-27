@@ -9,6 +9,8 @@ export default function DogCard({ dog }) {
       <p>Sex: {dog.sex}</p>
       <p>Color: {dog.color}</p>
       <p>Breed/Race: {dog.race}</p>
+      <p>Vaccinations: {dog.vaccinations}</p>
+      <p>Insurances: {dog.insurances}</p>
     </StyledDogCard>
   );
 }
@@ -16,6 +18,7 @@ export default function DogCard({ dog }) {
 const StyledDogCard = styled.li`
   width: 325px;
   margin: auto;
+  margin-top: 20px;
   margin-bottom: 30px;
   padding-left: 25px;
   padding-right: 25px;

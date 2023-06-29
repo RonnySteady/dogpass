@@ -122,11 +122,3 @@ const DeleteCardButton = styled.button`
   grid-row-start: 1;
   grid-row-end: 1;
 `;
-
-// margin-bottom: 30px;
-// padding-left: 25px;
-// padding-right: 25px;
-// padding-top: 15px;
-// padding-bottom: 16px;
-// background: rgba(0, 0, 0, 0.4);
-// box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);

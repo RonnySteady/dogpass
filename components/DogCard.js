@@ -1,8 +1,14 @@
 import styled from "styled-components";
+import { useState } from "react";
 
 export default function DogCard({ dog, onDelete }) {
   const handleDeleteClick = () => {
-    onDelete(dog.name);
+    const confirmation = window.confirm(
+      "Are you sure you want to delete this dog?"
+    );
+    if (confirmation) {
+      onDelete(dog.name);
+    }
   };
 
   return (
@@ -15,7 +21,7 @@ export default function DogCard({ dog, onDelete }) {
       <p>Breed/Race: {dog.race}</p>
       <p>Vaccinations: {dog.vaccinations}</p>
       <p>Insurances: {dog.insurances}</p>
-      <DeleteCardButton onClick={handleDeleteClick}>Delete</DeleteCardButton>
+      <button onClick={handleDeleteClick}>Delete</button>
     </StyledDogCard>
   );
 }

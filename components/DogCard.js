@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export default function DogCard({ dog }) {
+export default function DogCard({ dog, onDelete }) {
+  const handleDeleteClick = () => {
+    onDelete(dog.name);
+  };
+
   return (
     <StyledDogCard>
       <h2>{dog.name}</h2>
@@ -11,6 +15,7 @@ export default function DogCard({ dog }) {
       <p>Breed/Race: {dog.race}</p>
       <p>Vaccinations: {dog.vaccinations}</p>
       <p>Insurances: {dog.insurances}</p>
+      <DeleteCardButton onClick={handleDeleteClick}>Delete</DeleteCardButton>
     </StyledDogCard>
   );
 }
@@ -28,10 +33,15 @@ const StyledDogCard = styled.li`
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+`;
 
-  // border: 2px solid;
-  // border-radius: 15px;
-  // width: 90%;
-  // padding: 1rem;
-  // margin: 1rem;
+const DeleteCardButton = styled.button`
+  display: flex;
+  margin: auto;
+  margin-top: 15px;
+  background-color: #800000;
+  color: white;
+  padding: 2px 15px;
+  font-size: 12px;
+  border-radius: 15px;
 `;

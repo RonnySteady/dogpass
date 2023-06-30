@@ -362,6 +362,10 @@ const CancelButton = styled.button`
   color: whitesmoke;
   padding: 5px 30px;
   border-radius: 15px;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  grid-row-start: 20;
+  grid-row-end: 20;
 `;
 
 const SubmitButton = styled.button`

@@ -6,12 +6,9 @@ export default function DogList() {
   const [dogList, setDogList] = useState(dogs);
 
   const handleDelete = (id) => {
-    console.log(`Deleting dog with ID: ${id}`);
     const updatedDogList = dogList.filter((dog) => dog.id !== id);
     setDogList(updatedDogList);
   };
-
-  const handleEdit = (dog) => {};
 
   const handleUpdate = (updatedDog) => {
     const updatedDogList = dogList.map((dog) =>
@@ -27,7 +24,6 @@ export default function DogList() {
           key={dog.id}
           dog={dog}
           onDelete={handleDelete}
-          onEdit={handleEdit}
           onUpdate={handleUpdate}
         />
       ))}

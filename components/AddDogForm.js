@@ -1,7 +1,7 @@
-import Link from "next/link";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+import { uid } from "uid";
 
 export default function AddDogForm({ dogs }) {
   const router = useRouter();
@@ -12,29 +12,23 @@ export default function AddDogForm({ dogs }) {
   } = useForm();
 
   const onSubmit = (data) => {
-    dogs.push(data);
+    const newDog = { id: uid(), ...data };
+    dogs.push(newDog);
     router.push(`/`);
-    console.log(data);
-    console.log(dogs);
-    console.log(errors);
   };
+
+  function handleCancel() {
+    router.push("/");
+  }
 
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Grid>
-          <LabelName htmlFor="Name">Name: </LabelName>
-          <InputName
-            type="text"
-            {...register("name", { required: true, min: 2, maxLenght: 15 })}
-          />
-          <LabelPicture htmlFor="Picture">Picture: </LabelPicture>
-          <InputPicture
-            type="text"
-            placeholder="upload coming later"
-            {...register("picture", { required: false, min: 2, maxLenght: 15 })}
-          />
-        </Grid>
+        <LabelName htmlFor="Name">Name: </LabelName>
+        <InputName
+          type="text"
+          {...register("name", { required: true, min: 2, maxLenght: 15 })}
+        />
         <Grid>
           <LabelDateBirth htmlFor="Date of birth">
             Date of birth:{" "}
@@ -68,7 +62,7 @@ export default function AddDogForm({ dogs }) {
           <InputColor
             type="text"
             {...register("color", {
-              required: true,
+              required: false,
               min: 2,
               maxLenght: 15,
             })}
@@ -79,7 +73,7 @@ export default function AddDogForm({ dogs }) {
           <InputTransponder
             type="text"
             {...register("transponder", {
-              required: true,
+              required: false,
               min: 2,
               maxLenght: 15,
             })}
@@ -88,7 +82,7 @@ export default function AddDogForm({ dogs }) {
           <InputRace
             type="text"
             {...register("race", {
-              required: true,
+              required: false,
               min: 2,
               maxLenght: 15,
             })}
@@ -101,7 +95,7 @@ export default function AddDogForm({ dogs }) {
           <TextareaVaccinations
             rows="3"
             {...register("vaccinations", {
-              required: true,
+              required: false,
               min: 2,
               maxLenght: 15,
             })}
@@ -109,7 +103,7 @@ export default function AddDogForm({ dogs }) {
           <LabelInsurances htmlFor="Insurances">Insurances: </LabelInsurances>
           <TextareaInsurances
             {...register("insurances", {
-              required: true,
+              required: false,
               min: 2,
               maxLenght: 15,
             })}
@@ -117,9 +111,7 @@ export default function AddDogForm({ dogs }) {
         </Grid>
         <Grid>
           <SubmitButton type="submit">Submit</SubmitButton>
-          <Link href="/">
-            <CancelButton type="submit">Cancel</CancelButton>
-          </Link>
+          <CancelButton onClick={handleCancel}>Cancel</CancelButton>
         </Grid>
       </Form>
     </>
@@ -132,10 +124,7 @@ const Form = styled.form`
   width: 325px;
   margin: auto;
   margin-bottom: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 15px;
-  padding-bottom: 16px;
+  padding: 15px 25px 16px;
   border: 1px solid rgba(0, 0, 0, 0.29);
   border-radius: 15px;
   background: rgba(0, 0, 0, 0.4);
@@ -159,29 +148,10 @@ const LabelName = styled.label`
 const InputName = styled.input`
   background: whitesmoke;
   border-radius: 6px;
-  padding-left: 12px;
-  // padding-top: 1px;
-  // padding-bottom: 1px;
+  padding: 5px;
+  margin-bottom: 15px;
   grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 2;
-  grid-row-end: 2;
-`;
-
-const LabelPicture = styled.label`
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
-`;
-const InputPicture = styled.input`
-background: whitesmoke;
-border-radius: 6px;
-padding-left: 12px;
-padding-top: 5px;
-padding-bottom: 5px;
-  grid-column-start: 2
-  grid-column-end: 2;
+  grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 2;
 `;
@@ -245,6 +215,7 @@ const LabelMale = styled.label`
 `;
 
 const ButtonFemale = styled.input`
+  margin: 4px;
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 8;
@@ -322,7 +293,7 @@ const LabelVaccinations = styled.label`
 
 const TextareaVaccinations = styled.textarea`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -341,7 +312,7 @@ const LabelInsurances = styled.label`
 
 const TextareaInsurances = styled.textarea`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -367,4 +338,8 @@ const SubmitButton = styled.button`
   color: whitesmoke;
   padding: 5px 30px;
   border-radius: 15px;
+  grid-column-start: 2;
+  grid-column-end: 2;
+  grid-row-start: 20;
+  grid-row-end: 20;
 `;

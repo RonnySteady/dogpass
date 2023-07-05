@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "next/image";
 import editButtonCardImage from "../public/images/edit-button-card.png";
 
-export default function DogCard({ dog, onDelete, onEdit, onUpdate }) {
+export default function DogCard({ dog, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDog, setEditedDog] = useState(dog);
 
@@ -25,14 +25,13 @@ export default function DogCard({ dog, onDelete, onEdit, onUpdate }) {
   };
 
   const handleSaveClick = () => {
-    const updatedDog = { ...editedDog };
-    onUpdate(updatedDog);
+    onUpdate(editedDog);
     setIsEditMode(false);
   };
 
   const handleCancelClick = () => {
-    setIsEditMode(false);
     setEditedDog(dog);
+    setIsEditMode(false);
   };
 
   const handleInputChange = (event) => {
@@ -76,7 +75,6 @@ export default function DogCard({ dog, onDelete, onEdit, onUpdate }) {
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
-          {/* Add other input fields for editing dog's details */}
           <SaveButton onClick={handleSaveClick}>Save</SaveButton>
           <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
         </Grid>
@@ -98,7 +96,6 @@ export default function DogCard({ dog, onDelete, onEdit, onUpdate }) {
           </DisplayVaccinations>
           <DisplayInsurances>Insurances: {dog.insurances}</DisplayInsurances>
 
-          {/* Display other dog's details */}
           <EditButton onClick={handleEditClick}>
             <Image
               src={editButtonCardImage}
@@ -167,46 +164,6 @@ const DeleteCardButton = styled.button`
   grid-row-end: 1;
 `;
 
-// const EditName = styled.input`
-//   margin-bottom: 10px;
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row-start: 2;
-//   grid-row-end: 2;
-// `;
-
-// const EditRace = styled.input`
-//   margin-bottom: 10px;
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row-start: 3;
-//   grid-row-end: 3;
-// `;
-
-// const EditBirthDate = styled.input`
-//   margin-bottom: 10px;
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row-start: 4;
-//   grid-row-end: 4;
-// `;
-
-// const EditBirthPlace = styled.input`
-//   margin-bottom: 10px;
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row-start: 5;
-//   grid-row-end: 5;
-// `;
-
-// const EditColor = styled.input`
-//   margin-bottom: 10px;
-//   grid-column-start: 1;
-//   grid-column-end: 3;
-//   grid-row-start: 6;
-//   grid-row-end: 6;
-// `;
-
 const EditTransponder = styled.input`
   margin-bottom: 10px;
   grid-column-start: 2;
@@ -232,16 +189,6 @@ const EditInsurances = styled.input`
 `;
 
 const SaveButton = styled.button`
-  // display: grid;
-  // margin: auto;
-  // margin-top: 4px;
-  // margin-right: 0px;
-  // background: rgba(0, 0, 0, 0.4);
-  // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  // background-color: Transparent;
-  // border-radius: 15px;
-  // padding: 1px 3px;
-  // font-size: 8px;
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 11;
@@ -249,16 +196,6 @@ const SaveButton = styled.button`
 `;
 
 const CancelButton = styled.button`
-  // display: grid;
-  // margin: auto;
-  // margin-top: 4px;
-  // margin-right: 0px;
-  // background: rgba(0, 0, 0, 0.4);
-  // box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  // background-color: Transparent;
-  // border-radius: 15px;
-  // padding: 1px 3px;
-  // font-size: 8px;
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 11;

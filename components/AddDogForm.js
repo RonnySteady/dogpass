@@ -26,7 +26,6 @@ export default function AddDogForm({ dogs }) {
           <LabelName htmlFor="Name">Name: </LabelName>
           <InputName
             type="text"
-            // placeholder="Name"
             {...register("name", { required: true, min: 2, maxLenght: 15 })}
           />
           <LabelPicture htmlFor="Picture">Picture: </LabelPicture>
@@ -79,7 +78,6 @@ export default function AddDogForm({ dogs }) {
           </LabelTransponder>
           <InputTransponder
             type="text"
-            // placeholder="Transponder"
             {...register("transponder", {
               required: true,
               min: 2,
@@ -89,7 +87,6 @@ export default function AddDogForm({ dogs }) {
           <LabelRace htmlFor="Race">Race/Breed: </LabelRace>
           <InputRace
             type="text"
-            // placeholder="Race/Breed"
             {...register("race", {
               required: true,
               min: 2,
@@ -103,7 +100,6 @@ export default function AddDogForm({ dogs }) {
           </LabelVaccinations>
           <TextareaVaccinations
             rows="3"
-            // placeholder="Vaccinations"
             {...register("vaccinations", {
               required: true,
               min: 2,
@@ -112,7 +108,6 @@ export default function AddDogForm({ dogs }) {
           />
           <LabelInsurances htmlFor="Insurances">Insurances: </LabelInsurances>
           <TextareaInsurances
-            // placeholder="Insurances"
             {...register("insurances", {
               required: true,
               min: 2,
@@ -163,10 +158,10 @@ const LabelName = styled.label`
 `;
 const InputName = styled.input`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  // padding-top: 1px;
+  // padding-bottom: 1px;
   grid-column-start: 1;
   grid-column-end: 1;
   grid-row-start: 2;
@@ -181,7 +176,7 @@ const LabelPicture = styled.label`
 `;
 const InputPicture = styled.input`
 background: whitesmoke;
-border-radius: 15px;
+border-radius: 6px;
 padding-left: 12px;
 padding-top: 5px;
 padding-bottom: 5px;
@@ -199,7 +194,7 @@ const LabelDateBirth = styled.label`
 `;
 const InputDateBirth = styled.input`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -218,7 +213,7 @@ const LabelPlaceBirth = styled.label`
 
 const InputPlaceBirth = styled.input`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -270,7 +265,7 @@ const LabelColor = styled.label`
 `;
 const InputColor = styled.input`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -289,7 +284,7 @@ const LabelTransponder = styled.label`
 
 const InputTransponder = styled.input`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -308,7 +303,7 @@ const LabelRace = styled.label`
 
 const InputRace = styled.input`
   background: whitesmoke;
-  border-radius: 15px;
+  border-radius: 6px;
   padding-left: 12px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -357,10 +352,9 @@ const TextareaInsurances = styled.textarea`
 `;
 
 const CancelButton = styled.button`
-  margin: 10px;
   background-color: #800000;
   color: whitesmoke;
-  padding: 5px 30px;
+  padding: 5px 40px;
   border-radius: 15px;
   grid-column-start: 1;
   grid-column-end: 1;
@@ -369,7 +363,6 @@ const CancelButton = styled.button`
 `;
 
 const SubmitButton = styled.button`
-  margin: 10px;
   background-color: #445540;
   color: whitesmoke;
   padding: 5px 30px;

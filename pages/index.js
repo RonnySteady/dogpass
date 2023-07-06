@@ -1,8 +1,8 @@
 import Heading from "../components/Heading";
 import DogList from "../components/DogList";
 import AddDogButton from "../components/AddDogButton";
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -14,7 +14,7 @@ export default function Home({ dogs }) {
 
   return (
     <main>
-      <Heading>Dog Pass 🐕‍🦺</Heading>
+      <Heading>Dog Pass 🦮 </Heading>
       <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
       <Link href="/newdog">
         <AddDogButton />

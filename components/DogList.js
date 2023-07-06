@@ -1,16 +1,32 @@
-import DogCard from "/components/DogCard";
-import styled from "styled-components";
+import React, { useState } from "react";
+import DogCard from "./DogCard";
+import { dogs } from "../lib/data";
 
-export default function DogList({ dogs, onDeleteDog }) {
+export default function DogList() {
+  const [dogList, setDogList] = useState(dogs);
+
+  const handleDelete = (id) => {
+    const updatedDogList = dogList.filter((dog) => dog.id !== id);
+    setDogList(updatedDogList);
+  };
+
+  const handleUpdate = (updatedDog) => {
+    const updatedDogList = dogList.map((dog) =>
+      dog.id === updatedDog.id ? updatedDog : dog
+    );
+    setDogList(updatedDogList);
+  };
+
   return (
-    <StyledDogList>
-      {dogs.map((dog) => (
-        <DogCard key={dog.name} dog={dog} onDelete={onDeleteDog} />
+    <div>
+      {dogList.map((dog) => (
+        <DogCard
+          key={dog.id}
+          dog={dog}
+          onDelete={handleDelete}
+          onUpdate={handleUpdate}
+        />
       ))}
-    </StyledDogList>
+    </div>
   );
 }
-
-const StyledDogList = styled.ul`
-  list-style-type: none;
-`;

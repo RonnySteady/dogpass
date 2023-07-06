@@ -20,11 +20,6 @@ export default function Home({ dogs }) {
       <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
       <StyledLink href="/newdog">Add a dog</StyledLink>
       <StyledLink href="/owner">Go to owner</StyledLink>
-
-      {/* <AddDogButton /> */}
-      {/* <Link href="/owner">
-        <OwnerButton />
-      </Link> */}
     </main>
   );
 }

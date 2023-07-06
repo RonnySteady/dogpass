@@ -82,6 +82,15 @@ export default function OwnerCard() {
                 maxLength: 12,
               })}
             />
+            <InputPostal
+              type="textarea"
+              placeholder="Postal address"
+              {...register("postal", {
+                required: false,
+                minLength: 6,
+                maxLength: 12,
+              })}
+            />
 
             <input type="submit" value="Save" />
             <button type="button" onClick={onCancel}>
@@ -95,24 +104,8 @@ export default function OwnerCard() {
               <StyledName>
                 {formData.firstName} {formData.lastName}
               </StyledName>
-              <StyledEmail>
-                <Image
-                  src="/images/icons8-mail-94.png"
-                  width="20"
-                  height="20"
-                  alt="Mail icon"
-                />
-                {formData.email}
-              </StyledEmail>
-              <StyledMobile>
-                <Image
-                  src="/images/icons8-phone-94.png"
-                  width="20"
-                  height="20"
-                  alt="Phone icon"
-                />
-                {formData.mobileNumber}
-              </StyledMobile>{" "}
+              <StyledEmail>{formData.email}</StyledEmail>
+              <StyledMobile>{formData.mobileNumber}</StyledMobile>{" "}
             </Grid>
             <div>
               <EditButton type="button" onClick={() => setIsEditing(true)}>
@@ -192,6 +185,11 @@ const InputEmail = styled.input`
   grid-area: 1 / 1 / 1 / 1;
 `;
 const InputMobile = styled.input`
+  margin-bottom: 10px;
+  grid-area: 1 / 1 / 1 / 1;
+`;
+
+const InputPostal = styled.input`
   margin-bottom: 10px;
   grid-area: 1 / 1 / 1 / 1;
 `;

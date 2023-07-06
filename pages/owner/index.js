@@ -2,7 +2,6 @@ import Heading from "/components/Heading";
 import OwnerCard from "../../components/OwnerCard";
 import styled from "styled-components";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function Owner({ dogs }) {
   return (

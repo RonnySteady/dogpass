@@ -1,10 +1,8 @@
 import Heading from "../components/Heading";
 import DogList from "../components/DogList";
-import AddDogButton from "../components/AddDogButton";
 import { useState } from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import OwnerButton from "../components/OwnerButton";
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);

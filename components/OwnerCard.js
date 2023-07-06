@@ -17,7 +17,6 @@ export default function OwnerCard() {
   const [formData, setFormData] = useState({});
 
   const onSubmit = (data) => {
-    console.log(data);
     localStorage.setItem("formData", JSON.stringify(data));
     setFormData(data);
     setIsEditing(false);
@@ -45,13 +44,10 @@ export default function OwnerCard() {
     }
   }, [setValue]);
 
-  console.log(errors);
-
   return (
     <StyledOwnerCard>
       <Grid>
         {isEditing ? (
-          // Form code...
           <form onSubmit={handleSubmit(onSubmit)}>
             <select {...register("Title", { required: true })}>
               <option value="Mr">Mr</option>
@@ -118,7 +114,6 @@ export default function OwnerCard() {
                 {formData.mobileNumber}
               </StyledMobile>{" "}
             </Grid>
-            {/* Rest of the non-editing code */}
             <div>
               <EditButton type="button" onClick={() => setIsEditing(true)}>
                 <Image
@@ -142,14 +137,10 @@ const StyledOwnerCard = styled.li`
   min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 15px;
-  padding-bottom: 16px;
+  padding: 15px 25px 16px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 15px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  //   background: rgba(0, 0, 0, 0.4);
   background: rgba(255, 255, 255, 0.22);
   backdrop-filter: blur(5.4px);
   -webkit-backdrop-filter: blur(5.4px);
@@ -210,12 +201,6 @@ const EditButton = styled.button`
   margin: auto;
   margin-top: 5px;
   margin-right: 0px;
-  padding: 0;
   border: none;
   background: none;
-  font-size: 14px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
 `;

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 export default function Owner({ dogs }) {
-  console.log(dogs ? dogs : 0);
   return (
     <main>
       <Heading>Dog 🦮 Owner</Heading>

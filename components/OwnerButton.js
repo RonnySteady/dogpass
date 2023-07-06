@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export default function OwnerButton() {
-  return <StyledBackButton type="button">Go to owner</StyledBackButton>;
+  return <StyledOwnerButton type="button">Go to owner</StyledOwnerButton>;
 }
 
-const StyledBackButton = styled.button`
+const StyledOwnerButton = styled.button`
   display: flex;
   margin: auto;
   margin-bottom: 25px;

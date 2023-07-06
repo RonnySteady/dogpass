@@ -85,10 +85,11 @@ export default function OwnerCard() {
             <InputPostal
               type="textarea"
               placeholder="Postal address"
+              style={{ whiteSpace: "pre-wrap" }}
               {...register("postal", {
                 required: false,
-                minLength: 6,
-                maxLength: 12,
+                minLength: 5,
+                maxLength: 50,
               })}
             />
 
@@ -106,6 +107,7 @@ export default function OwnerCard() {
               </StyledName>
               <StyledEmail>{formData.email}</StyledEmail>
               <StyledMobile>{formData.mobileNumber}</StyledMobile>{" "}
+              <StyledPostal>{formData.postal}</StyledPostal>
             </Grid>
             <div>
               <EditButton type="button" onClick={() => setIsEditing(true)}>
@@ -170,6 +172,13 @@ const StyledMobile = styled.p`
   width: 250px;
 `;
 
+const StyledPostal = styled.p`
+  grid-area: 5 / 1 / 5 / 1;
+  width: 300px;
+  align: top;
+  white-space: pre-wrap;
+`;
+
 const InputFirstName = styled.input`
   margin-bottom: 10px;
   grid-area: 1 / 2 / 1 / 2;
@@ -189,9 +198,9 @@ const InputMobile = styled.input`
   grid-area: 1 / 1 / 1 / 1;
 `;
 
-const InputPostal = styled.input`
+const InputPostal = styled.textarea`
   margin-bottom: 10px;
-  grid-area: 1 / 1 / 1 / 1;
+  grid-area: 4 / 2 / 3 / 1;
 `;
 
 const EditButton = styled.button`

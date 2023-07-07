@@ -14,6 +14,8 @@ export default function AddDogForm({ dogs }) {
   const onSubmit = (data) => {
     const newDog = { id: uid(), ...data };
     dogs.push(newDog);
+    // Save dogs array in localStorage
+    localStorage.setItem("dogs", JSON.stringify(dogs));
     router.push(`/`);
   };
 

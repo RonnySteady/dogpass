@@ -48,7 +48,7 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
         <Grid>
           <DisplayName>{dog.name}</DisplayName>
 
-          <DisplayTransponder>Transponder:</DisplayTransponder>
+          {/* Edit mode inputs */}
           <EditTransponder
             type="text"
             name="transponder"
@@ -57,7 +57,6 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
-          <DisplayVaccinations>Vaccinations:</DisplayVaccinations>
           <EditVaccinations
             type="textarea"
             name="vaccinations"
@@ -66,7 +65,6 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
-          <DisplayInsurances>Insurances:</DisplayInsurances>
           <EditInsurances
             type="textarea"
             name="insurances"
@@ -75,6 +73,7 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
+
           <SaveButton onClick={handleSaveClick}>Save</SaveButton>
           <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
         </Grid>
@@ -96,6 +95,7 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
           </DisplayVaccinations>
           <DisplayInsurances>Insurances: {dog.insurances}</DisplayInsurances>
 
+          {/* Edit and delete buttons */}
           <EditButton onClick={handleEditClick}>
             <Image
               src={editButtonCardImage}

@@ -7,10 +7,18 @@ export default createGlobalStyle`
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    
+  }    
 
-  }
-  body {
-    font-family: system-ui;
-  }
-`;
+    body {
+      font-family: Open Sans, Avenir, Roboto, system-ui;
+      font-weight: 400;
+      font-size: 14px;
+      background: #111111;
+      color: whitesmoke;
+      background-image: url("/images/dogpassbg.jpg");
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  `;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import editButtonCardImage from "../public/images/edit-button-card.png";
+import deleteButtonCardImage from "../public/images/del-button-card.png";
 
 export default function DogCard({ dog, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -47,25 +48,35 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
       {isEditMode ? (
         <Grid>
           <DisplayName>{dog.name}</DisplayName>
-
-          {/* Edit mode inputs */}
-          <EditTransponder
+          <EditTransponderLabel htmlFor="transponder">
+            Transponder:
+          </EditTransponderLabel>{" "}
+          <EditTransponderInput
             type="text"
+            maxLength={16}
             name="transponder"
+            label="transponder"
+            id="transponder"
             placeholder="Transponder ID"
             value={editedDog.transponder}
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
-          <EditVaccinations
+          <EditVaccinationsLabel htmlFor="vaccinations">
+            Vaccinations:
+          </EditVaccinationsLabel>{" "}
+          <EditVaccinationsInput
             type="textarea"
             name="vaccinations"
-            label="vaccinations"
+            placeholder="Vaccinations"
             value={editedDog.vaccinations}
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
-          <EditInsurances
+          <EditInsurancesLabel htmlFor="insurances">
+            Insurances:
+          </EditInsurancesLabel>{" "}
+          <EditInsurancesInput
             type="textarea"
             name="insurances"
             placeholder="Insurances"
@@ -73,7 +84,14 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
             onChange={handleInputChange}
             readOnly={!isEditMode}
           />
-
+          <DeleteCardButton onClick={handleDeleteClick}>
+            <Image
+              src={deleteButtonCardImage}
+              width="16"
+              height="18"
+              alt="Edit"
+            />
+          </DeleteCardButton>
           <SaveButton onClick={handleSaveClick}>Save</SaveButton>
           <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
         </Grid>
@@ -95,16 +113,14 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
           </DisplayVaccinations>
           <DisplayInsurances>Insurances: {dog.insurances}</DisplayInsurances>
 
-          {/* Edit and delete buttons */}
           <EditButton onClick={handleEditClick}>
             <Image
-              src={editButtonCardImage}
-              alt="Edit"
-              width={16}
-              height={16}
+              src="/images/edit-button-card.png"
+              width="16"
+              height="16"
+              alt="Edit icon"
             />
           </EditButton>
-          <DeleteCardButton onClick={handleDeleteClick}>❌</DeleteCardButton>
         </Grid>
       )}
     </StyledDogCard>
@@ -114,162 +130,156 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
 const StyledDogCard = styled.li`
   display: grid;
   width: 325px;
+  min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
-  padding-left: 25px;
-  padding-right: 25px;
-  padding-top: 15px;
-  padding-bottom: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.29);
+  color: #333333;
+  padding: 15px 25px 16px;
+  background: rgba(255, 255, 255, 0.26);
   border-radius: 15px;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 130px 130px;
-  column-gap: 10px;
+  grid-template-columns: repeat(2, 130px);
+  column-gap: 15px;
 `;
 
 const EditButton = styled.button`
-  display: grid;
-  margin: auto;
-  margin-right: 25px;
-  margin-top: 6px;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  background-color: Transparent;
-  border-radius: 15px;
-  font-size: 8px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
-`;
-
-const DeleteCardButton = styled.button`
   display: grid;
   margin: auto;
   margin-right: 0px;
   margin-top: 6px;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  background-color: Transparent;
-  border-radius: 15px;
-  font-size: 8px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  background-color: transparent;
+  border: none;
+  grid-column: 2;
+  grid-row: 1;
 `;
 
-const EditTransponder = styled.input`
-  margin-bottom: 10px;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 7;
-  grid-row-end: 7;
+const DeleteCardButton = styled.button`
+  display: grid;
+  grid-column: 2;
+  grid-row: 1;
+  margin: auto;
+  margin-right: 2px;
+
+  margin-top: 4px;
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  background-color: transparent;
+  border: none;
 `;
 
-const EditVaccinations = styled.input`
-  margin-bottom: 10px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 9;
-  grid-row-end: 9;
+const EditTransponderLabel = styled.label`
+  margin-right: 10px;
+  grid-column: 1;
+  grid-row: 7;
 `;
 
-const EditInsurances = styled.input`
+const EditTransponderInput = styled.input`
   margin-bottom: 10px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 9;
-  grid-row-end: 9;
+  grid-column: 2;
+  grid-row: 7;
+`;
+
+const EditVaccinationsLabel = styled.label`
+  margin-right: 10px;
+  grid-column: 1;
+  grid-row: 8;
+`;
+
+const EditVaccinationsInput = styled.textarea`
+  margin-bottom: 18px;
+  max-width: 130px;
+  grid-column: 1;
+  grid-row: 9;
+`;
+
+const EditInsurancesLabel = styled.label`
+  margin-right: 10px;
+  grid-column: 2;
+  grid-row: 8;
+`;
+
+const EditInsurancesInput = styled.textarea`
+  margin-bottom: 18px;
+  max-width: 130px;
+  grid-column: 2;
+  grid-row: 9;
 `;
 
 const SaveButton = styled.button`
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 11;
-  grid-row-end: 11;
+  grid-column: 2;
+  grid-row: 11;
+  width: 80px;
+  padding: 1px;
+  font-size: 12px;
+  border-radius: 6px;
 `;
 
 const CancelButton = styled.button`
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 11;
-  grid-row-end: 11;
+  grid-column: 1;
+  grid-row: 11;
+  width: 80px;
+  padding: 1px;
+  font-size: 12px;
+  border-radius: 6px;
 `;
 
 const DisplayName = styled.h2`
   margin-bottom: 10px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 1;
-  grid-row-end: 1;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  margin-right: 22px;
 `;
 
 const DisplayRace = styled.span`
   margin-bottom: 10px;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 2;
+  grid-column: 1 / span 2;
+  grid-row: 2;
 `;
 
 const DisplayBirthDate = styled.span`
   margin-bottom: 10px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-column: 1;
+  grid-row: 3;
 `;
 
 const DisplayBirthPlace = styled.span`
   margin-bottom: 10px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 3;
-  grid-row-end: 3;
+  grid-column: 2;
+  grid-row: 3;
 `;
 
 const DisplaySex = styled.span`
-  margin-bottom: 10px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 4;
-  grid-row-end: 4;
+  grid-column: 2;
+  grid-row: 4;
 `;
 
 const DisplayColor = styled.span`
   margin-bottom: 10px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 4;
+  grid-column: 2;
+  grid-row: 5;
 `;
 
 const DisplayTransponder = styled.span`
   margin-bottom: 10px;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 7;
-  grid-row-end: 7;
+  column-gap: 15px;
+  grid-column: 1 / 2;
+  grid-row: 4 / 7;
 `;
 
 const DisplayVaccinations = styled.span`
-  margin-top: 10px;
-  grid-column-start: 1;
-  grid-column-end: 1;
-  grid-row-start: 8;
-  grid-row-end: 8;
+  grid-column: 1;
+  grid-row: 8;
 `;
 
 const DisplayInsurances = styled.span`
-  margin-top: 10px;
-  grid-column-start: 2;
-  grid-column-end: 2;
-  grid-row-start: 8;
-  grid-row-end: 8;
+  grid-column: 2;
+  grid-row: 8;
 `;

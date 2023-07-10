@@ -150,9 +150,7 @@ const Grid = styled.div`
 `;
 
 const StyledTitle = styled.p`
-  // grid-area: 1 / 1 / 1 / 1;
   font-size: 12px;
-  // margin-bottom: 0px;
 `;
 
 const EditButton = styled.button`
@@ -162,7 +160,6 @@ const EditButton = styled.button`
   margin: auto;
   margin-left: -6px;
   margin-top: 6px;
-  // grid-area: 2 / 2 / 2 / 2;
 `;
 
 const StyledName = styled.p`

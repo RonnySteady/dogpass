@@ -14,7 +14,6 @@ export default function AddDogForm({ dogs }) {
   const onSubmit = (data) => {
     const newDog = { id: uid(), ...data };
     dogs.push(newDog);
-    // Save dogs array in localStorage
     localStorage.setItem("dogs", JSON.stringify(dogs));
     router.push(`/`);
   };
@@ -172,7 +171,7 @@ const LabelDateBirth = styled.label`
 `;
 
 const InputDateBirth = styled.input`
-  // background: whitesmoke;
+  background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
   grid-column: 1;

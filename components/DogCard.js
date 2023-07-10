@@ -113,7 +113,6 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
           </DisplayVaccinations>
           <DisplayInsurances>Insurances: {dog.insurances}</DisplayInsurances>
 
-          {/* Edit and delete buttons */}
           <EditButton onClick={handleEditClick}>
             <Image
               src="/images/edit-button-card.png"
@@ -122,14 +121,6 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
               alt="Edit icon"
             />
           </EditButton>
-          {/* <DeleteCardButton onClick={handleDeleteClick}>
-            <Image
-              src={deleteButtonCardImage}
-              width="16"
-              height="18"
-              alt="Edit"
-            />
-          </DeleteCardButton> */}
         </Grid>
       )}
     </StyledDogCard>

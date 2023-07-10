@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import editButtonCardImage from "../public/images/edit-button-card.png";
 
 export default function OwnerCard() {
   const {
@@ -49,12 +50,12 @@ export default function OwnerCard() {
       <Grid>
         {isEditing ? (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <select {...register("Title", { required: true })}>
+            <InputTitle {...register("Title", { required: true })}>
               <option value="Mr">Mr</option>
               <option value="Mrs">Mrs</option>
               <option value="Miss">Miss</option>
               <option value="Dr">Dr</option>
-            </select>
+            </InputTitle>
             <InputFirstName
               type="text"
               placeholder="First name"
@@ -79,7 +80,7 @@ export default function OwnerCard() {
               {...register("mobileNumber", {
                 required: false,
                 minLength: 6,
-                maxLength: 12,
+                maxLength: 14,
               })}
             />
             <InputPostal
@@ -93,10 +94,10 @@ export default function OwnerCard() {
               })}
             />
 
-            <input type="submit" value="Save" />
-            <button type="button" onClick={onCancel}>
+            <CancelButton type="button" onClick={onCancel}>
               Cancel
-            </button>
+            </CancelButton>
+            <SubmitButton type="submit" value="Submit" />
           </form>
         ) : (
           <>
@@ -113,8 +114,8 @@ export default function OwnerCard() {
               <EditButton type="button" onClick={() => setIsEditing(true)}>
                 <Image
                   src="/images/edit-button-card.png"
-                  width="15"
-                  height="15"
+                  width="16"
+                  height="16"
                   alt="Edit icon"
                 />
               </EditButton>
@@ -132,82 +133,107 @@ const StyledOwnerCard = styled.li`
   min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
+  color: #333333;
   padding: 15px 25px 16px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.26);
   border-radius: 15px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  background: rgba(255, 255, 255, 0.22);
-  backdrop-filter: blur(5.4px);
-  -webkit-backdrop-filter: blur(5.4px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 180px 80px;
-  column-gap: 10px;
+  grid-template-columns: 250px 16px;
+  column-gap: 15px;
 `;
 
 const StyledTitle = styled.p`
-  grid-area: 1 / 1 / 1 / 1;
-  font-size: 14px;
-  margin-top: 5px;
-  margin-bottom: 0px;
+  // grid-area: 1 / 1 / 1 / 1;
+  font-size: 12px;
+  // margin-bottom: 0px;
 `;
 
-const StyledName = styled.h3`
-  grid-area: 2 / 1 / 2 / 1;
+const EditButton = styled.button`
+  border: none;
+  background: none;
+  display: flex;
+  margin: auto;
+  margin-left: -6px;
+  margin-top: 6px;
+  // grid-area: 2 / 2 / 2 / 2;
+`;
+
+const StyledName = styled.p`
+  font-size: 22px;
+  grid-area: 2 / 1 / 2 / 2;
   margin-bottom: 10px;
-  width: 200px;
+  width: 274px;
 `;
 
 const StyledEmail = styled.p`
   grid-area: 3 / 1 / 3 / 1;
   margin-bottom: 2px;
-  width: 250px;
+  width: 274px;
   align: top;
 `;
 
 const StyledMobile = styled.p`
   grid-area: 4 / 1 / 4 / 1;
-  width: 250px;
+  width: 274px;
+  margin-bottom: 10px;
 `;
 
 const StyledPostal = styled.p`
   grid-area: 5 / 1 / 5 / 1;
-  width: 300px;
+  width: 274px;
   align: top;
   white-space: pre-wrap;
 `;
 
-const InputFirstName = styled.input`
+const InputTitle = styled.select`
+  width: 80px;
   margin-bottom: 10px;
-  grid-area: 1 / 2 / 1 / 2;
+`;
+
+const InputFirstName = styled.input`
+  display: grid;
+  width: 270px;
+  margin-bottom: 10px;
 `;
 
 const InputLastName = styled.input`
+  width: 270px;
   margin-bottom: 10px;
-  grid-area: 1 / 1 / 1 / 1;
 `;
 
 const InputEmail = styled.input`
+  width: 270px;
   margin-bottom: 10px;
-  grid-area: 1 / 1 / 1 / 1;
 `;
 const InputMobile = styled.input`
+  width: 270px;
   margin-bottom: 10px;
-  grid-area: 1 / 1 / 1 / 1;
 `;
 
 const InputPostal = styled.textarea`
-  margin-bottom: 10px;
-  grid-area: 4 / 2 / 3 / 1;
+  width: 270px;
+  height: 55px;
+  margin-bottom: 15px;
 `;
 
-const EditButton = styled.button`
-  display: grid;
-  margin: auto;
-  margin-top: 5px;
-  margin-right: 0px;
-  border: none;
-  background: none;
+const CancelButton = styled.button`
+  width: 75px;
+  padding: 1px;
+  font-size: 12px;
+  border-radius: 6px;
+`;
+
+const SubmitButton = styled.input`
+  width: 75px;
+  margin-left: 10px;
+  padding: 1px;
+  font-size: 12px;
+  border-radius: 6px;
 `;

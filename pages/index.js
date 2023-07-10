@@ -25,13 +25,12 @@ export default function Home({ dogs }) {
 const StyledLink = styled(Link)`
   display: flex;
   justify-content: center;
-  width: 160px;
+  width: 140px;
   margin: auto;
   margin-bottom: 25px;
   background-color: #445540;
-  color: white;
+  color: whitesmoke;
   padding: 5px;
-  font-size: 16px;
   border-radius: 15px;
   text-decoration: none;
 `;

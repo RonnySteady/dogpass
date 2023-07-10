@@ -10,7 +10,7 @@ export default createGlobalStyle`
   }    
 
     body {
-      font-family: Open Sans, Avenir, Roboto;
+      font-family: Open Sans, Avenir, Roboto, system-ui;
       font-weight: 400;
       font-size: 14px;
       background: #111111;

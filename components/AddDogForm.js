@@ -125,11 +125,11 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   color: #333333;
-  width: 325px;
+  width: 350px;
   margin: auto;
   margin-bottom: 30px;
   padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
@@ -138,14 +138,14 @@ const Form = styled.form`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 130px 130px;
+  grid-template-columns: 140px 140px;
   column-gap: 15px;
   margin: 2px 0 15px;
 `;
 
 const Grid3 = styled.div`
   display: grid;
-  grid-template-columns: 50px 65px 130px;
+  grid-template-columns: 55px 70px 140px;
   column-gap: 15px;
   margin: 2px 0 15px;
 `;

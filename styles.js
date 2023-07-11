@@ -12,8 +12,8 @@ export default createGlobalStyle`
     body {
       font-family: Open Sans, Avenir, Roboto, system-ui;
       font-weight: 400;
-      font-size: 14px;
-      background: #111111;
+      font-size: 16px;
+      background: #222222;
       color: whitesmoke;
       background-image: url("/images/dogpassbg.jpg");
       background-attachment: fixed;

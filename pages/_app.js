@@ -7,7 +7,8 @@ export default function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Head>
-        <title>Capstone Project</title>
+        <link rel="shortcut icon" href="/favicon.png" />
+        <title>Dog Pass</title>
       </Head>
       <Component {...pageProps} dogs={dogs} />
     </>

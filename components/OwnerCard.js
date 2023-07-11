@@ -80,7 +80,7 @@ export default function OwnerCard() {
               {...register("mobileNumber", {
                 required: false,
                 minLength: 6,
-                maxLength: 14,
+                maxLength: 16,
               })}
             />
             <InputPostal
@@ -129,13 +129,13 @@ export default function OwnerCard() {
 
 const StyledOwnerCard = styled.li`
   display: grid;
-  width: 325px;
+  width: 350px;
   min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
   color: #333333;
   padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
@@ -144,12 +144,13 @@ const StyledOwnerCard = styled.li`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 250px 16px;
+  grid-template-columns: 270px 16px;
   column-gap: 15px;
 `;
 
 const StyledTitle = styled.p`
   font-size: 12px;
+  margin-top: 5px;
 `;
 
 const EditButton = styled.button`
@@ -186,6 +187,7 @@ const StyledPostal = styled.p`
   width: 274px;
   align: top;
   white-space: pre-wrap;
+  margin-bottom: 5px;
 `;
 
 const InputTitle = styled.select`

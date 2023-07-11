@@ -129,13 +129,13 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
 
 const StyledDogCard = styled.li`
   display: grid;
-  width: 325px;
+  width: 350px;
   min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
   color: #333333;
   padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 15px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
@@ -144,7 +144,7 @@ const StyledDogCard = styled.li`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 130px);
+  grid-template-columns: repeat(2, 140px);
   column-gap: 15px;
 `;
 
@@ -167,7 +167,6 @@ const DeleteCardButton = styled.button`
   grid-row: 1;
   margin: auto;
   margin-right: 2px;
-
   margin-top: 4px;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
@@ -232,26 +231,26 @@ const CancelButton = styled.button`
 `;
 
 const DisplayName = styled.h2`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   grid-column: 1 / 3;
   grid-row: 1;
   margin-right: 22px;
 `;
 
 const DisplayRace = styled.span`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   grid-column: 1 / span 2;
   grid-row: 2;
 `;
 
 const DisplayBirthDate = styled.span`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   grid-column: 1;
   grid-row: 3;
 `;
 
 const DisplayBirthPlace = styled.span`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   grid-column: 2;
   grid-row: 3;
 `;
@@ -262,24 +261,26 @@ const DisplaySex = styled.span`
 `;
 
 const DisplayColor = styled.span`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   grid-column: 2;
   grid-row: 5;
 `;
 
 const DisplayTransponder = styled.span`
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   column-gap: 15px;
   grid-column: 1 / 2;
   grid-row: 4 / 7;
 `;
 
 const DisplayVaccinations = styled.span`
+  margin-bottom: 3px;
   grid-column: 1;
   grid-row: 8;
 `;
 
 const DisplayInsurances = styled.span`
+  margin-bottom: 3px;
   grid-column: 2;
   grid-row: 8;
 `;

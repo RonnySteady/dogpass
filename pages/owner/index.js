@@ -1,27 +1,18 @@
-import Heading from "/components/Heading";
+import Header from "../../components/Header";
+import Navbar from "../../components/NavBar";
 import OwnerCard from "../../components/OwnerCard";
-import styled from "styled-components";
-import Link from "next/link";
 
 export default function Owner({ dogs }) {
   return (
     <main>
-      <Heading>Owner 🦮 </Heading>
+      <Header />
       <OwnerCard />
-      <StyledLink href="/">Go to dogs</StyledLink>
+      <Navbar
+        buttonText1="Go to dogs"
+        link1="/"
+        buttonText2="Add a dog"
+        link2="/newdog"
+      />
     </main>
   );
 }
-
-const StyledLink = styled(Link)`
-  display: flex;
-  justify-content: center;
-  width: 140px;
-  margin: auto;
-  margin-bottom: 25px;
-  background-color: #445540;
-  color: whitesmoke;
-  padding: 5px;
-  border-radius: 15px;
-  text-decoration: none;
-`;

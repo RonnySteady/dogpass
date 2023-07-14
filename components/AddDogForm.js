@@ -31,14 +31,24 @@ export default function AddDogForm({ dogs }) {
           {...register("name", { required: true, min: 2, maxLength: 12 })}
         />
         <Grid>
-          <LabelDateBirth htmlFor="Date of birth">
-            Date of birth:{" "}
-          </LabelDateBirth>
-          <InputDateBirth type="date" {...register("birthdate", {})} />
-          <LabelPlaceBirth htmlFor="Place of birth">
-            Place of birth:{" "}
-          </LabelPlaceBirth>
-          <InputPlaceBirth type="text" {...register("birthplace", {})} />
+          <LabelRace htmlFor="Race">Race/Breed: </LabelRace>
+          <InputRace
+            type="text"
+            {...register("race", {
+              required: false,
+              min: 2,
+              maxLength: 26,
+            })}
+          />
+          <LabelColor htmlFor="Color">Color: </LabelColor>
+          <InputColor
+            type="text"
+            {...register("color", {
+              required: false,
+              min: 2,
+              maxLength: 15,
+            })}
+          />
         </Grid>
         <Grid3>
           <LabelSex htmlFor="Sex">Sex: </LabelSex>
@@ -58,39 +68,29 @@ export default function AddDogForm({ dogs }) {
             {...register("sex", { required: true })}
             value="male"
           />
-
-          <LabelColor htmlFor="Color">Color: </LabelColor>
-          <InputColor
-            type="text"
-            {...register("color", {
-              required: false,
-              min: 2,
-              maxLength: 15,
-            })}
-          />
-        </Grid3>
-        <Grid>
           <LabelTransponder htmlFor="Transponder">
             Transponder:{" "}
           </LabelTransponder>
           <InputTransponder
-            type="number"
+            type="text"
             {...register("transponder", {
               required: false,
               min: 2,
               maxLength: 16,
             })}
           />
-          <LabelRace htmlFor="Race">Race/Breed: </LabelRace>
-          <InputRace
-            type="text"
-            {...register("race", {
-              required: false,
-              min: 2,
-              maxLength: 15,
-            })}
-          />
+        </Grid3>
+        <Grid>
+          <LabelDateBirth htmlFor="Date of birth">
+            Date of birth:{" "}
+          </LabelDateBirth>
+          <InputDateBirth type="date" {...register("birthdate", {})} />
+          <LabelPlaceBirth htmlFor="Place of birth">
+            Place of birth:{" "}
+          </LabelPlaceBirth>
+          <InputPlaceBirth type="text" {...register("birthplace", {})} />
         </Grid>
+        <Grid></Grid>
         <Grid>
           <LabelVaccinations htmlFor="Vaccinations">
             Vaccinations:{" "}
@@ -140,14 +140,14 @@ const Grid = styled.div`
   display: grid;
   grid-template-columns: 140px 140px;
   column-gap: 15px;
-  margin: 2px 0 15px;
+  margin: 2px 0 10px;
 `;
 
 const Grid3 = styled.div`
   display: grid;
   grid-template-columns: 55px 70px 140px;
   column-gap: 15px;
-  margin: 2px 0 15px;
+  margin: 2px 0 20px;
 `;
 
 const LabelName = styled.label`
@@ -164,30 +164,30 @@ const InputName = styled.input`
   grid-row: 2;
 `;
 
-const LabelDateBirth = styled.label`
+const LabelRace = styled.label`
   grid-column: 1;
-  grid-row: 4;
+  grid-row: 2;
 `;
 
-const InputDateBirth = styled.input`
+const InputRace = styled.input`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
   grid-column: 1;
-  grid-row: 5;
+  grid-row: 3;
 `;
 
-const LabelPlaceBirth = styled.label`
+const LabelColor = styled.label`
   grid-column: 2;
-  grid-row: 4;
+  grid-row: 2;
 `;
 
-const InputPlaceBirth = styled.input`
+const InputColor = styled.input`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
   grid-column: 2;
-  grid-row: 5;
+  grid-row: 3;
 `;
 
 const LabelSex = styled.label`
@@ -221,12 +221,38 @@ const ButtonMale = styled.input`
   grid-row: 8;
 `;
 
-const LabelColor = styled.label`
+const LabelDateBirth = styled.label`
+  grid-column: 1;
+  grid-row: 4;
+`;
+
+const InputDateBirth = styled.input`
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 5px 0 5px 12px;
+  grid-column: 1;
+  grid-row: 5;
+`;
+
+const LabelPlaceBirth = styled.label`
+  grid-column: 2;
+  grid-row: 4;
+`;
+
+const InputPlaceBirth = styled.input`
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 5px 0 5px 12px;
+  grid-column: 2;
+  grid-row: 5;
+`;
+
+const LabelTransponder = styled.label`
   grid-column: 3;
   grid-row: 7;
 `;
 
-const InputColor = styled.input`
+const InputTransponder = styled.input`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
@@ -234,56 +260,32 @@ const InputColor = styled.input`
   grid-row: 8;
 `;
 
-const LabelTransponder = styled.label`
-  grid-column: 1;
-  grid-row: 10;
-`;
-
-const InputTransponder = styled.input`
-  background: whitesmoke;
-  border-radius: 6px;
-  padding: 5px 0 5px 12px;
-  grid-column: 1;
-  grid-row: 11;
-`;
-
-const LabelRace = styled.label`
-  grid-column: 2;
-  grid-row: 10;
-`;
-
-const InputRace = styled.input`
-  background: whitesmoke;
-  border-radius: 6px;
-  padding: 5px 0 5px 12px;
-  grid-column: 2;
-  grid-row: 11;
-`;
-
 const LabelVaccinations = styled.label`
   grid-column: 1;
-  grid-row: 13;
+  grid-row: 1;
 `;
 
 const TextareaVaccinations = styled.textarea`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
+  margin-bottom: 15px;
   grid-column: 1;
-  grid-row: 14;
+  grid-row: 2;
 `;
 
 const LabelInsurances = styled.label`
   grid-column: 2;
-  grid-row: 13;
+  grid-row: 1;
 `;
 
 const TextareaInsurances = styled.textarea`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
+  margin-bottom: 15px;
   grid-column: 2;
-  grid-row: 14;
+  grid-row: 2;
 `;
 
 const CancelButton = styled.button`

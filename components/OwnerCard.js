@@ -14,8 +14,18 @@ export default function OwnerCard() {
     getValues,
   } = useForm();
 
-  const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedData = localStorage.getItem("formData");
+      setIsEditing(
+        !storedData || Object.keys(JSON.parse(storedData)).length === 0
+      );
+    }
+  }, []);
 
   const onSubmit = (data) => {
     localStorage.setItem("formData", JSON.stringify(data));
@@ -111,14 +121,14 @@ export default function OwnerCard() {
               <StyledPostal>{formData.postal}</StyledPostal>
             </Grid>
             <div>
-              <EditButton type="button" onClick={() => setIsEditing(true)}>
+              <EditCardButton type="button" onClick={() => setIsEditing(true)}>
                 <Image
                   src="/images/edit-button-card.png"
-                  width="16"
-                  height="16"
+                  width="20"
+                  height="20"
                   alt="Edit icon"
                 />
-              </EditButton>
+              </EditCardButton>
             </div>
           </>
         )}
@@ -135,11 +145,11 @@ const StyledOwnerCard = styled.li`
   margin-bottom: 30px;
   color: #333333;
   padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.26);
+  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.29);
 `;
 
 const Grid = styled.div`
@@ -153,13 +163,15 @@ const StyledTitle = styled.p`
   margin-top: 5px;
 `;
 
-const EditButton = styled.button`
+const EditCardButton = styled.button`
+  font-size: 11px;
+  font-family: Open Sans, Roboto, Avenir, system-ui;
+  color: #222222;
+  position: absolute;
+  top: 21px;
+  right: 25px;
+  background-color: transparent;
   border: none;
-  background: none;
-  display: flex;
-  margin: auto;
-  margin-left: -6px;
-  margin-top: 6px;
 `;
 
 const StyledName = styled.p`

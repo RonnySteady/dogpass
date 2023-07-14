@@ -134,11 +134,11 @@ const StyledDogCard = styled.li`
   margin: auto;
   margin-bottom: 30px;
   padding: 15px 25px 15px 25px;
-  background: rgba(255, 255, 255, 0.26);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.29);
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 `;
 
 const CopyCardButton = styled.button`

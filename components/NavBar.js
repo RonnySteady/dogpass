@@ -37,6 +37,6 @@ const StyledLink = styled.a`
   &:focus {
     // color: #333333;
     background-color: orange;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Increase box-shadow for more depth */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 `;

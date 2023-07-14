@@ -156,7 +156,7 @@ const CopyCardButton = styled.button`
 `;
 
 const EditCardButton = styled.button`
-  font-size: 11px;
+  // font-size: 10px;
   font-family: Open Sans, Roboto, Avenir, system-ui;
   color: #222222;
   position: absolute;

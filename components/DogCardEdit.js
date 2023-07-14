@@ -113,8 +113,8 @@ export default function DogCardEdit({
             alt="Delete"
           />
         </DeleteCardButton>
-        <SaveButton onClick={handleSaveClick}>Save</SaveButton>
         <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
+        <SaveButton onClick={handleSaveClick}>Save</SaveButton>
       </Grid2>
     </div>
   );

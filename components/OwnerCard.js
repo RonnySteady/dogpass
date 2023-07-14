@@ -138,14 +138,14 @@ export default function OwnerCard() {
 }
 
 const StyledOwnerCard = styled.li`
-  display: grid;
+  display: flex;
+  position: relative;
   width: 350px;
   min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
-  color: #333333;
-  padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.26);
+  padding: 15px 25px 15px 25px;
+  background: rgba(255, 255, 255, 0.38);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);

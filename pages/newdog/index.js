@@ -1,10 +1,10 @@
-import Heading from "/components/Heading";
+import Header from "../../components/Header";
 import AddDogForm from "../../components/AddDogForm";
 
 export default function DogForm({ dogs }) {
   return (
     <main>
-      <Heading>Add 🦮 Pass</Heading>
+      <Header />
       <AddDogForm dogs={dogs} />
     </main>
   );

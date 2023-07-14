@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
+import DogCardEdit from "./DogCardEdit";
 import editButtonCardImage from "../public/images/edit-button-card.png";
-import deleteButtonCardImage from "../public/images/del-button-card.png";
+import copyButtonCardImage from "../public/images/copy-button-card.png";
 
 export default function DogCard({ dog, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDog, setEditedDog] = useState(dog);
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     setEditedDog(dog);
@@ -31,96 +33,93 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
   };
 
   const handleCancelClick = () => {
-    setEditedDog(dog);
     setIsEditMode(false);
+    setEditedDog(dog);
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const handleInputChange = (name, value) => {
     setEditedDog((prevDog) => ({
       ...prevDog,
       [name]: value,
     }));
   };
 
+  const handleCopyClick = async () => {
+    const dogInformation = `${dog.name}, ${dog.race}, ${dog.color}, born ${dog.birthdate} in ${dog.birthplace}, Transponder-ID: ${dog.transponder}, Vaccinations: ${dog.vaccinations}, Insurances: ${dog.insurances}`;
+    try {
+      await navigator.clipboard.writeText(dogInformation);
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
+      window.alert(`${dog.name} copied to clipboard`);
+    } catch (error) {
+      console.error("Failed to copy Dog to clipboard:", error);
+      window.alert("Failed to copy Dog to clipboard. Please try again.");
+    }
+  };
+
   return (
     <StyledDogCard>
       {isEditMode ? (
-        <Grid>
-          <DisplayName>{dog.name}</DisplayName>
-          <EditTransponderLabel htmlFor="transponder">
-            Transponder:
-          </EditTransponderLabel>{" "}
-          <EditTransponderInput
-            type="text"
-            maxLength={16}
-            name="transponder"
-            label="transponder"
-            id="transponder"
-            placeholder="Transponder ID"
-            value={editedDog.transponder}
-            onChange={handleInputChange}
-            readOnly={!isEditMode}
-          />
-          <EditVaccinationsLabel htmlFor="vaccinations">
-            Vaccinations:
-          </EditVaccinationsLabel>{" "}
-          <EditVaccinationsInput
-            type="textarea"
-            name="vaccinations"
-            placeholder="Vaccinations"
-            value={editedDog.vaccinations}
-            onChange={handleInputChange}
-            readOnly={!isEditMode}
-          />
-          <EditInsurancesLabel htmlFor="insurances">
-            Insurances:
-          </EditInsurancesLabel>{" "}
-          <EditInsurancesInput
-            type="textarea"
-            name="insurances"
-            placeholder="Insurances"
-            value={editedDog.insurances}
-            onChange={handleInputChange}
-            readOnly={!isEditMode}
-          />
-          <DeleteCardButton onClick={handleDeleteClick}>
-            <Image
-              src={deleteButtonCardImage}
-              width="16"
-              height="18"
-              alt="Edit"
-            />
-          </DeleteCardButton>
-          <SaveButton onClick={handleSaveClick}>Save</SaveButton>
-          <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
-        </Grid>
+        <DogCardEdit
+          dog={dog}
+          editedDog={editedDog}
+          onDelete={handleDeleteClick}
+          onSave={handleSaveClick}
+          onCancel={handleCancelClick}
+          onChange={handleInputChange}
+        />
       ) : (
         <Grid>
-          <DisplayName>{dog.name}</DisplayName>
-          <DisplayRace>{dog.race}</DisplayRace>
-          <DisplayBirthDate>Date of birth: {dog.birthdate}</DisplayBirthDate>
-          <DisplayBirthPlace>
-            Place of birth: {dog.birthplace}
-          </DisplayBirthPlace>
-          <DisplaySex>Sex: {dog.sex}</DisplaySex>
-          <DisplayColor>Color: {dog.color}</DisplayColor>
-          <DisplayTransponder>
-            Transponder: {dog.transponder}
-          </DisplayTransponder>
-          <DisplayVaccinations>
-            Vaccinations: {dog.vaccinations}
-          </DisplayVaccinations>
-          <DisplayInsurances>Insurances: {dog.insurances}</DisplayInsurances>
+          <NameSex>
+            {dog.name} {dog.sex === "male" ? "♂" : "♀"}
+          </NameSex>
+          <RaceColor>
+            {dog.race}
+            {dog.race && dog.color && ", "}
+            {dog.color}
+          </RaceColor>
+          {dog.birthdate ? (
+            <BirthDatePlace>
+              born {dog.birthdate}
+              {dog.birthplace && ` in ${dog.birthplace}`}
+            </BirthDatePlace>
+          ) : (
+            dog.birthplace && (
+              <BirthDatePlace>born in {dog.birthplace}</BirthDatePlace>
+            )
+          )}
 
-          <EditButton onClick={handleEditClick}>
+          <Transponder>
+            Transponder-ID:
+            <span style={{ marginLeft: "10px" }}>{dog.transponder}</span>
+          </Transponder>
+
+          <Vaccinations>Vaccinations: {dog.vaccinations}</Vaccinations>
+          <Insurances>Insurances: {dog.insurances}</Insurances>
+          <CopyCardButton
+            onClick={handleCopyClick}
+            className="copy-button"
+            isCopied={isCopied}
+          >
+            COPY
+            {/* <Image
+              src={copyButtonCardImage}
+              width="22"
+              height="22"
+              alt="Copy icon"
+            /> */}
+          </CopyCardButton>
+
+          <EditCardButton onClick={handleEditClick}>
             <Image
-              src="/images/edit-button-card.png"
-              width="16"
-              height="16"
+              src={editButtonCardImage}
+              width="20"
+              height="20"
               alt="Edit icon"
             />
-          </EditButton>
+          </EditCardButton>
         </Grid>
       )}
     </StyledDogCard>
@@ -128,159 +127,73 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
 }
 
 const StyledDogCard = styled.li`
-  display: grid;
+  display: flex;
+  position: relative;
   width: 350px;
   min-height: 200px;
   margin: auto;
   margin-bottom: 30px;
-  color: #333333;
-  padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.35);
-  border-radius: 15px;
+  padding: 15px 25px 15px 25px;
+  background: rgba(255, 255, 255, 0.26);
+  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.29);
+`;
+
+const CopyCardButton = styled.button`
+  font-size: 10px;
+  font-family: Open Sans, Roboto, Avenir, system-ui;
+  color: #222222;
+  position: absolute;
+  top: 25px;
+  right: 55px;
+  background-color: transparent;
+  border: none;
+  transition: opacity 0.3s ease;
+  opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)};
+  pointer-events: ${({ isCopied }) => (isCopied ? "none" : "auto")};
+`;
+
+const EditCardButton = styled.button`
+  font-size: 11px;
+  font-family: Open Sans, Roboto, Avenir, system-ui;
+  color: #222222;
+  position: absolute;
+  top: 21px;
+  right: 25px;
+  background-color: transparent;
+  border: none;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 140px);
-  column-gap: 15px;
+  grid-template-columns: 145px 145px;
+  column-gap: 10px;
 `;
 
-const EditButton = styled.button`
-  display: grid;
-  margin: auto;
-  margin-right: 0px;
-  margin-top: 6px;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  background-color: transparent;
-  border: none;
-  grid-column: 2;
-  grid-row: 1;
+const NameSex = styled.h2`
+  grid-area: 1 / 1 / 1 / 3;
+  margin-bottom: 8px;
 `;
 
-const DeleteCardButton = styled.button`
-  display: grid;
-  grid-column: 2;
-  grid-row: 1;
-  margin: auto;
-  margin-right: 2px;
-  margin-top: 4px;
-  background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
-  background-color: transparent;
-  border: none;
+const RaceColor = styled.span`
+  grid-area: 2 / 1 / 2 / 3;
 `;
 
-const EditTransponderLabel = styled.label`
-  margin-right: 10px;
-  grid-column: 1;
-  grid-row: 7;
+const BirthDatePlace = styled.span`
+  grid-area: 3 / 1 / 3 / 3;
+  margin-bottom: 8px;
 `;
 
-const EditTransponderInput = styled.input`
-  margin-bottom: 10px;
-  grid-column: 2;
-  grid-row: 7;
+const Transponder = styled.span`
+  grid-area: 4 / 1 / 4 / 3;
 `;
 
-const EditVaccinationsLabel = styled.label`
-  margin-right: 10px;
-  grid-column: 1;
-  grid-row: 8;
+const Vaccinations = styled.span`
+  grid-area: 5 / 1 / 5 / 2;
 `;
 
-const EditVaccinationsInput = styled.textarea`
-  margin-bottom: 18px;
-  max-width: 130px;
-  grid-column: 1;
-  grid-row: 9;
-`;
-
-const EditInsurancesLabel = styled.label`
-  margin-right: 10px;
-  grid-column: 2;
-  grid-row: 8;
-`;
-
-const EditInsurancesInput = styled.textarea`
-  margin-bottom: 18px;
-  max-width: 130px;
-  grid-column: 2;
-  grid-row: 9;
-`;
-
-const SaveButton = styled.button`
-  grid-column: 2;
-  grid-row: 11;
-  width: 80px;
-  padding: 1px;
-  font-size: 12px;
-  border-radius: 6px;
-`;
-
-const CancelButton = styled.button`
-  grid-column: 1;
-  grid-row: 11;
-  width: 80px;
-  padding: 1px;
-  font-size: 12px;
-  border-radius: 6px;
-`;
-
-const DisplayName = styled.h2`
-  margin-bottom: 5px;
-  grid-column: 1 / 3;
-  grid-row: 1;
-  margin-right: 22px;
-`;
-
-const DisplayRace = styled.span`
-  margin-bottom: 5px;
-  grid-column: 1 / span 2;
-  grid-row: 2;
-`;
-
-const DisplayBirthDate = styled.span`
-  margin-bottom: 5px;
-  grid-column: 1;
-  grid-row: 3;
-`;
-
-const DisplayBirthPlace = styled.span`
-  margin-bottom: 5px;
-  grid-column: 2;
-  grid-row: 3;
-`;
-
-const DisplaySex = styled.span`
-  grid-column: 2;
-  grid-row: 4;
-`;
-
-const DisplayColor = styled.span`
-  margin-bottom: 5px;
-  grid-column: 2;
-  grid-row: 5;
-`;
-
-const DisplayTransponder = styled.span`
-  margin-bottom: 5px;
-  column-gap: 15px;
-  grid-column: 1 / 2;
-  grid-row: 4 / 7;
-`;
-
-const DisplayVaccinations = styled.span`
-  margin-bottom: 3px;
-  grid-column: 1;
-  grid-row: 8;
-`;
-
-const DisplayInsurances = styled.span`
-  margin-bottom: 3px;
-  grid-column: 2;
-  grid-row: 8;
+const Insurances = styled.span`
+  grid-area: 5 / 2 / 5 / 3;
 `;

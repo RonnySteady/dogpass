@@ -2,8 +2,9 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { uid } from "uid";
+import { useState, useEffect } from "react";
 
-export default function AddDogForm({ dogs }) {
+export default function AddDogForm() {
   const router = useRouter();
   const {
     register,
@@ -11,10 +12,20 @@ export default function AddDogForm({ dogs }) {
     formState: { errors },
   } = useForm();
 
+  const [dogs, setDogs] = useState([]);
+
+  useEffect(() => {
+    const storedDogs = localStorage.getItem("dogs");
+    if (storedDogs) {
+      setDogs(JSON.parse(storedDogs));
+    }
+  }, []);
+
   const onSubmit = (data) => {
     const newDog = { id: uid(), ...data };
-    dogs.push(newDog);
-    localStorage.setItem("dogs", JSON.stringify(dogs));
+    const updatedDogs = [...dogs, newDog];
+    setDogs(updatedDogs);
+    localStorage.setItem("dogs", JSON.stringify(updatedDogs));
     router.push(`/`);
   };
 
@@ -112,11 +123,11 @@ export default function AddDogForm({ dogs }) {
             })}
           />
         </Grid>
-      </Form>
-        <ButtonContainer>
+        <Grid>
           <SubmitButton type="submit">Submit</SubmitButton>
           <CancelButton onClick={handleCancel}>Cancel</CancelButton>
-        </ButtonContainer>
+        </Grid>
+      </Form>
     </>
   );
 }
@@ -288,54 +299,20 @@ const TextareaInsurances = styled.textarea`
   grid-row: 2;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 20px 10px 35px;
-`;
-
 const CancelButton = styled.button`
-  width: 165px;
-  padding: 8px;
-  border-radius: 16px;
-  text-decoration: none;
-  margin: 20px 10px 35px;
-  font-weight: normal;
-  backdrop-filter: blur(6px);
-  color: #333333;
-  border: 1px solid rgba(255, 255, 255, 0.29);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  &:hover,
-  &:active,
-  &:focus {
-    // color: #333333;
-    background-color: orange;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
+  background-color: #800000;
+  color: whitesmoke;
+  padding: 5px;
+  border-radius: 6px;
+  grid-column: 1;
+  grid-row: 20;
 `;
 
 const SubmitButton = styled.button`
-  width: 165px;
-  text-align: center;
+  background-color: #445540;
+  color: whitesmoke;
   padding: 5px;
-  border-radius: 16px;
-  text-decoration: none;
-  margin: 20px 10px 35px;
-  font-weight: normal;
-  backdrop-filter: blur(6px);
-  color: #333333;
-  border: 1px solid rgba(255, 255, 255, 0.29);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
-  &:hover,
-  &:active,
-  &:focus {
-    // color: #333333;
-    background-color: orange;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-
-
+  border-radius: 6px;
+  grid-column: 2;
+  grid-row: 20;
 `;

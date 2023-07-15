@@ -14,23 +14,33 @@ export default function DogList() {
     }
   }, []);
 
+  const handleUpdate = (updatedDog) => {
+    setDogList((prevDogList) => {
+      const updatedDogList = prevDogList.map((dog) =>
+        dog.id === updatedDog.id ? updatedDog : dog
+      );
+      localStorage.setItem("dogs", JSON.stringify(updatedDogList));
+      return updatedDogList;
+    });
+  };
+
   const handleDelete = (id) => {
     const updatedDogList = dogList.filter((dog) => dog.id !== id);
     setDogList(updatedDogList);
     localStorage.setItem("dogs", JSON.stringify(updatedDogList));
   };
 
-  const handleUpdate = (updatedDog) => {
-    const updatedDogList = dogList.map((dog) =>
-      dog.id === updatedDog.id ? updatedDog : dog
-    );
-    setDogList(updatedDogList);
-    localStorage.setItem("dogs", JSON.stringify(updatedDogList));
-  };
-
   return (
     <div>
-      {dogList.map((dog) => (
+      {dogs.map((dog) => (
+        <DogCard
+          key={dog.id}
+          dog={dog}
+          onDelete={handleDelete}
+          onUpdate={handleUpdate}
+        />
+      ))}
+      {dogList.filter((dog) => dog.id !== dogs[0].id && dog.id !== dogs[1].id).map((dog) => (
         <DogCard
           key={dog.id}
           dog={dog}

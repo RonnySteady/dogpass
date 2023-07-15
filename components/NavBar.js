@@ -13,9 +13,7 @@ export default function NavBar({ buttonText1, buttonText2, link1, link2 }) {
 
 const StyledNavbar = styled.div`
   display: flex;
-  justify-content: center; /* Center align items horizontally */
-  margin-top: 17px;
-  margin-bottom: 12px;
+  justify-content: center; Center align items horizontally
 `;
 
 const StyledLink = styled.a`
@@ -24,7 +22,7 @@ const StyledLink = styled.a`
   padding: 5px;
   border-radius: 16px;
   text-decoration: none;
-  margin: 20px 10px 35px;
+  margin: 20px 10px 45px;
   font-weight: normal;
   backdrop-filter: blur(6px);
   color: #333333;

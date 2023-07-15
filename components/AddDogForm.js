@@ -112,11 +112,11 @@ export default function AddDogForm({ dogs }) {
             })}
           />
         </Grid>
-        <Grid>
+      </Form>
+        <ButtonContainer>
           <SubmitButton type="submit">Submit</SubmitButton>
           <CancelButton onClick={handleCancel}>Cancel</CancelButton>
-        </Grid>
-      </Form>
+        </ButtonContainer>
     </>
   );
 }
@@ -288,20 +288,54 @@ const TextareaInsurances = styled.textarea`
   grid-row: 2;
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px 10px 35px;
+`;
+
 const CancelButton = styled.button`
-  background-color: #800000;
-  color: whitesmoke;
-  padding: 5px;
-  border-radius: 6px;
-  grid-column: 1;
-  grid-row: 20;
+  width: 165px;
+  padding: 8px;
+  border-radius: 16px;
+  text-decoration: none;
+  margin: 20px 10px 35px;
+  font-weight: normal;
+  backdrop-filter: blur(6px);
+  color: #333333;
+  border: 1px solid rgba(255, 255, 255, 0.29);
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  &:hover,
+  &:active,
+  &:focus {
+    // color: #333333;
+    background-color: orange;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 const SubmitButton = styled.button`
-  background-color: #445540;
-  color: whitesmoke;
+  width: 165px;
+  text-align: center;
   padding: 5px;
-  border-radius: 6px;
-  grid-column: 2;
-  grid-row: 20;
+  border-radius: 16px;
+  text-decoration: none;
+  margin: 20px 10px 35px;
+  font-weight: normal;
+  backdrop-filter: blur(6px);
+  color: #333333;
+  border: 1px solid rgba(255, 255, 255, 0.29);
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  &:hover,
+  &:active,
+  &:focus {
+    // color: #333333;
+    background-color: orange;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+
 `;

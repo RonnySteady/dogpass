@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 import Header from "../components/Header";
 import Navbar from "../components/NavBar";
+import Head from "next/head";
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -15,6 +16,9 @@ export default function Home({ dogs }) {
 
   return (
     <main>
+          <Head>
+      <link rel="manifest" href="/manifest.json" />
+    </Head>
       <Header />
       <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
       <Navbar

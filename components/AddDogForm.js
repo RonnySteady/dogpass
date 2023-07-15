@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { uid } from "uid";
-import { useState, useEffect } from "react";
 
 export default function AddDogForm() {
   const router = useRouter();
@@ -23,11 +23,14 @@ export default function AddDogForm() {
 
   const onSubmit = (data) => {
     const newDog = { id: uid(), ...data };
-    const updatedDogs = [...dogs, newDog];
-    setDogs(updatedDogs);
-    localStorage.setItem("dogs", JSON.stringify(updatedDogs));
+    setDogs((prevDogs) => {
+      const updatedDogs = [...prevDogs, newDog];
+      localStorage.setItem("dogs", JSON.stringify(updatedDogs));
+      return updatedDogs;
+    });
     router.push(`/`);
   };
+  
 
   function handleCancel() {
     router.push("/");

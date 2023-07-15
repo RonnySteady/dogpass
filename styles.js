@@ -15,7 +15,7 @@ export default createGlobalStyle`
       font-size: 16px;
       background: #222222;
       color: #333333;
-      background-image: url("/images/dogpassbg.png");
+      background-image: url("/images/dogpassbg.jpg");
       background-attachment: fixed;
       background-size: cover;
       background-position: center;

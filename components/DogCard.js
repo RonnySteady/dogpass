@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import styled from 'styled-components';
+import { useTheme } from 'styled-components';
 import Image from "next/image";
 import DogCardEdit from "./DogCardEdit";
 import editButtonCardImage from "../public/images/edit-button-card.png";
 import copyButtonCardImage from "../public/images/copy-button-card.png";
+import { RiEditBoxFill, RiFileCopy,FillRiSave2Fill } from 'react-icons/ri';
+
+
 
 export default function DogCard({ dog, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDog, setEditedDog] = useState(dog);
   const [isCopied, setIsCopied] = useState(false);
+  const { theme } = useTheme(); // Assuming you have a theme context or hook
 
   useEffect(() => {
     setEditedDog(dog);
@@ -60,7 +65,7 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
   };
 
   return (
-    <StyledDogCard>
+    <StyledDogCard theme={theme}>
       {isEditMode ? (
         <DogCardEdit
           dog={dog}
@@ -112,13 +117,13 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
             /> */}
           </CopyCardButton>
 
-          <EditCardButton onClick={handleEditClick}>
-            <Image
+          <EditCardButton onClick={handleEditClick}>EDIT
+            {/* <Image
               src={editButtonCardImage}
               width="20"
               height="20"
               alt="Edit icon"
-            />
+            /> */}
           </EditCardButton>
         </Grid>
       )}
@@ -135,16 +140,18 @@ const StyledDogCard = styled.li`
   margin-bottom: 30px;
   padding: 15px 25px 15px 25px;
   border-radius: 16px;
-  backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.29);
-  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  background: ${({ theme }) => theme.backgroundColor};
+  color: ${({ theme }) => theme.textColor};
+
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6px);
 `;
 
 const CopyCardButton = styled.button`
   font-size: 10px;
   font-family: Open Sans, Roboto, Avenir, system-ui;
-  color: #222222;
+  color: ${({ theme }) => theme.textColor};
   position: absolute;
   top: 25px;
   right: 55px;
@@ -156,11 +163,11 @@ const CopyCardButton = styled.button`
 `;
 
 const EditCardButton = styled.button`
-  // font-size: 10px;
+  font-size: 10px;
   font-family: Open Sans, Roboto, Avenir, system-ui;
-  color: #222222;
+  color: ${({ theme }) => theme.textColor};
   position: absolute;
-  top: 21px;
+  top: 25px;
   right: 25px;
   background-color: transparent;
   border: none;

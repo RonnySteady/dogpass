@@ -39,7 +39,7 @@ export default function AddDogForm() {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <LabelName htmlFor="Name">Name: </LabelName>
+        <LabelName htmlFor="Name">Name: *</LabelName>
         <InputName
           type="text"
           {...register("name", { required: true, min: 2, maxLength: 12 })}
@@ -65,7 +65,7 @@ export default function AddDogForm() {
           />
         </Grid>
         <Grid3>
-          <LabelSex htmlFor="Sex">Sex: </LabelSex>
+          <LabelSex htmlFor="Sex">Sex: *</LabelSex>
 
           <LabelFemale htmlFor="Female"> ♀ </LabelFemale>
           <ButtonFemale
@@ -138,16 +138,18 @@ export default function AddDogForm() {
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  color: #333333;
   width: 350px;
   margin: auto;
   margin-bottom: 30px;
   padding: 15px 25px 16px;
-  background: rgba(255, 255, 255, 0.35);
+  /* background: rgba(255, 255, 255, 0.35); */
+  color: ${({ theme }) => theme.textColor};
+  background-color: ${({ theme }) => theme.backgroundColor};
+  border: 1px solid ${({ theme }) => theme.borderColor};
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  /* border: 1px solid rgba(255, 255, 255, 0.25); */
 `;
 
 const Grid = styled.div`

@@ -13,27 +13,25 @@ export default function NavBar({ buttonText1, buttonText2, link1, link2 }) {
 
 const StyledNavbar = styled.div`
   display: flex;
-  justify-content: center; Center align items horizontally
+  justify-content: center; 
 `;
 
 const StyledLink = styled.a`
-  width: 165px;
-  text-align: center;
-  padding: 5px;
-  border-radius: 16px;
-  text-decoration: none;
-  margin: 20px 10px 45px;
-  font-weight: normal;
-  backdrop-filter: blur(6px);
-  color: #333333;
-  border: 1px solid rgba(255, 255, 255, 0.29);
-  background: rgba(255, 255, 255, 0.38);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background-color: ${({ theme }) => theme.backgroundColor};
+    border: 1px solid ${({ theme }) => theme.borderColor};
+    color: ${({ theme }) => theme.textColor};
+    margin: 10px 10px 30px;
+    padding: 5px;
+    text-decoration: none;
+    width: 165px;
+    text-align: center;
+    border-radius: 16px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
   &:hover,
   &:active,
   &:focus {
-    // color: #333333;
     background-color: orange;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }

@@ -15,25 +15,25 @@ export default function Header() {
 
 const StyledHeader = styled.div`
   display: flex;
+  height: 120px;
   justify-content: center; /* Center align items horizontally */
-  margin-top: 17px;
-  margin-bottom: 12px;
 `;
 
 const ImageWrapper = styled.div`
   position: relative; /* Enable positioning of text within the image */
+  top: 16px; /* Adjust the top offset to your desired value */
   display: inline-block; /* Maintain inline display */
 `;
 
+
 const AppName = styled.h1`
   position: absolute; /* Position the text absolutely within the image */
-  top: 43%; /* Adjust vertically to center align the text */
+  top: 35%; /* Adjust vertically to center align the text */
   left: 50%; /* Adjust horizontally to center align the text */
   transform: translate(-50%, -50%); /* Center align the text precisely */
-  margin: 0; /* Remove default margin */
-  padding: 10px; /* Add padding for better visibility */
   font-family: Jaya Baru, system-ui;
   font-size: 30px;
-  text-shadow: 0 0 1px #00308f, 0 0 5px #add8e6, 0 0 10px #b0c4de;
-  -webkit-text-fill-color: transparent;
+  text-shadow: ${({ theme }) => theme.textShadow};
+  color: ${({ theme }) => theme.colorText};
+  /* -webkit-text-fill-color: transparent; */
 `;

@@ -6,6 +6,9 @@ import DogCardEdit from "./DogCardEdit";
 import editButtonCardImage from "../public/images/edit-button-card.png";
 import copyButtonCardImage from "../public/images/copy-button-card.png";
 import { RiEditBoxFill, RiFileCopy,FillRiSave2Fill } from 'react-icons/ri';
+import { PiCopyFill } from "react-icons/pi";
+import { BiSolidEdit, BiCopy } from "react-icons/bi";
+
 
 
 
@@ -105,19 +108,16 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
           <Insurances>Insurances: {dog.insurances}</Insurances>
           <CopyCardButton
             onClick={handleCopyClick}
-            className="copy-button"
+            // className="copy-button"
             isCopied={isCopied}
-          >
+            >
+              {/* <PiCopyFill size={22}/> */}
             COPY
-            {/* <Image
-              src={copyButtonCardImage}
-              width="22"
-              height="22"
-              alt="Copy icon"
-            /> */}
           </CopyCardButton>
 
-          <EditCardButton onClick={handleEditClick}>EDIT
+          <EditCardButton onClick={handleEditClick}>
+          <BiSolidEdit size={22}/>
+            {/* EDIT */}
             {/* <Image
               src={editButtonCardImage}
               width="20"
@@ -143,31 +143,34 @@ const StyledDogCard = styled.li`
   border: 1px solid ${({ theme }) => theme.borderColor};
   background: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.textColor};
-
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
 `;
 
 const CopyCardButton = styled.button`
+  background-color: transparent;
   font-size: 10px;
-  font-family: Open Sans, Roboto, Avenir, system-ui;
+  border: none;
+  /* border: ${({ theme }) => theme.textColor}; */
   color: ${({ theme }) => theme.textColor};
   position: absolute;
-  top: 25px;
-  right: 55px;
-  background-color: transparent;
-  border: none;
+  /* border: none; */
   transition: opacity 0.3s ease;
-  opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)};
+  /* opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)}; */
   pointer-events: ${({ isCopied }) => (isCopied ? "none" : "auto")};
+  color: ${({ theme }) => theme.textColor};
+  top: 24px;
+  right: 55px;
+  font-weight: 500;
 `;
+
 
 const EditCardButton = styled.button`
   font-size: 10px;
   font-family: Open Sans, Roboto, Avenir, system-ui;
   color: ${({ theme }) => theme.textColor};
   position: absolute;
-  top: 25px;
+  top: 20px;
   right: 25px;
   background-color: transparent;
   border: none;

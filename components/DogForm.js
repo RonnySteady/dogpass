@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { uid } from "uid";
 
-export default function AddDogForm() {
+export default function DogForm() {
   const router = useRouter();
   const {
     register,

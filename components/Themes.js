@@ -15,7 +15,7 @@ export const lightTheme = {
 
 export const darkTheme = {
   textColor: 'lightgrey',
-  toggleBorder: 'orange',
+  // toggleBorder: 'orange',
   background: '#222222 center / cover no-repeat fixed',
   backgroundImage: 'url(../images/dark-background.jpg)',
   backgroundColor: 'rgba(0, 0, 0, 0.45)',

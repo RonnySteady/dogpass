@@ -14,6 +14,10 @@ export default function Header() {
 }
 
 const StyledHeader = styled.div`
+/* position: fixed;  */
+top: 0px;
+  left: 0;
+  right: 0;
   display: flex;
   height: 120px;
   justify-content: center; /* Center align items horizontally */

@@ -2,6 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import deleteButtonCardImage from "../public/images/del-button-card.png";
+import { FaTrashAlt } from "react-icons/fa";
+import { LuSave } from "react-icons/lu";
+import {RiSave3Fill} from "react-icons/ri"
+
+
 
 export default function DogCardEdit({
   dog,
@@ -105,28 +110,17 @@ export default function DogCardEdit({
           value={editedDog.insurances} // Use the editedDog prop here
           onChange={handleInputChange}
         />
-        <DeleteCardButton onClick={handleDeleteClick}>
-          <Image
-            src={deleteButtonCardImage}
-            width="20"
-            height="22"
-            alt="Delete"
-          />
-        </DeleteCardButton>
-        <CancelButton onClick={handleCancelClick}>Cancel</CancelButton>
-        <SaveButton onClick={handleSaveClick}>Save</SaveButton>
+        <DeleteButton onClick={handleDeleteClick}>DELETE
+          {/* <FaTrashAlt size={17}/> */}
+        </DeleteButton>
+        {/* <CancelButton onClick={handleCancelClick}>Cancel</CancelButton> */}
+        <SaveButton onClick={handleSaveClick}><RiSave3Fill size={22}/></SaveButton>
       </Grid2>
     </div>
   );
 }
 
-const DeleteCardButton = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  background-color: transparent;
-  border: none;
-`;
+
 
 const Grid = styled.div`
   display: grid;
@@ -138,6 +132,37 @@ const Grid = styled.div`
 const NameSex = styled.h2`
   grid-area: 1 / 1 / 1 / 3;
   margin-bottom: 8px;
+`;
+
+const SaveButton = styled.button`
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  background-color: transparent;
+  border: none;
+  color: ${({ theme }) => theme.textColor};
+
+  /* grid-area: 10 / 1 / 10 / 1;
+  width: 80px;
+  padding: 1px;
+  font-size: 12px;
+  border-radius: 6px; */
+`;
+
+const DeleteButton = styled.button`
+  background-color: red;
+  font-size: 10px;
+
+  border: 1.5px solid ${({ theme }) => theme.textColor};;
+  /* border: ${({ theme }) => theme.textColor}; */
+  color: ${({ theme }) => theme.textColor};
+  position: absolute;
+  top: 22px;
+  right: 55px;
+  width: 60px;
+  padding: 1px;
+  font-weight: 500;
+  border-radius: 3px;
 `;
 
 const LabelRace = styled.label`
@@ -192,6 +217,8 @@ const EditVaccinationsLabel = styled.label`
 
 const EditVaccinations = styled.textarea`
   grid-area: 2 / 1 / 2 / 1;
+  font-family: Open Sans, Roboto, system-ui;
+  margin-bottom: 10px;
   width: 140px;
   max-width: 140px;
   height: 50px;
@@ -204,26 +231,21 @@ const EditInsurancesLabel = styled.label`
 
 const EditInsurances = styled.textarea`
   grid-area: 2 / 2 / 2 / 2;
-  margin-bottom: 15px;
+  font-family: Open Sans, Roboto, system-ui;
+  margin-bottom: 10px;
   width: 140px;
   max-width: 140px;
   height: 50px;
   max-height: 200px;
 `;
 
-const SaveButton = styled.button`
-  grid-area: 10 / 1 / 10 / 1;
-  width: 80px;
-  padding: 1px;
-  font-size: 12px;
-  border-radius: 6px;
-`;
 
-const CancelButton = styled.button`
-  grid-area: 10 / 2 / 10 / 2;
-  margin-left: 40px;
-  width: 80px;
-  padding: 1px;
-  font-size: 12px;
-  border-radius: 6px;
-`;
+// const CancelButton = styled.button`
+//   grid-area: 10 / 2 / 10 / 2;
+//   margin-left: 40px;
+//   width: 80px;
+//   padding: 1px;
+//   font-size: 12px;
+//   border-radius: 6px;
+// `;
+

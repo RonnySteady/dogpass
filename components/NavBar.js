@@ -14,6 +14,7 @@ export default function NavBar({ buttonText1, buttonText2, link1, link2 }) {
 const StyledNavbar = styled.div`
   display: flex;
   justify-content: center; 
+  margin-bottom: 10px;
 `;
 
 const StyledLink = styled.a`

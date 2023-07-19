@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-import Head from 'next/head';
 import { lightTheme, darkTheme } from '../components/Themes';
 import DarkMode from '../components/DarkMode';
-import Toggle from "../components/Toggle";
 import Header from '../components/Header';
 import DogList from '../components/DogList';
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import DogFacts from '../components/DogFacts';
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -53,6 +52,7 @@ export default function Home({ dogs }) {
       >
         <ContentWrapper id="content-wrapper">
           <Header />
+          <DogFacts/>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
           <NavBar
             buttonText1="Go to owner"

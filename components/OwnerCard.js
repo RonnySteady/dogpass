@@ -218,6 +218,7 @@ const InputEmail = styled.input`
   width: 270px;
   margin-bottom: 10px;
 `;
+
 const InputMobile = styled.input`
   width: 270px;
   margin-bottom: 10px;

@@ -1,6 +1,6 @@
 export const lightTheme = {
   textColor: '#111111',
-  toggleBorder: 'lightblue',
+  // toggleBorder: 'lightblue',
   background: 'lightblue center / cover no-repeat fixed',
   backgroundImage: 'url(../images/light-background.jpg)',
   backgroundColor: 'rgba(255, 255, 255, 0.3)',
@@ -8,13 +8,10 @@ export const lightTheme = {
   backgroundAttachment: 'fixed',
   colorText: 'darkblue',
   textShadow: '0 0 1px #00308f, 0 0 5px #add8e6, 0 0 10px #b0c4de',
-
-  // textShadow: '0 0 1px #333333, 0 0 5px #add8e6, 0 0 10px #b0c4de',
-  // -webkit-text-fill-color: 'transparent',
 };
 
 export const darkTheme = {
-  textColor: 'lightgrey',
+  textColor: 'whitesmoke',
   // toggleBorder: 'orange',
   background: '#222222 center / cover no-repeat fixed',
   backgroundImage: 'url(../images/dark-background.jpg)',
@@ -24,9 +21,6 @@ export const darkTheme = {
   backgroundAttachment: 'fixed',
   colorText: '#413201',
   textShadow: '0 0 1px #A1862E, 0 0 5px #AE9851, 0 0 10px #C3B279',
-
-  // textShadow: '0 0 1px #00308f, 0 0 5px #add8e6, 0 0 10px #b0c4de',
-  // -webkit-text-fill-color: 'transparent',
 };
 
 

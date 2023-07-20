@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const fetchDogFacts = async (url) => {
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data); // Log the fetched data
-  return data.data; // Access the dog facts array
+  console.log(data); 
+  return data.data;
 };
 
 const DogFacts = () => {
@@ -38,12 +38,6 @@ const DogFacts = () => {
 export default DogFacts;
 
 
-{/* <StyledTitle>{formData.Title}</StyledTitle>
-<StyledName>
-  {formData.firstName} {formData.lastName}
-</StyledName> */}
-
-
 
 const StyledFactCard = styled.ul`
   width: 350px;
@@ -53,12 +47,12 @@ const StyledFactCard = styled.ul`
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.backgroundColor};
   border: 1px solid ${({ theme }) => theme.borderColor};
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
+  z-index: 3;
 `;
-
 
 const Fact = styled.li`
     list-style-type: none;
   `
-
+  

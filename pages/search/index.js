@@ -1,13 +1,13 @@
 import Header from "../../components/Header";
-import DogForm from "../../components/DogForm";
-import NavBar from "../../components/NavBar";
 import DarkMode from '../../components/DarkMode';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../../components/Themes';
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
+import RaceSearch from "../../components/RaceSearch";
+import NavBar from "../../components/NavBar";
 
-export default function NewDog({ dogs }) {
+export default function Search({ dogs }) {
   const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
   return (
@@ -16,22 +16,18 @@ export default function NewDog({ dogs }) {
           style={{
             background: themeMode.background,
             backgroundImage: themeMode.backgroundImage,
-            backgroundSize: 'cover',
             color: themeMode.text,
             backgroundSize: 'cover',
             backgroundAttachment: 'fixed',
-            minHeight: '100vh', 
+            minHeight: '100vh',
           }}
-        >
-        <ContentWrapper>
-        <TopBar theme={theme} toggleTheme={themeToggler} />
-
-      <Header />
-      <FormWrapper>
-      <DogForm dogs={dogs} />
-      </FormWrapper>
-      </ContentWrapper>
-          <NavBar/>
+          >
+        <ContentWrapper id="content-wrapper">
+          <Header />
+          <TopBar theme={theme} toggleTheme={themeToggler} />
+          <RaceSearch/>
+        </ContentWrapper>
+      <NavBar/>
     </div>
     </ThemeProvider>
   );
@@ -42,12 +38,12 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  /* min-height: 100vh; */
-  min-height: calc(100vh - 50px); 
+  min-height: calc(100vh - 50px);
   padding-top: 0px;
+  padding-bottom: 0px;
 `;
 
-const FormWrapper = styled.div`
+const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

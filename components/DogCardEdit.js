@@ -1,12 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Image from "next/image";
-import deleteButtonCardImage from "../public/images/del-button-card.png";
-import { FaTrashAlt } from "react-icons/fa";
-import { LuSave } from "react-icons/lu";
 import {RiSave3Fill} from "react-icons/ri"
-
-
 
 export default function DogCardEdit({
   dog,
@@ -27,10 +21,6 @@ export default function DogCardEdit({
 
   const handleSaveClick = () => {
     onSave();
-  };
-
-  const handleCancelClick = () => {
-    onCancel();
   };
 
   const handleInputChange = (event) => {
@@ -74,7 +64,7 @@ export default function DogCardEdit({
           label="birthplace"
           id="birthplace"
           placeholder="Place of birth"
-          value={editedDog.birthplace} // Use the editedDog prop here
+          value={editedDog.birthplace} 
           onChange={handleInputChange}
         />
         <LabelTransponder>Transponder:</LabelTransponder>
@@ -85,7 +75,7 @@ export default function DogCardEdit({
           label="transponder"
           id="transponder"
           placeholder="Transponder ID"
-          value={editedDog.transponder} // Use the editedDog prop here
+          value={editedDog.transponder} 
           onChange={handleInputChange}
         />
       </Grid>
@@ -97,7 +87,7 @@ export default function DogCardEdit({
           type="textarea"
           name="vaccinations"
           placeholder="Vaccinations"
-          value={editedDog.vaccinations} // Use the editedDog prop here
+          value={editedDog.vaccinations} 
           onChange={handleInputChange}
         />
         <EditInsurancesLabel htmlFor="insurances">
@@ -107,13 +97,10 @@ export default function DogCardEdit({
           type="textarea"
           name="insurances"
           placeholder="Insurances"
-          value={editedDog.insurances} // Use the editedDog prop here
+          value={editedDog.insurances} 
           onChange={handleInputChange}
         />
-        <DeleteButton onClick={handleDeleteClick}>DELETE
-          {/* <FaTrashAlt size={17}/> */}
-        </DeleteButton>
-        {/* <CancelButton onClick={handleCancelClick}>Cancel</CancelButton> */}
+        <DeleteButton onClick={handleDeleteClick}>DELETE</DeleteButton>
         <SaveButton onClick={handleSaveClick}><RiSave3Fill size={22}/></SaveButton>
       </Grid2>
     </div>
@@ -141,20 +128,12 @@ const SaveButton = styled.button`
   background-color: transparent;
   border: none;
   color: ${({ theme }) => theme.textColor};
-
-  /* grid-area: 10 / 1 / 10 / 1;
-  width: 80px;
-  padding: 1px;
-  font-size: 12px;
-  border-radius: 6px; */
 `;
 
 const DeleteButton = styled.button`
   background-color: red;
   font-size: 10px;
-
   border: 1.5px solid ${({ theme }) => theme.textColor};;
-  /* border: ${({ theme }) => theme.textColor}; */
   color: ${({ theme }) => theme.textColor};
   position: absolute;
   top: 22px;
@@ -205,6 +184,7 @@ const EditTransponder = styled.input`
   margin-bottom: 10px;
   width: 190px;
 `;
+
 const Grid2 = styled.div`
   display: grid;
   grid-template-columns: 150px 150px;
@@ -217,8 +197,9 @@ const EditVaccinationsLabel = styled.label`
 
 const EditVaccinations = styled.textarea`
   grid-area: 2 / 1 / 2 / 1;
-  font-family: Open Sans, Roboto, system-ui;
-  margin-bottom: 10px;
+  font-family: system-ui;
+  font-size: 14px;
+  margin-bottom: 5px;
   width: 140px;
   max-width: 140px;
   height: 50px;
@@ -231,21 +212,13 @@ const EditInsurancesLabel = styled.label`
 
 const EditInsurances = styled.textarea`
   grid-area: 2 / 2 / 2 / 2;
-  font-family: Open Sans, Roboto, system-ui;
-  margin-bottom: 10px;
+  font-family: system-ui;
+  font-size: 14px;
+  margin-bottom: 5px;
   width: 140px;
   max-width: 140px;
   height: 50px;
   max-height: 200px;
 `;
 
-
-// const CancelButton = styled.button`
-//   grid-area: 10 / 2 / 10 / 2;
-//   margin-left: 40px;
-//   width: 80px;
-//   padding: 1px;
-//   font-size: 12px;
-//   border-radius: 6px;
-// `;
 

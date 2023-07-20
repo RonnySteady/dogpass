@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PiToggleLeftFill, PiToggleRightLight } from 'react-icons/pi';
+import { FaToggleOff, FaToggleOn } from 'react-icons/fa';
 
 
 const Button = styled.button`
@@ -9,17 +9,16 @@ const Button = styled.button`
   color: ${({ theme }) => theme.textColor};
   /* border-radius: 8px; */
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 6px;
 `;
 
-
-const Toggle = ({ theme, toggleTheme }) => {
-  return (
-      <Button onClick={toggleTheme}>
-        {theme === 'light' ? <PiToggleLeftFill /> : <PiToggleRightLight />}
-      </Button>
-  );
-};
+  const Toggle = ({ theme, toggleTheme }) => {
+      return (
+          <Button onClick={toggleTheme}>
+            {theme === 'light' ? <FaToggleOff /> : <FaToggleOn />}
+          </Button>
+      );
+    };
 
 export default Toggle;

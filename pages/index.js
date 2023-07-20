@@ -5,8 +5,12 @@ import DarkMode from '../components/DarkMode';
 import Header from '../components/Header';
 import DogList from '../components/DogList';
 import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
 import DogFacts from '../components/DogFacts';
+import OwnerCard from '../components/OwnerCard'
+import RaceSearch from '../components/RaceSearch';
+import TopBar from "../components/TopBar";
+
+
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -47,23 +51,18 @@ export default function Home({ dogs }) {
           color: themeMode.text,
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed',
-          minHeight: '100vh', // Ensure the container fills the viewport height
+          minHeight: '100vh', 
         }}
       >
         <ContentWrapper id="content-wrapper">
+          <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
-          <DogFacts/>
+          <DogFacts />
+          <RaceSearch/>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
-          <NavBar
-            buttonText1="Go to owner"
-            link1="/owner"
-            buttonText2="Add a dog"
-            link2="/newdog"
-          />
-          {/* <DarkMode/> */}
-          {/* <Toggle theme={theme} toggleTheme={themeToggler} /> */}
+          <OwnerCard/>
+          <NavBar/>
         </ContentWrapper>
-        <Footer theme={theme} toggleTheme={themeToggler} />
       </div>
     </ThemeProvider>
   );
@@ -74,6 +73,7 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: calc(100vh - 45px); /* Subtract the footer height from 100vh */
+  min-height: calc(100vh - 50px); 
   padding-bottom: 0px;
+
 `;

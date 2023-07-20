@@ -52,4 +52,5 @@ const FormWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 80px;
 `;

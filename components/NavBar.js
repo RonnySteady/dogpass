@@ -13,7 +13,6 @@ const NavBar = ({ theme, toggleTheme }) => {
     <IconContext.Provider value={{ size: '24px' }}>
       <StyledNavbar>
       <ItemWrapper>
-
         <NavLink href="/dogs" active={isActive('/dogs')}>
           <FaPaw size={28} color={isActive('/dogs') ? 'orange' : '${({ theme }) => theme.textColor}'} />
         </NavLink>
@@ -49,7 +48,7 @@ const StyledNavbar = styled.div`
   z-index: 4;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-top: 0.1px solid ${({ theme }) => theme.borderColor};
+  border-top: 0.5px solid ${({ theme }) => theme.borderColor};
 `;
 
 const ItemWrapper= styled.div`

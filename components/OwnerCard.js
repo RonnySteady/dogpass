@@ -147,6 +147,7 @@ const StyledOwnerCard = styled.li`
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
   border: 1px solid ${({ theme }) => theme.borderColor};
+  margin-bottom: 30px;
   /* z-index: 3; */
 `;
 

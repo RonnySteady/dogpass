@@ -10,8 +10,6 @@ import OwnerCard from '../components/OwnerCard'
 import RaceSearch from '../components/RaceSearch';
 import TopBar from "../components/TopBar";
 
-
-
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
   const [theme, themeToggler] = DarkMode();
@@ -59,10 +57,12 @@ export default function Home({ dogs }) {
           <Header />
           <DogFacts />
           <RaceSearch/>
+          <CardWrapper>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
           <OwnerCard/>
-          <NavBar/>
+          </CardWrapper>
         </ContentWrapper>
+          <NavBar/>
       </div>
     </ThemeProvider>
   );
@@ -75,5 +75,12 @@ const ContentWrapper = styled.div`
   align-items: center;
   min-height: calc(100vh - 50px); 
   padding-bottom: 0px;
+`;
 
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 80px;
 `;

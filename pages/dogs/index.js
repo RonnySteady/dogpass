@@ -36,7 +36,9 @@ export default function Dogs({ dogs }) {
         <ContentWrapper id="content-wrapper">
           <Header />
           <TopBar theme={theme} toggleTheme={themeToggler} />
+          <CardWrapper>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
+        </CardWrapper>
         </ContentWrapper>
           <NavBar/>
       </div>
@@ -50,6 +52,14 @@ const ContentWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   min-height: calc(100vh - 50px); 
+  padding-bottom: 0px;
 `;
 
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 80px;
+`;
 

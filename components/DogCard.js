@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
+import Image from "next/image";
 import DogCardEdit from "./DogCardEdit";
-import { BiSolidEdit } from "react-icons/bi";
+import editButtonCardImage from "../public/images/edit-button-card.png";
+import copyButtonCardImage from "../public/images/copy-button-card.png";
+import { RiEditBoxFill, RiFileCopy,FillRiSave2Fill } from 'react-icons/ri';
+import { PiCopyFill } from "react-icons/pi";
+import { BiSolidEdit, BiCopy } from "react-icons/bi";
+
+
 
 
 export default function DogCard({ dog, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDog, setEditedDog] = useState(dog);
   const [isCopied, setIsCopied] = useState(false);
-  const { theme } = useTheme();
+  const { theme } = useTheme(); // Assuming you have a theme context or hook
 
   useEffect(() => {
     setEditedDog(dog);
@@ -55,6 +62,7 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
       }, 1000);
       window.alert(`${dog.name} copied to clipboard`);
     } catch (error) {
+      console.error("Failed to copy Dog to clipboard:", error);
       window.alert("Failed to copy Dog to clipboard. Please try again.");
     }
   };
@@ -100,13 +108,22 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
           <Insurances>Insurances: {dog.insurances}</Insurances>
           <CopyCardButton
             onClick={handleCopyClick}
+            // className="copy-button"
             isCopied={isCopied}
             >
+              {/* <PiCopyFill size={22}/> */}
             COPY
           </CopyCardButton>
 
           <EditCardButton onClick={handleEditClick}>
           <BiSolidEdit size={22}/>
+            {/* EDIT */}
+            {/* <Image
+              src={editButtonCardImage}
+              width="20"
+              height="20"
+              alt="Edit icon"
+            /> */}
           </EditCardButton>
         </Grid>
       )}
@@ -116,16 +133,21 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
 
 const StyledDogCard = styled.li`
   display: flex;
+  position: relative;
   width: 350px;
   min-height: 200px;
+  margin: auto;
   margin-bottom: 30px;
   padding: 15px 25px 15px 25px;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.borderColor};
   background: ${({ theme }) => theme.backgroundColor};
   color: ${({ theme }) => theme.textColor};
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
+  z-index: 3;
+
+  
 `;
 
 const CopyCardButton = styled.button`
@@ -134,6 +156,8 @@ const CopyCardButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.textColor};
   position: absolute;
+  transition: opacity 0.3s ease;
+  opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)};
   pointer-events: ${({ isCopied }) => (isCopied ? "none" : "auto")};
   color: ${({ theme }) => theme.textColor};
   top: 24px;
@@ -141,8 +165,9 @@ const CopyCardButton = styled.button`
   font-weight: 500;
 `;
 
+
 const EditCardButton = styled.button`
-  /* font-size: 10px; */
+  font-size: 10px;
   font-family: Open Sans, Roboto, Avenir, system-ui;
   color: ${({ theme }) => theme.textColor};
   position: absolute;

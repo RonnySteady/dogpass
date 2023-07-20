@@ -4,8 +4,8 @@ import NavBar from "../../components/NavBar";
 import DarkMode from '../../components/DarkMode';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../../components/Themes';
-import Footer from "../../components/Footer";
 import styled from "styled-components";
+import TopBar from "../../components/TopBar";
 
 export default function NewDog({ dogs }) {
   const [theme, themeToggler] = DarkMode();
@@ -20,22 +20,22 @@ export default function NewDog({ dogs }) {
             color: themeMode.text,
             backgroundSize: 'cover',
             backgroundAttachment: 'fixed',
-            minHeight: '100vh', // Ensure the container fills the viewport height
+            minHeight: '100vh', 
           }}
         >
         <ContentWrapper>
+        <TopBar theme={theme} toggleTheme={themeToggler} />
+
       <Header />
       <FormWrapper>
       <DogForm dogs={dogs} />
       </FormWrapper>
       </ContentWrapper>
-      <Footer theme={theme} toggleTheme={themeToggler} />
+          <NavBar/>
     </div>
     </ThemeProvider>
   );
 }
-
-
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -43,9 +43,8 @@ const ContentWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   /* min-height: 100vh; */
-  min-height: calc(100vh - 45px); /* Subtract the footer height from 100vh */
+  min-height: calc(100vh - 50px); 
   padding-top: 0px;
-  padding-bottom: 20px;
 `;
 
 const FormWrapper = styled.div`
@@ -53,4 +52,5 @@ const FormWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 80px;
 `;

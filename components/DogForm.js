@@ -142,14 +142,13 @@ const Form = styled.form`
   margin: auto;
   margin-bottom: 30px;
   padding: 15px 25px 16px;
-  /* background: rgba(255, 255, 255, 0.35); */
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.backgroundColor};
   border: 1px solid ${({ theme }) => theme.borderColor};
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(6px);
-  /* border: 1px solid rgba(255, 255, 255, 0.25); */
+  z-index: 3;
 `;
 
 const Grid = styled.div`

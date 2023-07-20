@@ -1,13 +1,13 @@
 import Header from "../../components/Header";
-import Navbar from "../../components/NavBar";
-import OwnerCard from "../../components/OwnerCard";
 import DarkMode from '../../components/DarkMode';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../../components/Themes';
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
+import RaceSearch from "../../components/RaceSearch";
+import NavBar from "../../components/NavBar";
 
-export default function Owner({ dogs }) {
+export default function Search({ dogs }) {
   const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
   return (
@@ -19,17 +19,15 @@ export default function Owner({ dogs }) {
             color: themeMode.text,
             backgroundSize: 'cover',
             backgroundAttachment: 'fixed',
-            minHeight: '100vh', 
+            minHeight: '100vh',
           }}
           >
-      <ContentWrapper>
-      <Header />
+        <ContentWrapper id="content-wrapper">
+          <Header />
           <TopBar theme={theme} toggleTheme={themeToggler} />
-      <CardWrapper>
-            <OwnerCard />
-      </CardWrapper>
-    </ContentWrapper>
-      <Navbar/>
+          <RaceSearch/>
+        </ContentWrapper>
+      <NavBar/>
     </div>
     </ThemeProvider>
   );
@@ -40,7 +38,7 @@ const ContentWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  min-height: calc(100vh - 50px); 
+  min-height: calc(100vh - 50px);
   padding-top: 0px;
   padding-bottom: 0px;
 `;
@@ -51,5 +49,4 @@ const CardWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 80px;
-
 `;

@@ -145,18 +145,19 @@ const StyledDogCard = styled.li`
   color: ${({ theme }) => theme.textColor};
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
+  z-index: 3;
+
+  
 `;
 
 const CopyCardButton = styled.button`
   background-color: transparent;
   font-size: 10px;
   border: none;
-  /* border: ${({ theme }) => theme.textColor}; */
   color: ${({ theme }) => theme.textColor};
   position: absolute;
-  /* border: none; */
   transition: opacity 0.3s ease;
-  /* opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)}; */
+  opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)};
   pointer-events: ${({ isCopied }) => (isCopied ? "none" : "auto")};
   color: ${({ theme }) => theme.textColor};
   top: 24px;

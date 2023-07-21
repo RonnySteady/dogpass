@@ -1,4 +1,3 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -6,12 +5,10 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    remotePatterns: [
-      // {
-      //   protocol: 'https',
-      //   hostname: 'images.unsplash.com'
-      // },
-    ],
+    domains: ['images.dog.ceo'],
+    hostname: ['api-ninjas.com'],
+
+    // loader: 'default', // Add this line to specify the default loader for external images
   },
 };
 

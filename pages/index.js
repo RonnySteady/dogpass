@@ -9,6 +9,7 @@ import DogFacts from '../components/DogFacts';
 import OwnerCard from '../components/OwnerCard'
 import RaceSearch from '../components/RaceSearch';
 import TopBar from "../components/TopBar";
+import DogPhotos from '../components/DogPhotos';
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -55,8 +56,9 @@ export default function Home({ dogs }) {
         <ContentWrapper id="content-wrapper">
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
-          <DogFacts />
           <RaceSearch/>
+          <DogPhotos/>
+          <DogFacts/>
           <CardWrapper>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
           <OwnerCard/>

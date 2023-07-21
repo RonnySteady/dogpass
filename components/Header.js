@@ -33,12 +33,12 @@ const ImageLink = styled.div`
 
 const AppName = styled.h1`
   position: absolute; 
-  top: 35%; 
+  top: 33%; 
   left: 50%;
   margin-top: 10px;
   transform: translate(-50%, -50%); 
   font-family: Jaya Baru, system-ui;
-  font-size: 30px;
+  font-size: 28px;
   text-shadow: ${({ theme }) => theme.textShadow};
   color: ${({ theme }) => theme.colorText};
 `;

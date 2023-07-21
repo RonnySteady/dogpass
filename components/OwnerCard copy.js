@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
-import { BiSolidEdit } from "react-icons/bi";
+import editButtonCardImage from "../public/images/edit-button-card.png";
 
 export default function OwnerCard() {
   const {
@@ -16,7 +16,6 @@ export default function OwnerCard() {
 
   const [formData, setFormData] = useState({});
 
-  
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -32,12 +31,6 @@ export default function OwnerCard() {
     localStorage.setItem("formData", JSON.stringify(data));
     setFormData(data);
     setIsEditing(false);
-  };
-
-
-  const handleSaveClick = () => {
-    onUpdate(editedDog);
-    setIsEditMode(false);
   };
 
   const onCancel = () => {
@@ -61,10 +54,6 @@ export default function OwnerCard() {
       });
     }
   }, [setValue]);
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
 
   return (
     <StyledOwnerCard>
@@ -132,10 +121,14 @@ export default function OwnerCard() {
               <StyledPostal>{formData.postal}</StyledPostal>
             </Grid>
             <div>
-            <EditCardButton onClick={handleEditClick}>
-          <BiSolidEdit size={22}/>
-
-          </EditCardButton>
+              <EditCardButton type="button" onClick={() => setIsEditing(true)}>
+                <Image
+                  src="/images/edit-button-card.png"
+                  width="20"
+                  height="20"
+                  alt="Edit icon"
+                />
+              </EditCardButton>
             </div>
           </>
         )}
@@ -177,7 +170,7 @@ const EditCardButton = styled.button`
   font-family: Open Sans, Roboto, Avenir, system-ui;
   color: #222222;
   position: absolute;
-  top: 20px;
+  top: 21px;
   right: 25px;
   background-color: transparent;
   border: none;

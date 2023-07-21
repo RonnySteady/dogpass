@@ -114,7 +114,6 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
               {/* <PiCopyFill size={22}/> */}
             COPY
           </CopyCardButton>
-
           <EditCardButton onClick={handleEditClick}>
           <BiSolidEdit size={22}/>
             {/* EDIT */}
@@ -146,8 +145,6 @@ const StyledDogCard = styled.li`
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
   z-index: 3;
-
-  
 `;
 
 const CopyCardButton = styled.button`

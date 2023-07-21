@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
-import { FaPaw, FaUserAlt, } from 'react-icons/fa';
+import { FaPaw, FaUserAlt, FaInfoCircle } from 'react-icons/fa';
 import { AiFillDashboard, AiFillPlusCircle } from 'react-icons/ai';
 
 const NavBar = ({ theme, toggleTheme }) => {
@@ -11,17 +11,17 @@ const NavBar = ({ theme, toggleTheme }) => {
   const isActive = (href) => router.pathname === href;
 
   return (
-    <IconContext.Provider value={{ size: '30px' }}>
+    <IconContext.Provider value={{ size: '24px' }}>
       <StyledNavbar>
       <ItemWrapper>
         <NavLink href="/facts" active={isActive('/facts')}>
-          <AiFillDashboard color={isActive('/facts') ? 'orange' : '${({ theme }) => theme.textColor}'} />
+          <FaInfoCircle color={isActive('/facts') ? 'orange' : '${({ theme }) => theme.textColor}'} />
         </NavLink>
         <NavLink href="/dogs" active={isActive('/dogs')}>
           <FaPaw size={26} color={isActive('/dogs') ? 'orange' : '${({ theme }) => theme.textColor}'} />
         </NavLink>
         <NavLink href="/newdog" active={isActive('/newdog')}>
-          <AiFillPlusCircle size={28} color={isActive('/newdog') ? 'orange' : '${({ theme }) => theme.textColor}'} />
+          <AiFillPlusCircle size={27} color={isActive('/newdog') ? 'orange' : '${({ theme }) => theme.textColor}'} />
         </NavLink>
         <NavLink href="/owner" active={isActive('/owner')}>
           <FaUserAlt size={23} color={isActive('/owner') ? 'orange' : '${({ theme }) => theme.textColor}'} />

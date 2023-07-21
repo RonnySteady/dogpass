@@ -35,7 +35,7 @@ const RaceSearch = () => {
   
     return (
       <StyledRaceSearch>
-        <h3>Search </h3>
+        <h3>Search 
         <SearchField
           type="text"
           placeholder=' for dog race'
@@ -43,6 +43,7 @@ const RaceSearch = () => {
           onChange={(e) => setDogName(e.target.value)}
         />
         <SearchButton onClick={handleSearch}>Search</SearchButton>
+        </h3>
         {loading ? (
           <p>Loading dog data...</p>
         ) : (
@@ -84,7 +85,7 @@ const RaceSearch = () => {
 `;
 
 const PhotoContainer = styled.div`
-width: 100%;
+  width: 100%;
   position: relative;
   overflow: hidden;
   border-radius: 6px;
@@ -95,10 +96,10 @@ width: 100%;
 
 
 const SearchField = styled.input`
-  width: 160px;
+  width: 175px;
   height: 21px;
 `
 const SearchButton = styled.button`
-  width: 70px;
+  width: 75px;
   height: 21.5px;  
 `

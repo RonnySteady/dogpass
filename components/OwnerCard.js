@@ -10,7 +10,7 @@ export default function OwnerCard() {
     handleSubmit,
     formState: { errors },
     setValue,
-    // getValues,
+    getValues,
   } = useForm();
 
   const [formData, setFormData] = useState({});
@@ -138,17 +138,19 @@ export default function OwnerCard() {
 
 const StyledOwnerCard = styled.li`
   display: flex;
+  position: relative;
   width: 350px;
   min-height: 200px;
+  margin: auto;
+  margin-bottom: 80px;
   padding: 15px 25px 15px 25px;
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.backgroundColor};
   border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
   border: 1px solid ${({ theme }) => theme.borderColor};
-  margin-bottom: 30px;
-  /* z-index: 3; */
+  z-index: 3;
 `;
 
 const Grid = styled.div`
@@ -163,6 +165,8 @@ const StyledTitle = styled.p`
 `;
 
 const EditCardButton = styled.button`
+  font-size: 11px;
+  font-family: Open Sans, Roboto, Avenir, system-ui;
   color: #222222;
   position: absolute;
   top: 21px;
@@ -219,15 +223,12 @@ const InputEmail = styled.input`
   width: 270px;
   margin-bottom: 10px;
 `;
-
 const InputMobile = styled.input`
   width: 270px;
   margin-bottom: 10px;
 `;
 
 const InputPostal = styled.textarea`
-  font-family: system-ui;
-  font-size: 14px;
   width: 270px;
   height: 55px;
   margin-bottom: 15px;

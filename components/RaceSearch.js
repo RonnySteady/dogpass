@@ -87,10 +87,13 @@ const RaceSearch = () => {
 `;
 
 const PhotoContainer = styled.div`
+width: 300px; 
+height: 200px;
   position: relative;
   overflow: hidden;
   border-radius: 6px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+
   `;
 
 const SearchField = styled.input`

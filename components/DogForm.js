@@ -28,7 +28,7 @@ export default function DogForm() {
       localStorage.setItem("dogs", JSON.stringify(updatedDogs));
       return updatedDogs;
     });
-    router.push(`/`);
+    router.push(`/dogs`);
   };
   
 
@@ -104,7 +104,6 @@ export default function DogForm() {
           </LabelPlaceBirth>
           <InputPlaceBirth type="text" {...register("birthplace", {})} />
         </Grid>
-        <Grid></Grid>
         <Grid>
           <LabelVaccinations htmlFor="Vaccinations">
             Vaccinations:{" "}
@@ -158,17 +157,11 @@ const Grid = styled.div`
   margin: 2px 0 10px;
 `;
 
-const Grid3 = styled.div`
-  display: grid;
-  grid-template-columns: 55px 70px 140px;
-  column-gap: 15px;
-  margin: 2px 0 20px;
-`;
 
 const LabelName = styled.label`
   grid-column: 1;
   grid-row: 1;
-`;
+  `;
 
 const InputName = styled.input`
   background: whitesmoke;
@@ -177,12 +170,12 @@ const InputName = styled.input`
   margin-bottom: 15px;
   grid-column: 1 / span 2;
   grid-row: 2;
-`;
+  `;
 
 const LabelRace = styled.label`
   grid-column: 1;
   grid-row: 2;
-`;
+  `;
 
 const InputRace = styled.input`
   background: whitesmoke;
@@ -190,12 +183,12 @@ const InputRace = styled.input`
   padding: 5px 0 5px 12px;
   grid-column: 1;
   grid-row: 3;
-`;
+  `;
 
 const LabelColor = styled.label`
   grid-column: 2;
   grid-row: 2;
-`;
+  `;
 
 const InputColor = styled.input`
   background: whitesmoke;
@@ -203,6 +196,13 @@ const InputColor = styled.input`
   padding: 5px 0 5px 12px;
   grid-column: 2;
   grid-row: 3;
+  `;
+
+const Grid3 = styled.div`
+  display: grid;
+  grid-template-columns: 55px 70px 140px;
+  column-gap: 15px;
+  margin: 2px 0 10px;
 `;
 
 const LabelSex = styled.label`
@@ -284,7 +284,7 @@ const TextareaVaccinations = styled.textarea`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   grid-column: 1;
   grid-row: 2;
 `;
@@ -298,7 +298,7 @@ const TextareaInsurances = styled.textarea`
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 12px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   grid-column: 2;
   grid-row: 2;
 `;

@@ -44,6 +44,7 @@ const StyledNavbar = styled.div`
   height: 50px;
   bottom: 0px;
   z-index: 3;
+  background: ${({ theme }) => theme.backgroundNavBar};
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-top: 0.1px solid ${({ theme }) => theme.borderColor};

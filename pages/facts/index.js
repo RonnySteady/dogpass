@@ -5,7 +5,9 @@ import { lightTheme, darkTheme } from '../../components/Themes';
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
 import DogFacts from "../../components/DogFacts";
+import DogPhotos from "../../components/DogPhotos";
 import NavBar from "../../components/NavBar";
+import RaceSearch from "../../components/RaceSearch";
 
 export default function Facts({ dogs }) {
   const [theme, themeToggler] = DarkMode();
@@ -27,7 +29,11 @@ export default function Facts({ dogs }) {
         <ContentWrapper id="content-wrapper">
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
+          <CardWrapper>
+          <RaceSearch/>
+          <DogPhotos/>
           <DogFacts/>
+          </CardWrapper>
         </ContentWrapper>
       <NavBar/>
     </div>
@@ -45,3 +51,10 @@ const ContentWrapper = styled.div`
   padding-bottom: 0px;
 `;
 
+const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 80px;
+`;

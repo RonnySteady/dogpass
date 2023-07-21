@@ -20,7 +20,7 @@ const DogFacts = () => {
 
   return (
     <StyledFactCard>
-      <h2>Dog Facts</h2>
+      <h3>Dog Facts</h3>
       {dogFacts ? (
         <Fact>
           {dogFacts.map((fact) => (

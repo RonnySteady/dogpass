@@ -35,9 +35,10 @@ const RaceSearch = () => {
   
     return (
       <StyledRaceSearch>
-        <h2>Race Search</h2>
+        <h3>Search </h3>
         <SearchField
           type="text"
+          placeholder=' for dog race'
           value={dogName}
           onChange={(e) => setDogName(e.target.value)}
         />
@@ -55,7 +56,7 @@ const RaceSearch = () => {
                 height="auto" 
               />
             </PhotoContainer>          
-            <p>Breed: {dogData[0].name}</p>
+            <h2>{dogData[0].name}</h2>
           <p>Energy Level: {dogData[0].energy}</p>
           <p>Trainability: {dogData[0].trainability}</p>
             </>
@@ -70,8 +71,11 @@ const RaceSearch = () => {
 
 
   const StyledRaceSearch = styled.ul`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   width: 350px;
-  padding: 15px 25px 20px 25px;
+  padding: 15px 20px 15px 15px;
   margin-bottom: 30px;
   border-radius: 16px;
   color: ${({ theme }) => theme.textColor};
@@ -90,10 +94,10 @@ const PhotoContainer = styled.div`
   `;
 
 const SearchField = styled.input`
-  width: 224px;
+  width: 160px;
+  height: 21px;
 `
 const SearchButton = styled.button`
-  width: 65px;
-  position: absolute;
-  right: 25px;
+  width: 70px;
+  height: 21.5px;  
 `

@@ -10,6 +10,7 @@ import OwnerCard from '../components/OwnerCard'
 import RaceSearch from '../components/RaceSearch';
 import TopBar from "../components/TopBar";
 import DogPhotos from '../components/DogPhotos';
+import WeatherCard from '../components/WeatherCard';
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -56,6 +57,7 @@ export default function Home({ dogs }) {
         <ContentWrapper id="content-wrapper">
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
+          <WeatherCard/>
           <RaceSearch/>
           <DogPhotos/>
           <DogFacts/>

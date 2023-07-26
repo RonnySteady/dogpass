@@ -8,6 +8,7 @@ import DogFacts from "../../components/DogFacts";
 import DogPhotos from "../../components/DogPhotos";
 import NavBar from "../../components/NavBar";
 import RaceSearch from "../../components/RaceSearch";
+import WeatherCard from "../../components/WeatherCard";
 
 export default function Facts({ dogs }) {
   const [theme, themeToggler] = DarkMode();
@@ -30,6 +31,7 @@ export default function Facts({ dogs }) {
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
           <CardWrapper>
+          <WeatherCard/>
           <RaceSearch/>
           <DogPhotos/>
           <DogFacts/>

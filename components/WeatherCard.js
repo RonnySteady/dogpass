@@ -8,6 +8,7 @@ const apiKey = '5X5U38B3CUJMBXMZ573TS94Y7';
 const weatherIcons = {
   'clear-day': '/images/weather-clear-day.png', 
   'clear-night': '/images/weather-clear-night.png',
+  'cloudy': '/images/weather-cloudy.png',
   'cloudy-day': '/images/weather-cloudy-day.png', 
   'cloudy-night': '/images/weather-cloudy-night.png', 
   'partly-cloudy-day': '/images/weather-partly-cloudy-day.png', 
@@ -49,13 +50,13 @@ export default function WeatherCard() {
     <StyledWeatherCard>
       <h3>Current Weather</h3>
       <Current>
-      <p>Temperature: {currentConditions.temp} °C</p>
-        <p>{currentConditions.conditions}</p>
+      <p>{currentConditions.temp} °C,  {currentConditions.conditions}</p>
+      <p>{currentConditions.preciptype}</p>
           <WeatherIcon
             src={getWeatherIcon(currentConditions.icon)}
             alt={currentConditions.icon}
-            width={95}
-            height={95}
+            width={90}
+            height={90}
           />
       </Current>
       <Forecast>  
@@ -87,11 +88,10 @@ function getWeatherIcon(iconString) {
 
 const StyledWeatherCard = styled.li`
   display: grid;
-  position: relative;
   width: 350px;
   min-height: 200px;
   margin-bottom: 30px;
-  padding: 15px 25px 15px 25px;
+  padding: 15px 25px 10px 25px;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.borderColor};
   background: ${({ theme }) => theme.backgroundColor};
@@ -122,15 +122,12 @@ const Forecast = styled.div`
 
 const Day = styled.p`
     font-size: 16px;
-    /* grid-area: 1 / 1 / 1; */
 `
 
 const Temp = styled.p`
     font-size: 16px;
-    /* grid-area: 1 / 1 / 1; */
 `
 
 const Cond = styled.p`
     font-size: 10px;
-    /* grid-area: 3 / 3 / 3; */
 `

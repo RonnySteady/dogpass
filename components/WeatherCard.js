@@ -6,15 +6,15 @@ import Image from 'next/image';
 const apiKey = '5X5U38B3CUJMBXMZ573TS94Y7';
 
 const weatherIcons = {
-  'clear-day': '/images/weather-clear-day.png', // Replace with the actual URL or path for the sun icon
-  'cloudy-day': '/images/weather-cloudy-day.png', // Replace with the actual URL or path for the sun icon
-  'cloudy': '/images/weather-cloudy.png', // Replace with the actual URL or path for the sun icon
-  'partly-cloudy-day': '/images/weather-cloudy-day.png', // Replace with the actual URL or path for the sun icon
-  'rainy-day': '/images/weather-rainy-day.png', // Replace with the actual URL or path for the sun icon
-
-  // 'cloudy-day': 'url-to-partly-cloudy-icon',
-  // 'rainy-day': 'url-to-cloudy-icon',
-  // Add more mappings for other weather conditions as needed
+  'clear-day': '/images/weather-clear-day.png', 
+  'clear-night': '/images/weather-clear-night.png',
+  'cloudy': '/images/weather-cloudy.png',
+  'cloudy-day': '/images/weather-cloudy-day.png', 
+  'cloudy-night': '/images/weather-cloudy-night.png', 
+  'partly-cloudy-day': '/images/weather-partly-cloudy-day.png', 
+  'partly-cloudy-night': '/images/weather-partly-cloudy-night.png', 
+  'rainy-day': '/images/weather-rainy-day.png', 
+  'rainy-night': '/images/weather-rainy-night.png', 
 };
 
 
@@ -46,6 +46,7 @@ export default function WeatherCard() {
   const currentConditions = weatherData.currentConditions;
   const forecastDays = weatherData.days.slice(1, 4);
 
+
   return (
     <StyledWeatherCard>
       <h3>Current Weather</h3>
@@ -55,8 +56,8 @@ export default function WeatherCard() {
           <WeatherIcon
             src={getWeatherIcon(currentConditions.icon)}
             alt={currentConditions.icon}
-            width={100}
-            height={100}
+            width={90}
+            height={90}
           />
       </Current>
       <Forecast>  
@@ -104,7 +105,6 @@ const StyledWeatherCard = styled.li`
 
 
 const Current = styled.div`
-  margin-top: 2px;
   margin-bottom: 15px;
 `;
 

@@ -173,7 +173,7 @@ const StyledTitle = styled.p`
 const EditCardButton = styled.button`
   font-size: 11px;
   font-family: Open Sans, Roboto, Avenir, system-ui;
-  color: #222222;
+  color: ${({ theme }) => theme.textColor};
   position: absolute;
   top: 20px;
   right: 25px;

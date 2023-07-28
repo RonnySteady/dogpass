@@ -1,7 +1,7 @@
 export const lightTheme = {
   textColor: '#111111',
   // toggleBorder: 'lightblue',
-  background: 'lightblue center / cover no-repeat fixed',
+  background: 'darkblue center / cover no-repeat fixed',
   backgroundImage: 'url(../images/light-background.jpg)',
   backgroundColor: 'rgba(255, 255, 255, 0.3)',
   backgroundNavBar: 'rgba(255, 255, 255, 0.1)',

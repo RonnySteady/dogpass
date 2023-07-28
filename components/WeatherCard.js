@@ -6,15 +6,16 @@ import Image from 'next/image';
 const apiKey = '5X5U38B3CUJMBXMZ573TS94Y7';
 
 const weatherIcons = {
-  'clear-day': '/images/weather-clear-day.png', 
-  'clear-night': '/images/weather-clear-night.png',
-  'cloudy': '/images/weather-cloudy.png',
-  'cloudy-day': '/images/weather-cloudy-day.png', 
-  'cloudy-night': '/images/weather-cloudy-night.png', 
-  'partly-cloudy-day': '/images/weather-partly-cloudy-day.png', 
-  'partly-cloudy-night': '/images/weather-partly-cloudy-night.png', 
-  'rainy-day': '/images/weather-rainy-day.png', 
-  'rainy-night': '/images/weather-rainy-night.png', 
+  'clear-day': '/images/weather-icons/clear-day.png', 
+  'clear-night': '/images/weather-icons/clear-night.png',
+  'cloudy': '/images/weather-icons/cloudy.png',
+  'cloudy-day': '/images/weather-icons/cloudy-day.png', 
+  'cloudy-night': '/images/weather-icons/cloudy-night.png', 
+  'partly-cloudy-day': '/images/weather-icons/partly-cloudy-day.png', 
+  'partly-cloudy-night': '/images/weather-icons/partly-cloudy-night.png', 
+  'rain': '/images/weather-icons/rain.png', 
+  'rainy-day': '/images/weather-icons/rainy-day.png', 
+  'rainy-night': '/images/weather-icons/rainy-night.png', 
 };
 
 

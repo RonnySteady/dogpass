@@ -6,11 +6,9 @@ import Header from '../components/Header';
 import DogList from '../components/DogList';
 import NavBar from '../components/NavBar';
 import DogFacts from '../components/DogFacts';
-import OwnerCard from '../components/OwnerCard'
-import RaceSearch from '../components/RaceSearch';
 import TopBar from "../components/TopBar";
 import DogPhotos from '../components/DogPhotos';
-import WeatherCard from '../components/WeatherCard';
+import Buttons from '../components/Buttons';
 
 export default function Home({ dogs }) {
   const [dogList, setDogList] = useState(dogs);
@@ -57,14 +55,12 @@ export default function Home({ dogs }) {
         <ContentWrapper id="content-wrapper">
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
-          <WeatherCard/>
-          <RaceSearch/>
           <DogPhotos/>
-          <DogFacts/>
-          <CardWrapper>
-          <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
-          <OwnerCard/>
-          </CardWrapper>
+          <Buttons
+                buttonText1="Go to dogs"
+                link1="/dogs"
+                buttonText2="Go to owner"
+                link2="/owner"/>
         </ContentWrapper>
           <NavBar/>
       </div>
@@ -81,10 +77,3 @@ const ContentWrapper = styled.div`
   padding-bottom: 0px;
 `;
 
-const CardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 80px;
-`;

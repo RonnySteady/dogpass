@@ -148,7 +148,7 @@ const StyledOwnerCard = styled.li`
   width: 350px;
   min-height: 200px;
   margin: auto;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   padding: 15px 25px 15px 25px;
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.backgroundColor};

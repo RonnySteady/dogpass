@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { BiSolidEdit } from "react-icons/bi";
+import { db } from "../firebase/config";
+import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+
 
 export default function OwnerCard() {
   const {
@@ -15,25 +18,41 @@ export default function OwnerCard() {
   } = useForm();
 
   const [formData, setFormData] = useState({});
-
-  
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const storedData = localStorage.getItem("formData");
-      setIsEditing(
-        !storedData || Object.keys(JSON.parse(storedData)).length === 0
-      );
+    const fetchOwnerDataFromFirebase = async () => {
+      const ownerDocRef = doc(db, "owners", "owner_id");
+      const ownerDocSnapshot = await getDoc(ownerDocRef);
+      if (ownerDocSnapshot.exists()) {
+        const ownerData = ownerDocSnapshot.data();
+        setFormData(ownerData);
+        Object.keys(ownerData).forEach((key) => {
+          setValue(key, ownerData[key]);
+        });
+      } else {
+        setIsEditing(true);
+      }
+    };
+
+    fetchOwnerDataFromFirebase();
+  }, [setValue]);
+
+
+    const onSubmit = async (data) => {
+    try {
+      const ownerDocRef = doc(db, "owners", "owner_id");
+      await setDoc(ownerDocRef, data);
+      setFormData(data);
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error saving owner data:", error);
     }
-  }, []);
-
-  const onSubmit = (data) => {
-    localStorage.setItem("formData", JSON.stringify(data));
-    setFormData(data);
-    setIsEditing(false);
   };
-
+  
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
 
   const handleSaveClick = () => {
     onUpdate(editedDog);
@@ -41,30 +60,10 @@ export default function OwnerCard() {
   };
 
   const onCancel = () => {
-    const storedData = localStorage.getItem("formData");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      Object.keys(parsedData).forEach((key) => {
-        setValue(key, parsedData[key]);
-      });
-    }
     setIsEditing(false);
   };
+  
 
-  useEffect(() => {
-    const storedData = localStorage.getItem("formData");
-    if (storedData) {
-      const parsedData = JSON.parse(storedData);
-      setFormData(parsedData);
-      Object.keys(parsedData).forEach((key) => {
-        setValue(key, parsedData[key]);
-      });
-    }
-  }, [setValue]);
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
 
   return (
     <StyledOwnerCard>
@@ -132,10 +131,9 @@ export default function OwnerCard() {
               <StyledPostal>{formData.postal}</StyledPostal>
             </Grid>
             <div>
-            <EditCardButton onClick={handleEditClick}>
-          <BiSolidEdit size={22}/>
-
-          </EditCardButton>
+              <EditCardButton onClick={handleEditClick}>
+                <BiSolidEdit size={22} />
+              </EditCardButton>
             </div>
           </>
         )}

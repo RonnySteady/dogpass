@@ -1,48 +1,45 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
-import { useTheme } from 'styled-components';
-import Image from "next/image";
+import styled from "styled-components";
 import DogCardEdit from "./DogCardEdit";
-import editButtonCardImage from "../public/images/edit-button-card.png";
-import copyButtonCardImage from "../public/images/copy-button-card.png";
-import { RiEditBoxFill, RiFileCopy,FillRiSave2Fill } from 'react-icons/ri';
-import { PiCopyFill } from "react-icons/pi";
 import { BiSolidEdit, BiCopy } from "react-icons/bi";
+import { db } from "../firebase/config";
+import { doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
+import { useTheme } from "styled-components";
 
-
-
-
-export default function DogCard({ dog, onDelete, onUpdate }) {
+export default function DogCard({ dogId, dog, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDog, setEditedDog] = useState(dog);
   const [isCopied, setIsCopied] = useState(false);
   const { theme } = useTheme(); // Assuming you have a theme context or hook
 
-  useEffect(() => {
-    setEditedDog(dog);
-  }, [dog]);
 
-  const handleDeleteClick = () => {
-    const confirmation = window.confirm(
-      "Are you sure you want to delete this dog?"
-    );
+  const handleDeleteClick = async () => {
+    const confirmation = window.confirm("Are you sure you want to delete this dog?");
     if (confirmation) {
-      onDelete(dog.id);
+      const dogDocRef = doc(db, "dogs", dogId);
+      await deleteDoc(dogDocRef);
     }
   };
 
   const handleEditClick = () => {
+    console.log("Edit button clicked!"); 
     setIsEditMode(true);
-  };
+  };  
 
-  const handleSaveClick = () => {
-    onUpdate(editedDog);
-    setIsEditMode(false);
+  const handleSaveClick = async () => {
+    try {
+      const dogDocRef = doc(db, "dogs", dogId);
+      await updateDoc(dogDocRef, editedDog);
+      onUpdate(editedDog); 
+    } catch (error) {
+      console.error("Error updating dog data:", error);
+    }
+    setIsEditMode(false); 
   };
-
+  
+  
   const handleCancelClick = () => {
     setIsEditMode(false);
-    setEditedDog(dog);
   };
 
   const handleInputChange = (name, value) => {
@@ -52,15 +49,16 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
     }));
   };
 
+
   const handleCopyClick = async () => {
-    const dogInformation = `${dog.name}, ${dog.race}, ${dog.color}, born ${dog.birthdate} in ${dog.birthplace}, Transponder-ID: ${dog.transponder}, Vaccinations: ${dog.vaccinations}, Insurances: ${dog.insurances}`;
+    const dogInformation = `${editedDog.name}, ${editedDog.race}, ${editedDog.color}, born ${editedDog.birthdate} in ${editedDog.birthplace}, Transponder-ID: ${editedDog.transponder}, Vaccinations: ${editedDog.vaccinations}, Insurances: ${editedDog.insurances}`;
     try {
       await navigator.clipboard.writeText(dogInformation);
       setIsCopied(true);
       setTimeout(() => {
         setIsCopied(false);
       }, 1000);
-      window.alert(`${dog.name} copied to clipboard`);
+      window.alert(`${editedDog.name} copied to clipboard`);
     } catch (error) {
       console.error("Failed to copy Dog to clipboard:", error);
       window.alert("Failed to copy Dog to clipboard. Please try again.");
@@ -70,65 +68,57 @@ export default function DogCard({ dog, onDelete, onUpdate }) {
   return (
     <StyledDogCard theme={theme}>
       {isEditMode ? (
-        <DogCardEdit
-          dog={dog}
-          editedDog={editedDog}
-          onDelete={handleDeleteClick}
-          onSave={handleSaveClick}
-          onCancel={handleCancelClick}
-          onChange={handleInputChange}
-        />
+            <DogCardEdit
+            dogId={dog.id} 
+            editedDog={editedDog}
+            onDelete={handleDeleteClick}
+            onSave={handleSaveClick}
+            onCancel={handleCancelClick}
+            onChange={handleInputChange}
+          />
       ) : (
         <Grid>
           <NameSex>
-            {dog.name} {dog.sex === "male" ? "♂" : "♀"}
+          {editedDog.name} {editedDog.sex === "male" ? "♂" : "♀"}
           </NameSex>
           <RaceColor>
-            {dog.race}
-            {dog.race && dog.color && ", "}
-            {dog.color}
-          </RaceColor>
-          {dog.birthdate ? (
-            <BirthDatePlace>
-              born {dog.birthdate}
-              {dog.birthplace && ` in ${dog.birthplace}`}
-            </BirthDatePlace>
-          ) : (
-            dog.birthplace && (
-              <BirthDatePlace>born in {dog.birthplace}</BirthDatePlace>
-            )
-          )}
+        {editedDog.race}
+        {editedDog.race && editedDog.color && ", "}
+        {editedDog.color}
+      </RaceColor>
+      {editedDog.birthdate ? (
+        <BirthDatePlace>
+          born {editedDog.birthdate}
+          {editedDog.birthplace && ` in ${editedDog.birthplace}`}
+        </BirthDatePlace>
+      ) : (
+        editedDog.birthplace && (
+          <BirthDatePlace>born in {editedDog.birthplace}</BirthDatePlace>
+        )
+      )}
 
           <Transponder>
             Transponder-ID:
-            <span style={{ marginLeft: "10px" }}>{dog.transponder}</span>
+            <span style={{ marginLeft: "10px" }}>{editedDog.transponder}</span>
           </Transponder>
 
-          <Vaccinations>Vaccinations: {dog.vaccinations}</Vaccinations>
-          <Insurances>Insurances: {dog.insurances}</Insurances>
-          <CopyCardButton
-            onClick={handleCopyClick}
-            // className="copy-button"
-            isCopied={isCopied}
-            >
-              {/* <PiCopyFill size={22}/> */}
-            COPY
-          </CopyCardButton>
-          <EditCardButton onClick={handleEditClick}>
-          <BiSolidEdit size={22}/>
-            {/* EDIT */}
-            {/* <Image
-              src={editButtonCardImage}
-              width="20"
-              height="20"
-              alt="Edit icon"
-            /> */}
-          </EditCardButton>
-        </Grid>
-      )}
-    </StyledDogCard>
+          <Vaccinations>Vaccinations: {editedDog.vaccinations}</Vaccinations>
+      <Insurances>Insurances: {editedDog.insurances}</Insurances>
+      <CopyCardButton
+        onClick={handleCopyClick}
+        isCopied={isCopied}
+      >
+        COPY
+      </CopyCardButton>
+      <EditCardButton onClick={handleEditClick}>
+        <BiSolidEdit size={22} />
+      </EditCardButton>
+    </Grid>
+  )}
+</StyledDogCard>
   );
 }
+
 
 const StyledDogCard = styled.li`
   display: flex;

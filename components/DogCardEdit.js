@@ -1,38 +1,46 @@
 import React from "react";
 import styled from "styled-components";
 import {RiSave3Fill} from "react-icons/ri"
+import { db } from "../firebase/config";
+import { doc, updateDoc } from 'firebase/firestore';
 
-export default function DogCardEdit({
-  dog,
-  editedDog,
-  onDelete,
-  onSave,
-  onCancel,
-  onChange,
-}) {
+
+
+export default function DogCardEdit({ dogId, editedDog, onDelete, onSave, onCancel, onChange }) {
+    const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    onChange(name, value);
+    console.log("dogId in DogCardEdit:", dogId);
+  };
+
   const handleDeleteClick = () => {
-    const confirmation = window.confirm(
-      "Are you sure you want to delete this dog?"
-    );
+    const confirmation = window.confirm("Are you sure you want to delete this dog?");
     if (confirmation) {
-      onDelete(dog.id);
+      onDelete(dogId); // Use dogId from the props
     }
   };
 
-  const handleSaveClick = () => {
-    onSave();
+  const handleSaveClick = async () => {
+    console.log("dogId in DogCardEdit:", dogId);
+    console.log("Saving edited dog data:", editedDog); 
+    try {
+      const dogDocRef = doc(db, "dogs", editedDog.id); 
+      console.log("Dog data before update:", editedDog); 
+      await updateDoc(dogDocRef, editedDog);
+      console.log("Dog data after update:", editedDog); 
+      onSave(); 
+      console.log("Dog data successfully updated in Firebase.");
+    } catch (error) {
+      console.error("Error updating dog data:", error); 
+    }
   };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    onChange(name, value);
-  };
+  
 
   return (
     <div>
       <Grid>
         <NameSex>
-          {dog.name} {dog.sex === "male" ? "♂" : "♀"}
+        {editedDog.name} {editedDog.sex === "male" ? "♂" : "♀"}
         </NameSex>
         <LabelRace>Race:</LabelRace>
         <EditRace

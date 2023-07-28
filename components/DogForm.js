@@ -1,8 +1,10 @@
-import styled from "styled-components";
-import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import styled from "styled-components";
 import { useRouter } from "next/router";
-import { uid } from "uid";
+import { db } from "../firebase/config";
+import { collection, addDoc } from 'firebase/firestore'
+
 
 export default function DogForm() {
   const router = useRouter();
@@ -14,28 +16,37 @@ export default function DogForm() {
 
   const [dogs, setDogs] = useState([]);
 
-  useEffect(() => {
-    const storedDogs = localStorage.getItem("dogs");
-    if (storedDogs) {
-      setDogs(JSON.parse(storedDogs));
+  const onSubmit = async (data) => {
+    try {
+      const dogCollectionRef = collection(db, "dogs"); 
+      await addDoc(dogCollectionRef, data); 
+      router.push(`/dogs`);
+    } catch (error) {
+      console.error("Error adding dog to Firestore: ", error);
     }
-  }, []);
-
-  const onSubmit = (data) => {
-    const newDog = { id: uid(), ...data };
-    setDogs((prevDogs) => {
-      const updatedDogs = [...prevDogs, newDog];
-      localStorage.setItem("dogs", JSON.stringify(updatedDogs));
-      return updatedDogs;
-    });
-    router.push(`/dogs`);
   };
+
+  const onUpdate = (updatedDog) => {
+  const dogIndex = dogs.findIndex((d) => d.id === updatedDog.id);
   
+    if (dogIndex !== -1) {
+      console.log("Updating dog:", updatedDog.id);
+  
+      setDogs((prevDogs) => {
+        const updatedDogs = [...prevDogs];
+        updatedDogs[dogIndex] = updatedDog;
+        return updatedDogs;
+      });
+    } else {
+      console.log("Dog not found in state:", updatedDog.id);
+    }
+  };
 
   function handleCancel() {
     router.push("/");
   }
 
+  
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -126,8 +137,8 @@ export default function DogForm() {
           />
         </Grid>
         <Grid>
-          <SubmitButton type="submit">Submit</SubmitButton>
-          <CancelButton onClick={handleCancel}>Cancel</CancelButton>
+        <SubmitButton type="submit">Submit</SubmitButton>
+        <CancelButton onClick={handleCancel}>Cancel</CancelButton>
         </Grid>
       </Form>
     </>

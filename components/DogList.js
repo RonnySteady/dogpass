@@ -1,49 +1,53 @@
 import React, { useState, useEffect } from "react";
 import DogCard from "./DogCard";
-import { dogs } from "../lib/data";
+import { db } from "../firebase/config";
+import { collection, getDocs } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 
 export default function DogList() {
+  const dogId = "your-dog-id"; // Replace this with the actual dogId value
   const [dogList, setDogList] = useState([]);
 
   useEffect(() => {
-    const storedDogs = localStorage.getItem("dogs");
-    if (storedDogs) {
-      setDogList(JSON.parse(storedDogs));
-    } else {
-      setDogList(dogs);
-    }
+    const fetchDogsFromFirestore = async () => {
+      const dogsCollectionRef = collection(db, "dogs");
+      const dogsSnapshot = await getDocs(dogsCollectionRef);
+      const dogsData = dogsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+      setDogList(dogsData);
+    };
+
+    fetchDogsFromFirestore();
   }, []);
 
-  const handleUpdate = (updatedDog) => {
-    setDogList((prevDogList) => {
-      const updatedDogList = prevDogList.map((dog) =>
-        dog.id === updatedDog.id ? updatedDog : dog
+  const handleUpdate = async (updatedDog) => {
+    try {
+      const dogDocRef = doc(db, "dogs", updatedDog.id);
+      await updateDoc(dogDocRef, updatedDog);
+      setDogList((prevDogList) =>
+        prevDogList.map((dog) => (dog.id === updatedDog.id ? updatedDog : dog))
       );
-      localStorage.setItem("dogs", JSON.stringify(updatedDogList));
-      return updatedDogList;
-    });
+    } catch (error) {
+      console.error("Error updating dog data:", error);
+    }
   };
 
-  const handleDelete = (id) => {
-    const updatedDogList = dogList.filter((dog) => dog.id !== id);
-    setDogList(updatedDogList);
-    localStorage.setItem("dogs", JSON.stringify(updatedDogList));
+  const handleDelete = async (id) => {
+    try {
+      const dogDocRef = doc(db, "dogs", id);
+      await deleteDoc(dogDocRef);
+      setDogList((prevDogList) => prevDogList.filter((dog) => dog.id !== id));
+    } catch (error) {
+      console.error("Error deleting dog:", error);
+    }
   };
 
   return (
     <div>
-      {dogs.map((dog) => (
-        <DogCard
+      {dogList.map((dog) => (
+          <DogCard
           key={dog.id}
-          dog={dog}
-          onDelete={handleDelete}
-          onUpdate={handleUpdate}
-        />
-      ))}
-      {dogList.filter((dog) => dog.id !== dogs[0].id && dog.id !== dogs[1].id).map((dog) => (
-        <DogCard
-          key={dog.id}
-          dog={dog}
+          dogId={dog.id} // Pass the 'dogId' prop to DogCard
+          dog={dog} // Pass the 'dog' prop to DogCard
           onDelete={handleDelete}
           onUpdate={handleUpdate}
         />

@@ -1,12 +1,13 @@
+import { useState } from 'react';
+import styled from "styled-components";
 import Header from "../../components/Header";
 import DarkMode from '../../components/DarkMode';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../../components/Themes';
-import styled from "styled-components";
 import TopBar from "../../components/TopBar";
 import DogList from "../../components/DogList";
-import { useState } from 'react';
 import NavBar from "../../components/NavBar";
+import Buttons from "../../components/Buttons";
 
 
 const handleDeleteDog = (dogName) => {
@@ -39,6 +40,11 @@ export default function Dogs({ dogs }) {
           <CardWrapper>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
         </CardWrapper>
+          <Buttons
+                buttonText1="Add a dog"
+                link1="/newdog"
+                buttonText2="Go to owner"
+                link2="/owner"/>
         </ContentWrapper>
           <NavBar/>
       </div>
@@ -60,6 +66,6 @@ const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 80px;
 `;
+
 

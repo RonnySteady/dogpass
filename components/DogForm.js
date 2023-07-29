@@ -218,7 +218,7 @@ const Grid3 = styled.div`
 
 const LabelSex = styled.label`
   grid-column: 1;
-  grid-row: 7;
+  grid-row:7;
 `;
 
 const LabelFemale = styled.label`
@@ -236,15 +236,13 @@ const LabelMale = styled.label`
 `;
 
 const ButtonFemale = styled.input`
-  margin-left: 21px;
-  grid-column: 1;
-  grid-row: 8;
+  position: relative;
+  top:43px
 `;
 
 const ButtonMale = styled.input`
-  margin-left: 10px;
-  grid-column: 2;
-  grid-row: 8;
+  position: relative;
+  top:43px
 `;
 
 const LabelDateBirth = styled.label`

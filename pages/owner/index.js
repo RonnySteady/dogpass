@@ -6,6 +6,8 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../../components/Themes';
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
+import Buttons from "../../components/Buttons";
+
 
 export default function Owner({ dogs }) {
   const [theme, themeToggler] = DarkMode();
@@ -28,6 +30,11 @@ export default function Owner({ dogs }) {
       <CardWrapper>
             <OwnerCard />
       </CardWrapper>
+      <Buttons
+                buttonText1="Go to dogs"
+                link1="/dogs"
+                buttonText2="Add a dog"
+                link2="/newdog"/>
     </ContentWrapper>
       <Navbar/>
     </div>
@@ -50,6 +57,5 @@ const CardWrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 80px;
 
 `;

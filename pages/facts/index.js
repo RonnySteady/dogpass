@@ -7,7 +7,6 @@ import TopBar from "../../components/TopBar";
 import DogFacts from "../../components/DogFacts";
 import DogPhotos from "../../components/DogPhotos";
 import NavBar from "../../components/NavBar";
-import RaceSearch from "../../components/RaceSearch";
 import WeatherCard from "../../components/WeatherCard";
 
 export default function Facts({ dogs }) {
@@ -32,8 +31,6 @@ export default function Facts({ dogs }) {
           <Header />
           <CardWrapper>
           <WeatherCard/>
-          <RaceSearch/>
-          <DogPhotos/>
           <DogFacts/>
           </CardWrapper>
         </ContentWrapper>

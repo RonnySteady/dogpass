@@ -11,7 +11,7 @@ const RaceSearch = () => {
     const fetchDogData = async () => {
       try {
         setLoading(true);
-        const apiKey = 'qXCfPFmIeQlM//9LwibmJA==nujcRxFjGNMghqJk'; // Replace this with your actual API key
+        const apiKey = process.env.NEXT_PUBLIC_API_KEY;
         const url = `https://api.api-ninjas.com/v1/dogs?name=${dogName}`;
         const response = await axios.get(url, {
           headers: {

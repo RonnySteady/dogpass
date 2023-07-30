@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Image from 'next/image';
+import process from 'process';
 
-const apiKey = '5X5U38B3CUJMBXMZ573TS94Y7';
 
 const weatherIcons = {
   'clear-day': '/images/weather-icons/clear-day.png', 
@@ -26,7 +26,8 @@ export default function WeatherCard() {
     async function fetchWeatherData() {
       const city = 'Frankfurt';
       const country = 'Germany';
-      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Frankfurt?unitGroup=metric&key=5X5U38B3CUJMBXMZ573TS94Y7&contentType=json`;
+      const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
+      const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=${apiKey}&contentType=json`;
 
       try {
         const response = await axios.get(url);

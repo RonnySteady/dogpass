@@ -2,40 +2,40 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DogCardEdit from "./DogCardEdit";
 import { BiSolidEdit, BiCopy } from "react-icons/bi";
-import { db } from "../firebase/config";
+import { database } from "../firebase/database";
 import { doc, updateDoc, deleteDoc, getDoc } from "firebase/firestore";
 import { useTheme } from "styled-components";
+import { auth } from "../firebase/auth";
 
-export default function DogCard({ dogId, dog, onDelete, onUpdate }) {
+export default function DogCard({ dogId, dog, user, onDelete, onUpdate }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const [editedDog, setEditedDog] = useState(dog);
   const [isCopied, setIsCopied] = useState(false);
-  const { theme } = useTheme(); // Assuming you have a theme context or hook
-
+  const { theme } = useTheme(); 
 
   const handleDeleteClick = async () => {
     const confirmation = window.confirm("Are you sure you want to delete this dog?");
     if (confirmation) {
-      const dogDocRef = doc(db, "dogs", dogId);
-      await deleteDoc(dogDocRef);
+      await onDelete(dogId); 
     }
   };
 
   const handleEditClick = () => {
     console.log("Edit button clicked!"); 
     setIsEditMode(true);
-  };  
+  };
 
   const handleSaveClick = async () => {
     try {
-      const dogDocRef = doc(db, "dogs", dogId);
+      const dogDocRef = doc(database, "users", user, "dogs", dogId);
       await updateDoc(dogDocRef, editedDog);
-      onUpdate(editedDog); 
+      onUpdate(editedDog);
     } catch (error) {
       console.error("Error updating dog data:", error);
     }
-    setIsEditMode(false); 
+    setIsEditMode(false);
   };
+
   
   
   const handleCancelClick = () => {
@@ -68,14 +68,15 @@ export default function DogCard({ dogId, dog, onDelete, onUpdate }) {
   return (
     <StyledDogCard theme={theme}>
       {isEditMode ? (
-            <DogCardEdit
-            dogId={dog.id} 
-            editedDog={editedDog}
-            onDelete={handleDeleteClick}
-            onSave={handleSaveClick}
-            onCancel={handleCancelClick}
-            onChange={handleInputChange}
-          />
+        <DogCardEdit
+        dogId={dog.id} 
+        editedDog={editedDog}
+        onDelete={handleDeleteClick} 
+        onSave={handleSaveClick}
+        onCancel={handleCancelClick}
+        onChange={handleInputChange}
+        auth={auth}
+      />
       ) : (
         <Grid>
           <NameSex>

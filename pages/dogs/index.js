@@ -8,19 +8,18 @@ import TopBar from "../../components/TopBar";
 import DogList from "../../components/DogList";
 import NavBar from "../../components/NavBar";
 import Buttons from "../../components/Buttons";
+import withAuth from '../../components/auth/withAuth';
 
-
-const handleDeleteDog = (dogName) => {
-  const updatedDogs = dogList.filter((dog) => dog.name !== dogName);
-  setDogList(updatedDogs);
-};
-
-
-export default function Dogs({ dogs }) {
-  const [theme, themeToggler] = DarkMode();
+const Dogs = ({ dogs }) => {
   const [dogList, setDogList] = useState(dogs);
-
+  const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+  const handleDeleteDog = (dogName) => {
+    const updatedDogs = dogList.filter((dog) => dog.name !== dogName);
+    setDogList(updatedDogs);
+  };
+
   return (
     <ThemeProvider theme={themeMode}>
       <div
@@ -51,6 +50,11 @@ export default function Dogs({ dogs }) {
     </ThemeProvider>
   );
 }
+
+
+export default withAuth(Dogs);
+
+
 
 const ContentWrapper = styled.div`
   display: flex;

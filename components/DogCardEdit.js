@@ -1,40 +1,49 @@
 import React from "react";
 import styled from "styled-components";
-import {RiSave3Fill} from "react-icons/ri"
-import { db } from "../firebase/config";
-import { doc, updateDoc } from 'firebase/firestore';
+import { RiSave3Fill } from "react-icons/ri";
+import { database, auth } from "../firebase/database";
+import { doc, updateDoc, collection, addDoc } from "firebase/firestore";
 
 
+export default function DogCardEdit({ dogId, editedDog, onDelete, onSave, onCancel, onChange, auth }) {
+  const userId = auth.currentUser ? auth.currentUser.uid : null; 
 
-export default function DogCardEdit({ dogId, editedDog, onDelete, onSave, onCancel, onChange }) {
-    const handleInputChange = (event) => {
+  const handleInputChange = (event) => {
     const { name, value } = event.target;
     onChange(name, value);
-    console.log("dogId in DogCardEdit:", dogId);
   };
 
   const handleDeleteClick = () => {
     const confirmation = window.confirm("Are you sure you want to delete this dog?");
     if (confirmation) {
-      onDelete(dogId); // Use dogId from the props
+      onDelete(dogId); 
     }
   };
 
   const handleSaveClick = async () => {
-    console.log("dogId in DogCardEdit:", dogId);
-    console.log("Saving edited dog data:", editedDog); 
+    if (!userId) {
+      console.error("User is not logged in.");
+      return;
+    }
+
     try {
-      const dogDocRef = doc(db, "dogs", editedDog.id); 
-      console.log("Dog data before update:", editedDog); 
-      await updateDoc(dogDocRef, editedDog);
-      console.log("Dog data after update:", editedDog); 
-      onSave(); 
-      console.log("Dog data successfully updated in Firebase.");
+      if (dogId) {
+        const dogDocRef = doc(database, "users", userId, "dogs", dogId);
+        console.log("Saving edited dog data:", editedDog);
+        await updateDoc(dogDocRef, editedDog);
+        console.log("Dog data successfully updated in Firebase.");
+      } else {
+        const dogCollectionRef = collection(database, "users", userId, "dogs");
+        console.log("Saving new dog data:", editedDog);
+        await addDoc(dogCollectionRef, editedDog);
+        console.log("New dog data successfully added to Firebase.");
+      }
+      onSave();
     } catch (error) {
-      console.error("Error updating dog data:", error); 
+      console.error("Error updating dog data:", error);
     }
   };
-  
+
 
   return (
     <div>

@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { db } from "../firebase/config";
-import { collection, addDoc } from 'firebase/firestore'
-
+import { database, auth } from "../firebase/database"; 
+import { collection, doc, addDoc, updateDoc, getDoc } from "firebase/firestore";
 
 export default function DogForm() {
   const router = useRouter();
@@ -16,22 +15,40 @@ export default function DogForm() {
 
   const [dogs, setDogs] = useState([]);
 
+  const userId = auth.currentUser ? auth.currentUser.uid : null;
+
+  useEffect(() => {
+    const fetchDogs = async () => {
+      if (userId) {
+        const userDocRef = doc(database, "users", userId);
+        const userDocSnap = await getDoc(userDocRef);
+        if (userDocSnap.exists()) {
+          setDogs(userDocSnap.data().dogs || []);
+        }
+      }
+    };
+
+    fetchDogs();
+  }, [userId]);
+
   const onSubmit = async (data) => {
     try {
-      const dogCollectionRef = collection(db, "dogs"); 
-      await addDoc(dogCollectionRef, data); 
-      router.push(`/dogs`);
+      if (userId) {
+        const dogCollectionRef = collection(database, "users", userId, "dogs");
+        await addDoc(dogCollectionRef, data);
+        router.push(`/dogs`);
+      }
     } catch (error) {
       console.error("Error adding dog to Firestore: ", error);
     }
   };
 
   const onUpdate = (updatedDog) => {
-  const dogIndex = dogs.findIndex((d) => d.id === updatedDog.id);
-  
+    const dogIndex = dogs.findIndex((d) => d.id === updatedDog.id);
+
     if (dogIndex !== -1) {
       console.log("Updating dog:", updatedDog.id);
-  
+
       setDogs((prevDogs) => {
         const updatedDogs = [...prevDogs];
         updatedDogs[dogIndex] = updatedDog;
@@ -43,7 +60,7 @@ export default function DogForm() {
   };
 
   function handleCancel() {
-    router.push("/");
+    router.push("/dogs");
   }
 
   

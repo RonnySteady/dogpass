@@ -1,27 +1,33 @@
 import React, { useState, useEffect } from "react";
 import DogCard from "./DogCard";
-import { db } from "../firebase/config";
-import { collection, getDocs } from 'firebase/firestore';
-import { doc, updateDoc } from 'firebase/firestore';
+import { database, auth } from "../firebase/database";
+import { collection, query, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore';
+import { useAuth } from '../firebase/auth'; // Import the useAuth hook
 
 export default function DogList() {
-  const dogId = "your-dog-id"; // Replace this with the actual dogId value
   const [dogList, setDogList] = useState([]);
-
+  const { user } = useAuth(); // Access the currently authenticated user from the context
+  
   useEffect(() => {
-    const fetchDogsFromFirestore = async () => {
-      const dogsCollectionRef = collection(db, "dogs");
-      const dogsSnapshot = await getDocs(dogsCollectionRef);
-      const dogsData = dogsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setDogList(dogsData);
-    };
+    if (user) {
+      const fetchDogsFromFirestore = async () => {
+        const dogsQuery = query(collection(database, "users", user.uid, "dogs"));
+        const unsubscribe = onSnapshot(dogsQuery, (snapshot) => {
+          const dogsData = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          setDogList(dogsData);
+        });
 
-    fetchDogsFromFirestore();
-  }, []);
+        // Clean up the snapshot listener when the component unmounts
+        return () => unsubscribe();
+      };
+
+      fetchDogsFromFirestore();
+    }
+  }, [user]);
 
   const handleUpdate = async (updatedDog) => {
     try {
-      const dogDocRef = doc(db, "dogs", updatedDog.id);
+      const dogDocRef = doc(database, "users", user.uid, "dogs", updatedDog.id);
       await updateDoc(dogDocRef, updatedDog);
       setDogList((prevDogList) =>
         prevDogList.map((dog) => (dog.id === updatedDog.id ? updatedDog : dog))
@@ -33,7 +39,7 @@ export default function DogList() {
 
   const handleDelete = async (id) => {
     try {
-      const dogDocRef = doc(db, "dogs", id);
+      const dogDocRef = doc(database, "users", user.uid, "dogs", id);
       await deleteDoc(dogDocRef);
       setDogList((prevDogList) => prevDogList.filter((dog) => dog.id !== id));
     } catch (error) {
@@ -44,13 +50,14 @@ export default function DogList() {
   return (
     <div>
       {dogList.map((dog) => (
-          <DogCard
-          key={dog.id}
-          dogId={dog.id} // Pass the 'dogId' prop to DogCard
-          dog={dog} // Pass the 'dog' prop to DogCard
-          onDelete={handleDelete}
-          onUpdate={handleUpdate}
-        />
+        <DogCard
+        key={dog.id}
+        dogId={dog.id}
+        dog={dog}
+        user={user}
+        onDelete={handleDelete} // Pass the handleDelete function as onDelete prop
+        onUpdate={handleUpdate}
+      />
       ))}
     </div>
   );

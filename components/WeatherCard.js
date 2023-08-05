@@ -66,8 +66,8 @@ export default function WeatherCard() {
           <WeatherIcon
             src={getWeatherIcon(currentConditions.icon)}
             alt={currentConditions.icon}
-            width={100}
-            height={100}
+            width={95}
+            height={95}
           />
       </Current>
       <Forecast>  
@@ -118,8 +118,8 @@ const Current = styled.div`
 
 const WeatherIcon = styled(Image)`
 position: absolute;
-top: 2px;
-right: 10px;
+top: 4px;
+right: 12px;
 `
 
 
@@ -131,15 +131,12 @@ const Forecast = styled.div`
 
 const Day = styled.p`
     font-size: 16px;
-    /* grid-area: 1 / 1 / 1; */
 `
 
 const Temp = styled.p`
     font-size: 16px;
-    /* grid-area: 1 / 1 / 1; */
 `
 
 const Cond = styled.p`
     font-size: 10px;
-    /* grid-area: 3 / 3 / 3; */
 `

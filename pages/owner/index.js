@@ -7,11 +7,13 @@ import { lightTheme, darkTheme } from '../../components/Themes';
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
 import Buttons from "../../components/Buttons";
+import withAuth from '../../components/auth/withAuth';
 
 
-export default function Owner({ dogs }) {
+const Owner = ({ dogs }) => {
   const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
   return (
     <ThemeProvider theme={themeMode}>
     <div
@@ -41,6 +43,9 @@ export default function Owner({ dogs }) {
     </ThemeProvider>
   );
 }
+
+export default withAuth(Owner); // Wrap Owner component with withAuth
+
 
 const ContentWrapper = styled.div`
   display: flex;

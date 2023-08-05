@@ -6,10 +6,14 @@ import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../../components/Themes';
 import styled from "styled-components";
 import TopBar from "../../components/TopBar";
+import withAuth from '../../components/auth/withAuth';
 
-export default function NewDog({ dogs }) {
+
+const NewDog = ({ dogs }) => {
   const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
+
   return (
     <ThemeProvider theme={themeMode}>
     <div
@@ -36,6 +40,10 @@ export default function NewDog({ dogs }) {
     </ThemeProvider>
   );
 }
+
+export default withAuth(NewDog);
+
+
 
 const ContentWrapper = styled.div`
   display: flex;

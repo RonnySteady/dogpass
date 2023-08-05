@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import { BiSolidEdit } from "react-icons/bi";
-import { db } from "../firebase/config";
+import { database } from "../firebase/database";
 import { collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { useAuth } from "../firebase/auth"; // Import the AuthContext
 
 
 export default function OwnerCard() {
@@ -19,29 +20,40 @@ export default function OwnerCard() {
 
   const [formData, setFormData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const { user, loading } = useAuth();
 
   useEffect(() => {
-    const fetchOwnerDataFromFirebase = async () => {
-      const ownerDocRef = doc(db, "owners", "owner_id");
-      const ownerDocSnapshot = await getDoc(ownerDocRef);
-      if (ownerDocSnapshot.exists()) {
-        const ownerData = ownerDocSnapshot.data();
-        setFormData(ownerData);
-        Object.keys(ownerData).forEach((key) => {
-          setValue(key, ownerData[key]);
-        });
-      } else {
-        setIsEditing(true);
-      }
-    };
+    if (!loading && user) {
+      const fetchOwnerDataFromFirebase = async () => {
+        const userId = user.uid; // Get the user ID
+        const ownerDocRef = doc(database, "users", userId, "owner", "owner_id");
+        const ownerDocSnapshot = await getDoc(ownerDocRef);
+        if (ownerDocSnapshot.exists()) {
+          const ownerData = ownerDocSnapshot.data();
+          setFormData(ownerData);
+          Object.keys(ownerData).forEach((key) => {
+            setValue(key, ownerData[key]);
+          });
+        } else {
+          setIsEditing(true);
+        }
+      };
 
-    fetchOwnerDataFromFirebase();
-  }, [setValue]);
+      fetchOwnerDataFromFirebase();
+    }
+  }, [loading, user, setValue]);
 
 
-    const onSubmit = async (data) => {
+
+  const onSubmit = async (data) => {
     try {
-      const ownerDocRef = doc(db, "owners", "owner_id");
+      if (!user) {
+        console.error("User is not logged in.");
+        return;
+      }
+
+      const userId = user.uid; // Get the user ID
+      const ownerDocRef = doc(database, "users", userId, "owner", "owner_id");
       await setDoc(ownerDocRef, data);
       setFormData(data);
       setIsEditing(false);

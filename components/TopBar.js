@@ -1,20 +1,29 @@
 import React from 'react';
 import Toggle from './Toggle';
+import AuthIcon from './AuthIcon';
+import AuthStatus from './AuthStatus';
 import styled from 'styled-components';
-import { FaGithub, FaLinkedin, FaHome, FaSearch, FaInfoCircle } from 'react-icons/fa';
-import {HiMail} from "react-icons/hi";
+import { FaInfoCircle, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { useRouter } from "next/router";
+
 
 const TopBar = ({ theme, toggleTheme }) => {
+  const router = useRouter();
+
+const handleInfoIconClick = () => {
+    router.push('/info'); // Replace 'target-page' with the actual URL of the page you want to navigate to
+  };
+
+
   return (
     <StyledTopBar>
       <ItemWrapper>
-      <a href="https://www.linkedin.com/in/ronaldheimert/" target="_blank" rel="noopener noreferrer">
-      <StyledFaLinkedin size={18} />
+      <a href="#" onClick={handleInfoIconClick}>
+      <StyledFaInfoCircle size={17} />
       </a>
       <Toggle theme={theme} toggleTheme={toggleTheme} />
-      <a href="https://github.com/RonnySteady" target="_blank" rel="noopener noreferrer">
-      <StyledGithubIcon size={19} />
-      </a>
+      <AuthIcon theme={theme} toggleTheme={toggleTheme} />
+      {/* <AuthStatus/> */}
       </ItemWrapper>
     </StyledTopBar>
   );
@@ -45,7 +54,7 @@ const ItemWrapper= styled.div`
 `;
 
 
-const StyledFaLinkedin = styled(FaLinkedin)`
+const StyledFaInfoCircle = styled(FaInfoCircle)`
   color: ${({ theme }) => theme.textColor};
   position: relative;
   top: 3px;
@@ -67,3 +76,30 @@ const StyledGithubIcon = styled(FaGithub)`
   }
 `;
 
+const LoginButton = styled.button`
+  position: relative;
+  top: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  color: limegreen;
+  width: 50px;
+  text-align: center;
+  padding: 0px;
+  border-radius: 16px;
+  text-decoration: none;
+  margin: 20px 10px 45px;
+  background: black;
+  backdrop-filter: blur(6px);
+  /* color: ${({ theme }) => theme.backgroundColor}; */
+  background: ${({ theme }) => theme.textColor};
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  &:hover,
+  &:active,
+  &:focus {
+    // color: #333333;
+    background-color: orange;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+`

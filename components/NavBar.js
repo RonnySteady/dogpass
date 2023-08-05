@@ -2,8 +2,10 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { IconContext } from 'react-icons';
-import { FaPaw, FaUserAlt, FaInfoCircle } from 'react-icons/fa';
-import { AiFillDashboard, AiFillPlusCircle } from 'react-icons/ai';
+import { FaPaw, FaUserAlt } from 'react-icons/fa';
+import { AiFillPlusCircle } from 'react-icons/ai';
+import { MdSpaceDashboard } from 'react-icons/md';
+
 
 const NavBar = ({ theme, toggleTheme }) => {
   const router = useRouter();
@@ -15,7 +17,7 @@ const NavBar = ({ theme, toggleTheme }) => {
       <StyledNavbar>
       <ItemWrapper>
         <NavLink href="/facts" active={isActive('/facts')}>
-          <FaInfoCircle color={isActive('/facts') ? 'orange' : '${({ theme }) => theme.textColor}'} />
+          <MdSpaceDashboard size={28} color={isActive('/facts') ? 'orange' : '${({ theme }) => theme.textColor}'} />
         </NavLink>
         <NavLink href="/dogs" active={isActive('/dogs')}>
           <FaPaw size={26} color={isActive('/dogs') ? 'orange' : '${({ theme }) => theme.textColor}'} />
@@ -61,6 +63,3 @@ const ItemWrapper= styled.div`
 const NavLink = styled(Link)`
   color: ${({ theme }) => theme.textColor};
 `;
-
-
-

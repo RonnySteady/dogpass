@@ -34,8 +34,8 @@ const Dogs = ({ dogs }) => {
         }}
       >
         <ContentWrapper id="content-wrapper">
-          <Header />
           <TopBar theme={theme} toggleTheme={themeToggler} />
+          <Header />
           <CardWrapper>
           <DogList dogs={dogList} onDeleteDog={handleDeleteDog} />
         </CardWrapper>

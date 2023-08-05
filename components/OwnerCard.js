@@ -1,12 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
 import styled from "styled-components";
-import Image from "next/image";
 import { BiSolidEdit } from "react-icons/bi";
 import { database } from "../firebase/database";
-import { collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { useAuth } from "../firebase/auth"; // Import the AuthContext
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { useAuth } from "../firebase/auth"; 
 
 
 export default function OwnerCard() {
@@ -21,6 +19,7 @@ export default function OwnerCard() {
   const [formData, setFormData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const { user, loading } = useAuth();
+  const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
     if (!loading && user) {
@@ -44,6 +43,22 @@ export default function OwnerCard() {
   }, [loading, user, setValue]);
 
 
+  const handleCopyClick = async () => {
+    const ownerInformation = `${formData.Title} ${formData.firstName} ${formData.lastName}, Email: ${formData.email}, Mobile: ${formData.mobileNumber}, Postal: ${formData.postal}`;
+    
+    try {
+      await navigator.clipboard.writeText(ownerInformation);
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
+      window.alert("Owner information copied to clipboard");
+    } catch (error) {
+      console.error("Failed to copy owner information to clipboard:", error);
+      window.alert("Failed to copy owner information to clipboard. Please try again.");
+    }
+  };
+  
 
   const onSubmit = async (data) => {
     try {
@@ -143,6 +158,10 @@ export default function OwnerCard() {
               <StyledPostal>{formData.postal}</StyledPostal>
             </Grid>
             <div>
+            <CopyCardButton onClick={handleCopyClick} isCopied={isCopied}>
+  {isCopied ? "Copied" : "COPY"}
+</CopyCardButton>
+
               <EditCardButton onClick={handleEditClick}>
                 <BiSolidEdit size={22} />
               </EditCardButton>
@@ -169,6 +188,21 @@ const StyledOwnerCard = styled.li`
   backdrop-filter: blur(6px);
   border: 1px solid ${({ theme }) => theme.borderColor};
   z-index: 3;
+`;
+
+const CopyCardButton = styled.button`
+  background-color: transparent;
+  font-size: 10px;
+  border: none;
+  color: ${({ theme }) => theme.textColor};
+  position: absolute;
+  transition: opacity 0.3s ease;
+  opacity: ${({ isCopied }) => (isCopied ? 0.5 : 1)};
+  pointer-events: ${({ isCopied }) => (isCopied ? "none" : "auto")};
+  color: ${({ theme }) => theme.textColor};
+  top: 24px;
+  right: 55px;
+  font-weight: 500;
 `;
 
 const Grid = styled.div`

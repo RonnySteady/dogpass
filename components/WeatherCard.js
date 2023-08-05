@@ -25,7 +25,6 @@ export default function WeatherCard() {
   useEffect(() => {
     async function fetchWeatherData() {
       const city = 'Frankfurt';
-      const country = 'Germany';
       const apiKey = process.env.NEXT_PUBLIC_WEATHER_API_KEY;
       const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=metric&key=${apiKey}&contentType=json`;
 
@@ -41,25 +40,34 @@ export default function WeatherCard() {
   }, []);
 
   if (!weatherData) {
-    return <div>Loading...</div>;
+    return <StyledWeatherCard>
+      <p></p>
+    </StyledWeatherCard>;
   }
 
   // Extract the relevant weather information
   const currentConditions = weatherData.currentConditions;
   const forecastDays = weatherData.days.slice(1, 4);
 
+  const getCurrentDayAndDate = () => {
+    const now = new Date();
+    const options = { weekday: 'long'
+, month: 'short', day: 'numeric', year: 'numeric' };
+    return now.toLocaleDateString('en-US', options);
+  };
+
 
   return (
     <StyledWeatherCard>
-      <h3>Current Weather</h3>
+      <h3>{getCurrentDayAndDate()}</h3>
       <Current>
       <p>Temperature: {currentConditions.temp} °C</p>
         <p>{currentConditions.conditions}</p>
           <WeatherIcon
             src={getWeatherIcon(currentConditions.icon)}
             alt={currentConditions.icon}
-            width={85}
-            height={85}
+            width={100}
+            height={100}
           />
       </Current>
       <Forecast>  
@@ -83,8 +91,6 @@ function getDayName(datetime) {
 }
 
 function getWeatherIcon(iconString) {
-  // Check if the icon string exists in the weatherIcons mapping
-  // If not, you can return a default icon URL or path
   return weatherIcons[iconString] || '/images/weather-clear-day.jpg';
 }
 
@@ -112,8 +118,8 @@ const Current = styled.div`
 
 const WeatherIcon = styled(Image)`
 position: absolute;
-top: 12px;
-right: 15px;
+top: 2px;
+right: 10px;
 `
 
 

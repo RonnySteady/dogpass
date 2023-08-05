@@ -44,14 +44,14 @@ const AuthForm = () => {
             </div>
           )}
           <div>
-            <label>Email:</label>
-            <input type="email" value={email} onChange={handleEmailChange} />
+            <label>E-Mail:</label>
+            <AuthInput placeholder="E-Mail" type="email" value={email} onChange={handleEmailChange} />
           </div>
           <div>
             <label>Password:</label>
-            <input type="password" value={password} onChange={handlePasswordChange} />
+            <AuthInput placeholder="Password" type="password" value={password} onChange={handlePasswordChange} />
           </div>
-          <button type="submit">{isSignUp ? 'Sign Up' : 'Login'}</button>
+          <LoginButton type="submit">{isSignUp ? 'Sign Up' : 'Login'}</LoginButton>
           {/* <div>
             {isSignUp ? (
               <p>
@@ -76,7 +76,7 @@ export default AuthForm;
 
 const StyledAuthForm = styled.li`
   display: flex;
-  position: relative;
+  justify-content: flex-start;
   width: 350px;
   margin: auto;
   margin-top: 0px;
@@ -90,3 +90,14 @@ const StyledAuthForm = styled.li`
   backdrop-filter: blur(6px);
   z-index: 3;
 `;
+
+
+const AuthInput = styled.input`
+position: absolute;
+width: 210px;
+left: 110px;
+`
+
+const LoginButton = styled.button`
+  width: 50px;
+  `

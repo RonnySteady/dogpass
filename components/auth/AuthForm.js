@@ -44,11 +44,11 @@ const AuthForm = () => {
             </div>
           )}
           <div>
-            <label>E-Mail:</label>
+            <AuthLabel>E-Mail:</AuthLabel>
             <AuthInput placeholder="E-Mail" type="email" value={email} onChange={handleEmailChange} />
           </div>
           <div>
-            <label>Password:</label>
+            <AuthLabel>Password:</AuthLabel>
             <AuthInput placeholder="Password" type="password" value={password} onChange={handlePasswordChange} />
           </div>
           <LoginButton type="submit">{isSignUp ? 'Sign Up' : 'Login'}</LoginButton>
@@ -90,6 +90,11 @@ const StyledAuthForm = styled.li`
   backdrop-filter: blur(6px);
   z-index: 3;
 `;
+
+const AuthLabel = styled.label`
+position: relative;
+width: 210px;
+`
 
 
 const AuthInput = styled.input`

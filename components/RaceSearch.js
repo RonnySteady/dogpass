@@ -115,7 +115,7 @@ const SearchField = styled.input`
   top: -2px;
   width: 155px;
   margin-left: 3px;
-  margin-right: 6px;
+  margin-right: 7px;
   background: whitesmoke;
   border-radius: 6px;
   padding: 5px 0 5px 5px;
@@ -125,7 +125,7 @@ const SearchButton = styled.button`
   position: relative;
   top: -2px;
   width: 70px;
-  background-color: transparent;
+  background-color: #445540;
   color: ${({ theme }) => theme.textColor};
   padding: 5px;
   border-radius: 6px;

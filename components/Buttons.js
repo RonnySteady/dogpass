@@ -26,7 +26,7 @@ const StyledLink = styled.a`
   padding: 5px;
   border-radius: 16px;
   text-decoration: none;
-  margin: 20px 10px 45px;
+  margin: 20px 10px 30px;
   font-weight: normal;
   background: ${({ theme }) => theme.backgroundColor};
   backdrop-filter: blur(6px);

@@ -5,16 +5,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/database';
 
 
-const LogoutButton = styled.button`
-  background-color: #ff4500;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 80px;
-
-`;
 
 const SignOut = () => {
   const [user] = useAuthState(auth);  
@@ -32,3 +22,16 @@ const SignOut = () => {
 };
 
 export default SignOut;
+
+
+
+const LogoutButton = styled.button`
+  /* position: relative;
+  right: -10px; */
+  margin-left: 12px;
+  width: 70px;
+  background-color: #800000;
+  color: whitesmoke;
+  padding: 4px;
+  border-radius: 6px;
+`;

@@ -45,7 +45,7 @@ const RaceSearch = () => {
         <SearchButton onClick={handleSearch}>Search</SearchButton>
         </h3>
         {loading ? (
-          <p>Loading dog data...</p>
+          <p></p>
         ) : (
           dogData && (
             <>
@@ -58,8 +58,22 @@ const RaceSearch = () => {
               />
             </PhotoContainer>          
             <h3>{dogData[0].name}</h3>
-          <p>Energy Level: {dogData[0].energy}</p>
+            <br></br>  
+          <Activity>
+          <p>Playfulness: {dogData[0].playfulness}</p>
           <p>Trainability: {dogData[0].trainability}</p>
+          <p>Barking: {dogData[0].barking}</p>
+          <p>Coat length: {dogData[0].coat_length}</p>
+          {/* <p>Drooling: {dogData[0].drooling}</p> */}
+          {/* <p>Grooming: {dogData[0].grooming}</p> */}
+          {/* <p>Energy Level: {dogData[0].energy}</p> */}
+          </Activity>  
+          <Social>
+          <p>Good with</p>
+          <p> other dogs: {dogData[0].good_with_other_dogs}</p>
+          <p> children: {dogData[0].good_with_children}</p>
+          <p> strangers: {dogData[0].good_with_strangers}</p>
+          </Social>
             </>
           )
         )}
@@ -73,7 +87,8 @@ const RaceSearch = () => {
 
   const StyledRaceSearch = styled.ul`
   width: 350px;
-  padding: 15px 20px 15px 15px;
+  max-height: 58vh;
+  padding: 15px 25px 15px 25px;
   margin-bottom: 30px;
   border-radius: 16px;
   color: ${({ theme }) => theme.textColor};
@@ -88,18 +103,43 @@ const PhotoContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  /* border-radius: 6px; */
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); */
   margin-top: 18px;
   margin-bottom: 12px;
   `;
 
 
 const SearchField = styled.input`
-  width: 175px;
-  height: 21px;
+  width: 160px;
+  margin-left: 3px;
+  margin-right: 6px;
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 5px 0 5px 5px;
 `
+
 const SearchButton = styled.button`
-  width: 75px;
-  height: 21.5px;  
+  position: relative;
+  top: 1px;
+  width: 70px;
+  background-color: #445540;
+  color: whitesmoke;
+  padding: 5px;
+  border-radius: 6px;
+  grid-column: 2;
+  grid-row: 20;
+  `
+
+
+const Activity = styled.div`
+  position: relative;
+  top: -10px;
+  left: 0px;
+`
+
+const Social = styled.div`
+  position: relative;
+  top: -98px;
+  left: 155px;
 `

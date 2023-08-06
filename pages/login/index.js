@@ -9,18 +9,12 @@ import Buttons from '../../components/Buttons';
 import AuthForm from '../../components/auth/AuthForm';
 import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/database';
-import SignOut from '../../components/auth/SignOut';
 
 
 export default function Login({ dogs }) {
-  const [dogList, setDogList] = useState(dogs);
   const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
-  const handleDeleteDog = (dogName) => {
-    const updatedDogs = dogList.filter((dog) => dog.name !== dogName);
-    setDogList(updatedDogs);
-  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -58,7 +52,6 @@ export default function Login({ dogs }) {
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
           <AuthForm/>
-          <SignOut/>
           {/* <Buttons
                 buttonText1="Go to dogs"
                 link1="/dogs"
@@ -77,6 +70,6 @@ const ContentWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   min-height: calc(100vh - 50px);
-  padding-bottom: 0px;
+  padding-bottom: 75px;
 `;
 

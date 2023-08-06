@@ -43,7 +43,7 @@ export default DogPhotos;
 const StyledPhotosCard = styled.ul`
   width: 350px;
   padding: 20px 25px 15px 25px;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
   border-radius: 16px;
   color: ${({ theme }) => theme.textColor};
   background-color: ${({ theme }) => theme.backgroundColor};
@@ -55,7 +55,7 @@ const StyledPhotosCard = styled.ul`
 
 const PhotoContainer = styled.div`
   position: relative;
-  overflow: hidden;
-  border-radius: 6px;
+  /* overflow: hidden; */
+  /* border-radius: 6px; */
   /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); */
   `;

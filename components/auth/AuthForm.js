@@ -114,8 +114,8 @@ const AuthLabel = styled.label`
 
 const AuthInput = styled.input`
   position: absolute;
-  width: 210px;
-  left: 110px;
+  width: 200px;
+  left: 120px;
   background: whitesmoke;
   border-radius: 6px;
   padding: 3px;

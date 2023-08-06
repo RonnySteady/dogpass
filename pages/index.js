@@ -12,7 +12,6 @@ import Buttons from '../components/Buttons';
 import AuthForm from '../components/auth/AuthForm';
 import { useSignOut } from 'react-firebase-hooks/auth'; 
 import { auth } from '../firebase/database'; 
-import SignOut from '../components/auth/SignOut';
 
 
 export default function Home({ dogs }) {
@@ -62,7 +61,6 @@ export default function Home({ dogs }) {
           <Header />
           <AuthForm/>
           <DogPhotos/>
-          <SignOut/>
         </ContentWrapper>
           <NavBar/>
       </div>

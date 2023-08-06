@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/database'; 
+import SignOut from './SignOut';
+
 
 const AuthForm = () => {
   const [email, setEmail] = useState('');
@@ -33,37 +35,37 @@ const AuthForm = () => {
   return (
     <StyledAuthForm>
       {user ? (
-        <div>Welcome, {user.displayName || user.email}!</div>
+        <div>Welcome, {user.displayName || user.email}!<SignOut /></div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <h3>{isSignUp ? 'Sign Up' : 'Login'}</h3>
+          <AuthHeader>
+          <h2>{isSignUp ? 'Sign Up' : 'Login'}</h2>
+            {/* {isSignUp ? (
+              <AuthSwitcher>
+                Signed up already? <span onClick={() => setIsSignUp(false)}> Login</span>
+              </AuthSwitcher>
+            ) : (
+              <AuthSwitcher>
+                Need an account? <span onClick={() => setIsSignUp(true)}> Sign up</span>
+              </AuthSwitcher>
+            )} */}
+          </AuthHeader>
+          {isSignUp ? createUserError && <p>{createUserError.message}</p> : signInError && <p>{signInError.message}</p>}
           {isSignUp && (
-            <div>
-              <label>Name:</label>
-              <input type="text" />
-            </div>
+            <AuthDiv>
+              <AuthLabel>Name:</AuthLabel>
+              <AuthInput placeholder="Name" type="text" />
+            </AuthDiv>
           )}
-          <div>
-            <AuthLabel>E-Mail:</AuthLabel>
-            <AuthInput placeholder="E-Mail" type="email" value={email} onChange={handleEmailChange} />
-          </div>
+              <AuthDiv>
+              <AuthLabel>E-Mail:</AuthLabel>
+              <AuthInput placeholder="E-Mail" type="email" value={email} onChange={handleEmailChange} />
+            </AuthDiv>
           <div>
             <AuthLabel>Password:</AuthLabel>
             <AuthInput placeholder="Password" type="password" value={password} onChange={handlePasswordChange} />
           </div>
           <LoginButton type="submit">{isSignUp ? 'Sign Up' : 'Login'}</LoginButton>
-          {/* <div>
-            {isSignUp ? (
-              <p>
-                Already have an account? <span onClick={() => setIsSignUp(false)}>Login</span>
-              </p>
-            ) : (
-              <p>
-                Don't have an account? <span onClick={() => setIsSignUp(true)}>Sign Up</span>
-              </p>
-            )}
-          </div>
-          {isSignUp ? createUserError && <p>{createUserError.message}</p> : signInError && <p>{signInError.message}</p>} */}
         </form>
       )}
     </StyledAuthForm>
@@ -76,11 +78,8 @@ export default AuthForm;
 
 const StyledAuthForm = styled.li`
   display: flex;
-  justify-content: flex-start;
   width: 350px;
-  margin: auto;
-  margin-top: 0px;
-  margin-bottom: 30px;
+  margin-bottom:30px;
   padding: 15px 25px 15px 25px;
   border-radius: 16px;
   border: 1px solid ${({ theme }) => theme.borderColor};
@@ -91,18 +90,45 @@ const StyledAuthForm = styled.li`
   z-index: 3;
 `;
 
-const AuthLabel = styled.label`
-position: relative;
-width: 210px;
+
+const AuthHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 `
 
+const AuthSwitcher = styled.p`
+  font-size: 14px;
+  position: absolute;
+  right: 32px;
+`
+
+const AuthDiv = styled.div`
+  margin-bottom: 15px;
+`
+
+const AuthLabel = styled.label`
+  position: relative;
+  top: 4px;
+`
 
 const AuthInput = styled.input`
-position: absolute;
-width: 210px;
-left: 110px;
+  position: absolute;
+  width: 210px;
+  left: 110px;
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 3px;
 `
 
 const LoginButton = styled.button`
-  width: 50px;
+  margin-top: 22px;
+  margin-bottom: 4px;
+  width: 70px;
+  background-color: #445540;
+  color: whitesmoke;
+  padding: 3px;
+  border-radius: 6px;
+  grid-column: 2;
+  grid-row: 20;
   `

@@ -109,7 +109,7 @@ const AuthDiv = styled.div`
 
 const AuthLabel = styled.label`
   position: relative;
-  top: 4px;
+  top: 3px;
 `
 
 const AuthInput = styled.input`

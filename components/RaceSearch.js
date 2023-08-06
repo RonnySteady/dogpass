@@ -87,8 +87,8 @@ const RaceSearch = () => {
 
   const StyledRaceSearch = styled.ul`
   width: 350px;
-  max-height: 58vh;
-  padding: 15px 25px 15px 25px;
+  max-height: 60vh;
+  padding: 18px 25px 15px 25px;
   margin-bottom: 30px;
   border-radius: 16px;
   color: ${({ theme }) => theme.textColor};
@@ -103,14 +103,16 @@ const PhotoContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
-  /* border-radius: 6px; */
-  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5); */
-  margin-top: 18px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  margin-top: 20px;
   margin-bottom: 12px;
   `;
 
 
 const SearchField = styled.input`
+  position: relative;
+  top: -2px;
   width: 155px;
   margin-left: 3px;
   margin-right: 6px;
@@ -121,14 +123,12 @@ const SearchField = styled.input`
 
 const SearchButton = styled.button`
   position: relative;
-  top: 1px;
+  top: -2px;
   width: 70px;
-  background-color: #445540;
-  color: whitesmoke;
+  background-color: transparent;
+  color: ${({ theme }) => theme.textColor};
   padding: 5px;
   border-radius: 6px;
-  grid-column: 2;
-  grid-row: 20;
   `
 
 

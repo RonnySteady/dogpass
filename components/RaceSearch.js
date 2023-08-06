@@ -126,7 +126,7 @@ const SearchButton = styled.button`
   top: -2px;
   width: 70px;
   background-color: #445540;
-  color: ${({ theme }) => theme.textColor};
+  color: whitesmoke;
   padding: 5px;
   border-radius: 6px;
   `

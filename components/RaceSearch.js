@@ -111,7 +111,7 @@ const PhotoContainer = styled.div`
 
 
 const SearchField = styled.input`
-  width: 160px;
+  width: 155px;
   margin-left: 3px;
   margin-right: 6px;
   background: whitesmoke;

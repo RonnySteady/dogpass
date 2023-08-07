@@ -5,9 +5,10 @@ import DarkMode from '../../components/DarkMode';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import TopBar from "../../components/TopBar";
+import InfoCard from "../../components/InfoCard";
 
 
-export default function Info({ dogs }) {
+export default function InfoPage({ dogs }) {
   const [theme, themeToggler] = DarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
@@ -28,7 +29,7 @@ export default function Info({ dogs }) {
         <ContentWrapper id="content-wrapper">
           <TopBar theme={theme} toggleTheme={themeToggler} />
           <Header />
-          <h3>Dog Pass, Version 0.3.1</h3>
+          <InfoCard/>
         </ContentWrapper>
           <NavBar/>
       </div>
@@ -45,20 +46,3 @@ const ContentWrapper = styled.div`
   padding-bottom: 0px;
 `;
 
-
-const StyledInfoCard = styled.li`
-  display: flex;
-  position: relative;
-  width: 350px;
-  min-height: 200px;
-  margin: auto;
-  margin-bottom: 30px;
-  padding: 15px 25px 15px 25px;
-  color: ${({ theme }) => theme.textColor};
-  background-color: ${({ theme }) => theme.backgroundColor};
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(6px);
-  border: 1px solid ${({ theme }) => theme.borderColor};
-  z-index: 3;
-`;

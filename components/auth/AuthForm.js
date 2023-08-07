@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/database'; 
 import SignOut from './SignOut';
+import { useRouter } from 'next/router';
 
 
 const AuthForm = () => {
@@ -10,22 +11,27 @@ const AuthForm = () => {
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false); 
 
+  const router = useRouter();
   const [user] = useAuthState(auth); 
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (isSignUp) {
-      // Sign-up
-      createUserWithEmailAndPassword();
+      try {
+        // Sign-up
+        await createUserWithEmailAndPassword(email, password);
+      } catch (error) {
+        console.error('Error signing up:', error);
+      }
     } else {
       // Login
       signInWithEmailAndPassword(email, password)
-      .catch((error) => {
-        console.error('Error signing in:', error);
-      });
+        .catch((error) => {
+          console.error('Error signing in:', error);
+        });
     }
   };
 
@@ -38,18 +44,18 @@ const AuthForm = () => {
         <div>Welcome, {user.displayName || user.email}!<SignOut /></div>
       ) : (
         <form onSubmit={handleSubmit}>
-          <AuthHeader>
-          <h2>{isSignUp ? 'Sign Up' : 'Login'}</h2>
-            {/* {isSignUp ? (
-              <AuthSwitcher>
-                Signed up already? <span onClick={() => setIsSignUp(false)}> Login</span>
-              </AuthSwitcher>
-            ) : (
-              <AuthSwitcher>
-                Need an account? <span onClick={() => setIsSignUp(true)}> Sign up</span>
-              </AuthSwitcher>
-            )} */}
-          </AuthHeader>
+    <AuthHeader>
+      <h2>{isSignUp ? 'Sign Up' : 'Login'}</h2>
+      {isSignUp ? (
+        <AuthSwitcher>
+          Signed up already? <span onClick={() => setIsSignUp(false)}> Login</span>
+        </AuthSwitcher>
+      ) : (
+        <AuthSwitcher>
+          Need an account? <span onClick={() => router.push('/info')}> Contact</span>
+        </AuthSwitcher>
+      )}
+    </AuthHeader>
           {isSignUp ? createUserError && <p>{createUserError.message}</p> : signInError && <p>{signInError.message}</p>}
           {isSignUp && (
             <AuthDiv>
@@ -103,27 +109,31 @@ const AuthSwitcher = styled.p`
   right: 32px;
 `
 
+
+
+const AuthLabel = styled.label`
+  position: relative;
+  top: 4px;
+`
+
+
 const AuthDiv = styled.div`
   margin-bottom: 15px;
 `
 
-const AuthLabel = styled.label`
-  position: relative;
-  top: 3px;
-`
 
 const AuthInput = styled.input`
   position: absolute;
-  width: 190px;
-  left: 130px;
+  width: 210px;
+  left: 110px;
   background: whitesmoke;
   border-radius: 6px;
   padding: 3px;
+  
 `
 
 const LoginButton = styled.button`
-  margin-top: 22px;
-  margin-bottom: 4px;
+  margin-top: 20px;
   width: 70px;
   background-color: #445540;
   color: whitesmoke;

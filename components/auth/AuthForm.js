@@ -65,11 +65,11 @@ const AuthForm = () => {
           )}
               <AuthDiv>
               <AuthLabel>E-Mail:</AuthLabel>
-              <AuthInput placeholder="E-Mail" type="email" value={email} onChange={handleEmailChange} />
+              <AuthEmail placeholder="E-Mail" type="email" value={email} onChange={handleEmailChange} />
             </AuthDiv>
           <div>
             <AuthLabel>Password:</AuthLabel>
-            <AuthInput placeholder="Password" type="password" value={password} onChange={handlePasswordChange} />
+            <AuthPassword placeholder="Password" type="password" value={password} onChange={handlePasswordChange} />
           </div>
           <LoginButton type="submit">{isSignUp ? 'Sign Up' : 'Login'}</LoginButton>
         </form>
@@ -105,31 +105,35 @@ const AuthHeader = styled.div`
 
 const AuthSwitcher = styled.p`
   font-size: 14px;
-  position: absolute;
-  right: 32px;
+  position: relative;
+  left: 60px;
 `
-
-
 
 const AuthLabel = styled.label`
   position: relative;
   top: 4px;
 `
 
-
 const AuthDiv = styled.div`
   margin-bottom: 15px;
 `
 
-
-const AuthInput = styled.input`
-  position: absolute;
+const AuthEmail = styled.input`
+  position: relative;
   width: 210px;
-  left: 110px;
+  left: 35px;
   background: whitesmoke;
   border-radius: 6px;
   padding: 3px;
-  
+`
+
+const AuthPassword = styled.input`
+  position: relative;
+  width: 210px;
+  left: 12px;
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 3px;
 `
 
 const LoginButton = styled.button`

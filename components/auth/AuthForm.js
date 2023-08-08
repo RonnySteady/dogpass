@@ -60,7 +60,7 @@ const AuthForm = () => {
           {isSignUp && (
             <AuthDiv>
               <AuthLabel>Name:</AuthLabel>
-              <AuthInput placeholder="Name" type="text" />
+              <AuthName placeholder="Name" type="text" />
             </AuthDiv>
           )}
               <AuthDiv>
@@ -117,6 +117,16 @@ const AuthLabel = styled.label`
 const AuthDiv = styled.div`
   margin-bottom: 15px;
 `
+
+const AuthName = styled.input`
+  position: relative;
+  width: 210px;
+  left: 35px;
+  background: whitesmoke;
+  border-radius: 6px;
+  padding: 3px;
+`
+
 
 const AuthEmail = styled.input`
   position: relative;

@@ -129,18 +129,18 @@ const AuthName = styled.input`
 
 
 const AuthEmail = styled.input`
-  position: fixed;
+  position: relative;
   width: 210px;
-  left: 110px;
+  left: 37.5px;
   background: whitesmoke;
   border-radius: 6px;
   padding: 3px;
 `
 
 const AuthPassword = styled.input`
-  position: fixed;
+  position: relative;
   width: 210px;
-  left: 110px;
+  left: 15px;
   background: whitesmoke;
   border-radius: 6px;
   padding: 3px;
